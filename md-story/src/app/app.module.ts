@@ -26,5 +26,6 @@ export class AppModule {
     ngDoBootstrap() {
         const el = createCustomElement(MkdnStoryComponent, {injector: this.injector});
         customElements.define('mkdn-story', el);
+        customElements.define('mkdn-story-2', el);
     }
 }
