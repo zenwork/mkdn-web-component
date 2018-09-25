@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    template: '<app-mkdn-story>Hello</app-mkdn-story>',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'md-wc';
+    title = 'md-story';
+
 }
