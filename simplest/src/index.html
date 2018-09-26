@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Web Component</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script>
+        customElements.define('wc-simple',
+                              class extends HTMLElement {
+                                  constructor() {
+                                      super();
+
+                                      const pElem = document.createElement('p');
+                                      pElem.textContent = 'Hello Simple World';
+
+                                      const shadowRoot = this.attachShadow({mode:'open'});
+                                      shadowRoot.appendChild(pElem);
+
+                                  }
+                              });
+    </script>
+</head>
+<body>
+    <h1>The simplest web component</h1>
+    <wc-simple></wc-simple>
+</body>
+</html>
