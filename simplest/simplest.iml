@@ -4,5 +4,10 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="x-tag-polyfilled" level="application" />
+    <orderEntry type="library" name="webcomponents-bundle" level="application" />
+    <orderEntry type="library" name="x-tag-raw" level="application" />
+    <orderEntry type="library" name="hybrids" level="application" />
+    <orderEntry type="library" name="webcomponents-lite" level="application" />
   </component>
 </module>

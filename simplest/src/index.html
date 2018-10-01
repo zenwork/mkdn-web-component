@@ -7,14 +7,35 @@
     <script>
         customElements.define('wc-simple',
                               class extends HTMLElement {
+
+                                  static get observedAttributes() { return ['label']; }
+
+                                  connectedCallback() {
+                                      console.log('connected');
+                                  }
+
+                                  attributeChangedCallback(name, oldValue, newValue) {
+                                      if (oldValue !== newValue) {
+                                          switch (name) {
+                                              case 'label':
+                                                  console.log('label changed');
+                                                  this.label = newValue;
+                                                  this.pElem.textContent = this.label;
+                                                  break;
+                                              default:
+
+                                          }
+                                      }
+                                  }
+
                                   constructor() {
                                       super();
 
-                                      const pElem = document.createElement('p');
-                                      pElem.textContent = 'Hello Simple World';
+                                      this.pElem = document.createElement('p');
+                                      this.pElem.textContent = this.label;
 
                                       const shadowRoot = this.attachShadow({mode:'open'});
-                                      shadowRoot.appendChild(pElem);
+                                      shadowRoot.appendChild(this.pElem);
 
                                   }
                               });
@@ -22,6 +43,6 @@
 </head>
 <body>
     <h1>The simplest web component</h1>
-    <wc-simple></wc-simple>
+    <wc-simple label="foo"></wc-simple>
 </body>
 </html>

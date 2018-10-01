@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X-Tag example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script src="https://rawgit.com/x-tag/core/master/dist/x-tag-raw.js"></script>
+    <script>
+        xtag.create('x-clock', class extends XTagElement {
+
+            '::template'() {
+                return `<h2>the time: ${this.time}</h2>`;
+            }
+
+            set 'type::attr'(value) {
+                this.type = value;
+            }
+
+            set 'interval::attr'(value) {
+                this.timeout = value;
+            }
+
+            connectedCallback() {
+                this.start();
+            }
+
+            start() {
+                this.update();
+                this._interval = setInterval(() => this.update(), this.timeout);
+            }
+
+            stop() {
+                this._interval = clearInterval(this._data.interval);
+            }
+
+            update() {
+                if (this.type === 'iso') {
+                    this.time = new Date().toISOString();
+                } else {
+                    this.time = new Date().toLocaleTimeString();
+                }
+                this.render();
+            }
+        });
+    </script>
+</head>
+<x-clock type="iso" interval="100">time check:</x-clock>
+<body>
+
+</body>
+</html>
