@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/mkdn-web-component.iml" filepath="$PROJECT_DIR$/.idea/mkdn-web-component.iml" />
       <module fileurl="file://$PROJECT_DIR$/simplest/simplest.iml" filepath="$PROJECT_DIR$/simplest/simplest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wc-history/wc-history.iml" filepath="$PROJECT_DIR$/wc-history/wc-history.iml" />
       <module fileurl="file://$PROJECT_DIR$/md-story/wc-story.iml" filepath="$PROJECT_DIR$/md-story/wc-story.iml" />
     </modules>
   </component>
