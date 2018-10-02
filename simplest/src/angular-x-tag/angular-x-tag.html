@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular/X-Tag example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script src="https://rawgit.com/x-tag/core/master/dist/x-tag-raw.js"></script>
+    <script>
+        xtag.create('my-component', class extends XTagElement {
+            '::template'() {
+                // return `<h2>the time: ${this.time}</h2>`;
+                /*return `<app-root></app-root>
+                 <script type="text/javascript" src="runtime.js"><\/script>
+                 <script type="text/javascript" src="polyfills.js"><\/script>
+                 <script type="text/javascript" src="styles.js"><\/script>
+                 <script type="text/javascript" src="vendor.js"><\/script>
+                 <script type="text/javascript" src="main.js"><\/script>`*/
+                return `<link rel="import" href="ng-comp/wc.html"/>`;
+            }
+
+            set 'type::attr'(value) {
+                this.type = value;
+            }
+
+            set 'interval::attr'(value) {
+                this.timeout = value;
+            }
+
+            connectedCallback() {
+                this.start();
+            }
+
+            start() {
+                this.update();
+                // let timeout = 1000;
+                // if (this.timeout) {
+                //     timeout = this.timeout;
+                // }
+                // this._interval = setInterval(() => this.update(), timeout);
+            }
+
+            stop() {
+                this._interval = clearInterval(this._data.interval);
+            }
+
+            update() {
+                if (this.type === 'iso') {
+                    this.time = new Date().toISOString();
+                } else {
+                    this.time = new Date().toLocaleTimeString();
+                }
+                this.render();
+            }
+        });
+    </script>
+</head>
+<my-component></my-component>
+<body>
+
+</body>
+</html>
