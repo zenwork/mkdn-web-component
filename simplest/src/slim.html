@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Slim Library Example</title>
+    <!-- hhttp://slimjs.com -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.17/webcomponents-lite.js"></script>
     <script src="../node_modules/slim-js/Slim.nomodule.js"></script>
     <script src="../node_modules/slim-js/directives/all.nomodule.js"></script>
@@ -11,28 +12,23 @@
             'my-tag',
             `<div>Hello {{who}}, i am a custom element</div>`,
             class MyTag extends Slim {
-                constructor() {
-                    super();
-                    this.who = 'you';
-                }
-
+                
                 onBeforeCreated() {
-                    // initializing predefined values
-                    this.who = 'before';
+                    if (!this.who) this.who = 'Mr. Default';
                 }
 
                 static get observedAttributes() {
                     return ['who'];
                 }
 
-                get autoBoundAttributes() {
+                /*get autoBoundAttributes() {
                     return ['who'];
-                }
+                }*/
             });
     </script>
 </head>
 <body>
     <my-tag></my-tag>
-    <my-tag who="foo"></my-tag>
+    <my-tag who="Flo"></my-tag>
 </body>
 </html>

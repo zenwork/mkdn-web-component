@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular/X-Tag example</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script src="https://rawgit.com/x-tag/core/master/dist/x-tag-raw.js"></script>
+    <script>
+        xtag.create('my-component', class extends XTagElement {
+            '::template'() {
+                return `<link rel="import" href="ng-comp/index.html"/>`;
+                // return `<app-root></app-root>`;
+            }
+
+            set 'type::attr'(value) {
+                this.type = value;
+            }
+
+            set 'interval::attr'(value) {
+                this.timeout = value;
+            }
+
+            connectedCallback() {
+                this.start();
+            }
+
+            start() {
+                console.log('starting');
+                // this.loadFile('./ng-comp/runtime.ec2944dd8b20ec099bf3.js','js');
+                // this.loadFile('./ng-comp/polyfills.490b157ce793f8037537.js','js');
+                // this.loadFile('./ng-comp/main.a964133390c9ab53d85e.js','js');
+                this.update();
+            }
+
+            stop() {
+                this._interval = clearInterval(this._data.interval);
+            }
+
+            update() {
+                if (this.type === 'iso') {
+                    this.time = new Date().toISOString();
+                } else {
+                    this.time = new Date().toLocaleTimeString();
+                }
+                this.render();
+            }
+
+            loadFile(filename, filetype){
+                let fileref;
+                if (filetype === "js"){ //if filename is a external JavaScript file
+                    fileref = document.createElement('script');
+                    fileref.setAttribute("type","text/javascript");
+                    fileref.setAttribute("src", filename)
+                }
+                else if (filetype === "css"){ //if filename is an external CSS file
+                    fileref = document.createElement("link");
+                    fileref.setAttribute("rel", "stylesheet");
+                    fileref.setAttribute("type", "text/css");
+                    fileref.setAttribute("href", filename)
+                }
+                if (typeof fileref !== "undefined")
+                    document.getElementsByTagName("my-component")[0].appendChild(fileref)
+            }
+
+
+        });
+    </script>
+</head>
+<my-component></my-component>
+<body>
+
+</body>
+</html>

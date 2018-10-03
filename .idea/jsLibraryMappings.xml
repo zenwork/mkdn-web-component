@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/simplest" libraries="{hybrids, webcomponents-bundle, webcomponents-lite, x-tag-polyfilled, x-tag-raw}" />
-    <includedPredefinedLibrary name="Node.js Core" />
+    <file url="file://$PROJECT_DIR$/simplest" libraries="{webcomponents-lite}" />
   </component>
 </project>
