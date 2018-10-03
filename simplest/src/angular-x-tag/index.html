@@ -7,13 +7,32 @@
     <script src="https://rawgit.com/x-tag/core/master/dist/x-tag-raw.js"></script>
     <script>
         xtag.create('my-component', class extends XTagElement {
-            '::template(true)'() {
-                return `<link rel="import" href="ng-comp/index.html"/>`;
+
+            'prod::template'() {
+                return `<link rel="import" href="ng-comp-prod/index.html"/>`;
             }
+
+            'dev::template'() {
+                return `<link rel="import" href="ng-comp-dev/index.html"/>`;
+            }
+
+            set 'mode::attr'(value) {
+                this.mode = value;
+            }
+
+            connectedCallback() {
+                if (this.mode === 'prod') {
+                    this.render(this.mode);
+                } else {
+                    this.render('dev');
+                }
+            }
+
         });
     </script>
 </head>
 <my-component></my-component>
+<my-component mode="prod"></my-component>
 <body>
 
 </body>
