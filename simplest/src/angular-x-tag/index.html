@@ -6,7 +6,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
     <script src="https://rawgit.com/x-tag/core/master/dist/x-tag-raw.js"></script>
     <script>
-        xtag.create('my-component', class extends XTagElement {
+        xtag.create('app-root', class extends XTagElement {
 
             'prod::template'() {
                 return `<link rel="import" href="ng-comp-prod/index.html"/>`;
@@ -31,8 +31,8 @@
         });
     </script>
 </head>
-<my-component></my-component>
-<my-component mode="prod"></my-component>
+<!--<app-root></app-root>-->
+<app-root mode="prod"></app-root>
 <body>
 
 </body>
