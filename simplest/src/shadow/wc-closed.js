@@ -4,6 +4,7 @@ customElements.define('wc-closed',
                           constructor() {
                               super();
                               const div = document.createElement('div');
+                              div.id = 'wc-closed';
                               div.innerHTML =`
                                         <link rel='stylesheet' href='wc.css'>
                                         the closed shadow world
