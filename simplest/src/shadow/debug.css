@@ -1,0 +1,12 @@
+div {
+    background: lightpink ;
+    border:darkred;
+    font-family: monospace;
+    padding: 5px;
+    margin-top: 50px;
+}
+ol {
+}
+li {
+    margin: 5px;
+}

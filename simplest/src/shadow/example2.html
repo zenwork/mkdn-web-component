@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <link rel="stylesheet" href="./app.css"/>
+    <script src="wc-open.js"></script>
+    <script src="wc-closed.js"></script>
+    <script src="wc-debugger.js"></script>
+    <script src="intruder.js"></script>
+</head>
+<body>
+
+    <h1>Shadow DOM example 2</h1>
+    <div>
+        not in the shade
+        <wc-closed></wc-closed>
+        <wc-open></wc-open>
+    </div>
+
+    <wc-closed></wc-closed>
+
+    <style>
+        div {
+            color: red;
+        }
+    </style>
+
+    <wc-debugger></wc-debugger>
+    <script>
+        addIntruder('wc-open');
+        addIntruder('wc-closed');
+    </script>
+
+</body>
+</html>
