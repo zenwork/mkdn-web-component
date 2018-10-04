@@ -9,7 +9,7 @@ customElements.define('wc-debugger',
                               this.div.style['all'] = 'initial';
                               this.div.innerHTML = `
                                         <div>
-                                        <link rel="stylesheet" href="debug.css"/>
+                                        <link rel="stylesheet" href="debug/debug.css"/>
                                         <h3>debug</h3>
                                         <ol class="debug"></ol>
                                         </div>`;
@@ -35,7 +35,7 @@ customElements.define('wc-debugger',
                           }
                       });
 
-function debugMessage(message) {
+function showDebugMessage(message) {
     console.log('triggering');
     let event = new CustomEvent('wc-debug-event', {detail:message});
     window.dispatchEvent(event);

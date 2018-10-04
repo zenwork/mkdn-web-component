@@ -1,19 +1,19 @@
-customElements.define('wc-closed',
+customElements.define('wc-open',
                       class extends HTMLElement {
 
                           constructor() {
                               super();
                               const div = document.createElement('div');
-                              div.id = 'wc-closed';
+                              div.id='wc-open';
                               div.innerHTML =`
-                                        <link rel='stylesheet' href='wc.css'>
-                                        the closed shadow world
+                                        <link rel='stylesheet' href='wc/wc.css'>
+                                        the open shadow world
                                         <style>
                                             div{color:yellow;}
                                         </style>
                                       `;
 
-                              const shadowRoot = this.attachShadow({mode:'closed'});
+                              const shadowRoot = this.attachShadow({mode:'open'});
                               shadowRoot.appendChild(div);
 
                           }

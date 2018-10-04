@@ -8,9 +8,9 @@ function addIntruder(tagname) {
     if (root) {
         let div = root.getElementById(tagname);
         div.innerHTML = `${div.innerHTML}<p>INTRUDER CSS ADDED!</p><style>div{color:greenyellow;margin-left:33%;margin-right: 33%;}</style>`;
-        debugMessage(`[${tagname}] DOM is visible and was changed`);
+        return `[${tagname}] DOM is visible and was changed`;
     } else {
-        debugMessage(`[${tagname}] DOM is hidden`);
+        return `[${tagname}] DOM is hidden`;
     }
 
 }
