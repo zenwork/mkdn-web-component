@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>example 1</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
     <link rel="stylesheet" href="./app.css"/>
-    <script src="wc/wc-open.js"></script>
-    <script src="wc/wc-closed.js"></script>
-    <script src="debug/wc-debugger.js"></script>
-    <script src="debug/intruder.js"></script>
 </head>
 <body>
 
@@ -28,10 +23,17 @@
     </style>
 
     <wc-debugger></wc-debugger>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script src="wc/wc-open.js" ></script>
+    <script src="wc/wc-closed.js" ></script>
+    <script src="debug/wc-debugger.js"></script>
+    <script src="debug/intruder.js" ></script>
     <script>
         showDebugMessage(addIntruder('wc-open'));
         showDebugMessage(addIntruder('wc-closed'));
     </script>
+    
 
 </body>
 </html>
