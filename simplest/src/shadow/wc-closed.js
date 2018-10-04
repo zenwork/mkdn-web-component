@@ -1,0 +1,19 @@
+customElements.define('wc-closed',
+                      class extends HTMLElement {
+
+                          constructor() {
+                              super();
+                              const div = document.createElement('div');
+                              div.innerHTML =`
+                                        <link rel='stylesheet' href='wc.css'>
+                                        the closed shadow world
+                                        <style>
+                                            div{color:yellow;}
+                                        </style>
+                                      `;
+
+                              const shadowRoot = this.attachShadow({mode:'closed'});
+                              shadowRoot.appendChild(div);
+
+                          }
+                      });

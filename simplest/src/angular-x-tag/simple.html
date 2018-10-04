@@ -10,13 +10,13 @@
 
                                   connectedCallback() {
                                       console.log('connected');
-                                      this.pElem = document.createElement('script');
-                                      this.pElem.setAttribute('rel','import');
-                                      this.pElem.setAttribute('src','ng-comp-dev/index.html');
+                                      this.p = document.createElement('script');
+                                      this.p.setAttribute('rel', 'import');
+                                      this.p.setAttribute('src', 'ng-comp-dev/index.html');
 
 
                                       const shadowRoot = this.attachShadow({mode:'open'});
-                                      shadowRoot.appendChild(this.pElem);
+                                      shadowRoot.appendChild(this.p);
 
                                   }
 

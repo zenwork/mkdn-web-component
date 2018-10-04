@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example 1</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <link rel="stylesheet" href="./app.css"/>
+</head>
+<body>
+    <script src="wc-open.js"></script>
+    <script src="wc-closed.js"></script>
+    <h1>Shadow DOM example 1</h1>
+    <div>
+        not in the shade
+        <wc-closed></wc-closed>
+        <wc-open></wc-open>
+    </div>
+
+    <wc-closed></wc-closed>
+
+    <style>
+        div {
+            color: red;
+        }
+    </style>
+    <script>
+        function addIntruder(tagname) {
+
+            let root = document.getElementsByTagName(tagname)[0].shadowRoot;
+
+            if (root) {
+                root.innerHTML = `${root.innerHTML}<div>INTRUDER ADDED!</div><style>div{color:greenyellow}</style>`;
+            } else {
+
+                console.log(`unable to change wc: ${tagname}`);
+            }
+
+        }
+
+        addIntruder('wc-open');
+        addIntruder('wc-closed');
+
+    </script>
+
+</body>
+</html>
