@@ -1,0 +1,42 @@
+<template id="template-closed">
+    <link rel='stylesheet' href='wc/wc.css'>
+    the closed shadow world
+    <style>
+        div {
+            color: yellow;
+        }
+    </style>
+</template>
+<script>
+    customElements.define('wc-closed2',
+                          class extends HTMLElement {
+
+                              constructor() {
+                                  super();
+                                  console.log('hello html link world');
+                                  // this.oldWay();
+                                  this.newWay();
+                              }
+
+                              newWay() {
+                                  const template = document.getElementById('template-closed').content;
+                                  this.attachShadow({mode:'closed'})
+                                      .appendChild(template.cloneNode(true));
+                              }
+
+                              oldWay() {
+                                  const div = document.createElement('div');
+                                  div.id = 'wc-closed2';
+                                  div.innerHTML = `
+                                         <link rel='stylesheet' href='wc/wc.css'>
+                                         the closed shadow world loaded with <code>&lt;link&gt;</code> instead of <code>&lt;script&gt;</code>
+                                         <style>
+                                             div{color:yellow; background: darkcyan}
+                                         </style>
+                                       `;
+
+                                  const shadowRoot = this.attachShadow({mode:'closed'});
+                                  shadowRoot.appendChild(div);
+                              }
+                          });
+</script>
