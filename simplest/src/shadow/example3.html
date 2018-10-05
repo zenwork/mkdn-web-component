@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>example 3</title>
+    <link rel="stylesheet" href="./app.css"/>
+</head>
+<body>
+
+    <h1>Shadow DOM example 3</h1>
+    <div>
+        not in the shade
+        <wc-closed></wc-closed>
+        <wc-open></wc-open>
+    </div>
+
+    <wc-closed></wc-closed>
+    <wc-app></wc-app>
+
+    <style>
+        div {
+            color: red;
+        }
+    </style>
+
+    <wc-debugger></wc-debugger>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    <script src="wc/wc-open.js" ></script>
+    <script src="wc/wc-closed.js" ></script>
+    <script src="ng-comp-dev/wc-app.js" ></script>
+    <script src="debug/wc-debugger.js"></script>
+    <script src="debug/intruder.js" ></script>
+    <script>
+        showDebugMessage(addIntruder('wc-open'));
+        showDebugMessage(addIntruder('wc-closed'));
+    </script>
+    
+
+</body>
+</html>

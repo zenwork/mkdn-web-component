@@ -4,7 +4,7 @@
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="18">
+          <list size="19">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -23,6 +23,7 @@
             <item index="15" class="java.lang.String" itemvalue="wc-closed" />
             <item index="16" class="java.lang.String" itemvalue="wc-debug" />
             <item index="17" class="java.lang.String" itemvalue="wc-debugger" />
+            <item index="18" class="java.lang.String" itemvalue="wc-app" />
           </list>
         </value>
       </option>
