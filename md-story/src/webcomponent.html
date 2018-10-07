@@ -9,10 +9,13 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
-    <md-story></md-story>
-    <md-story></md-story>
-    <md-story></md-story>
+    <button onclick="add()">add</button>
     <md-story></md-story>
     <script type="text/javascript" src="webcomponent.js"></script>
+    <script>
+        function add() {
+            window.document.getElementsByTagName("body")[0].appendChild(document.createElement("md-story"))
+        }
+    </script>
 </body>
 </html>
