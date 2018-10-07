@@ -3,17 +3,22 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-      "md-story": {
+    "md-story": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
       "prefix": "app",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineTemplate": true,
+          "inlineStyle": true
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-              "outputPath": "dist/md-story",
+            "outputPath": "dist/md-story",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,11 +30,7 @@
             "styles": [
               "src/styles.css"
             ],
-              "scripts": [
-                  {
-                      "input": "node_modules/document-register-element/build/document-register-element.js"
-                  }
-              ]
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -54,18 +55,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-              "browserTarget": "md-story:build"
+            "browserTarget": "md-story:build"
           },
           "configurations": {
             "production": {
-                "browserTarget": "md-story:build:production"
+              "browserTarget": "md-story:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-              "browserTarget": "md-story:build"
+            "browserTarget": "md-story:build"
           }
         },
         "test": {
@@ -99,7 +100,7 @@
         }
       }
     },
-      "md-story-e2e": {
+    "md-story-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -107,11 +108,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-              "devServerTarget": "md-story:serve"
+            "devServerTarget": "md-story:serve"
           },
           "configurations": {
             "production": {
-                "devServerTarget": "md-story:serve:production"
+              "devServerTarget": "md-story:serve:production"
             }
           }
         },
@@ -127,5 +128,5 @@
       }
     }
   },
-    "defaultProject": "md-story"
+  "defaultProject": "md-story"
 }
