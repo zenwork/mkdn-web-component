@@ -7,8 +7,10 @@
         "src"
     ],
     "scripts": {
-        "start": "http-server dist",
+        "start": "http-server dist -g",
         "build": "webpack",
+        "build-watch": "webpack --watch",
+        "build-prod": "webpack --mode=production",
         "test": "xo && ava"
     },
     "repository": {
@@ -32,10 +34,10 @@
     "devDependencies": {
         "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
-        "@polymer/lit-element": "0.5.2",
+        "@polymer/lit-element": "~0.6.2",
         "babel-loader": "^8.0.0",
         "html-webpack-plugin": "3.2.0",
-        "lit-loader": "0.0.2",
+        "lit-loader": "git+https://github.com/zenwork/lit-loader.git",
         "postcss-easy-import": "3.0.0",
         "webpack": "4.16.1",
         "webpack-cli": "3.0.8",
