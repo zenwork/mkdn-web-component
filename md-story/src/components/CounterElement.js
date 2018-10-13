@@ -1,37 +1,35 @@
+import * as logger from './logger.js';
+import {LitElement,html} from '@polymer/lit-element';
 
-<script>
-	import * as logger from './logger.js';
+export default class CounterElement extends LitElement {
+	static get properties() {
+		return {
+			clicks:{type:Number},
+			value:{type:Number}
+		};
+	}
 
-	export default class CounterElement extends LitElement {
-		static get properties() {
-			return {
-				clicks:{type:Number},
-				value:{type:Number}
-			};
-		}
+	constructor() {
+		super();
+		this.clicks = 0;
+		this.value = 0;
+	}
 
+	onIncrement() {
+		this.value++;
+		this.clicks++;
+		logger.log();
+		this.dispatchEvent(new CustomEvent('counter-incremented'));
+	}
 
-		constructor() {
-			super();
-			this.clicks = 0;
-			this.value = 0;
-		}
+	onDecrement() {
+		this.value--;
+		this.clicks++;
+		this.dispatchEvent(new CustomEvent('counter-decremented'));
+	}
 
-		onIncrement() {
-			this.value++;
-			this.clicks++;
-			logger.log();
-			this.dispatchEvent(new CustomEvent('counter-incremented'));
-		}
-
-		onDecrement() {
-			this.value--;
-			this.clicks++;
-			this.dispatchEvent(new CustomEvent('counter-decremented'));
-		}
-
-		render() {
-			return html`
+	render() {
+		return html`
             <style lang="postcss">
                 span {
                     width: 20px;
@@ -50,8 +48,7 @@
                 </p>
             </div>
                         `;
-		}
 	}
+}
 
-	window.customElements.define('counter-element', CounterElement);
-</script>
+window.customElements.define('counter-element', CounterElement);

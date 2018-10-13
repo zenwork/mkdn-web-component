@@ -12,23 +12,6 @@ module.exports = {
         new HtmlWebpackPlugin({title:'lit-loader example', template:'./src/index.html'})
     ],
     module:{
-        rules:[{
-            test:/\.lit$/,
-            use:[{
-                loader:'babel-loader',
-                options:{
-                    presets:[['@babel/preset-env', {
-                        targets:{
-                            browsers:[
-                                'safari 11'
-                            ]
-                        }
-                    }]]
-                }
-            },
-                {loader:'lit-loader'}
-            ]
-        }
-        ]
+        rules:[]
     }
 };

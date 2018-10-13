@@ -2,7 +2,7 @@
 
 import {LitElement, html} from '@polymer/lit-element';
 
-import './components/CounterElement.lit';
+import './components/CounterElement.js';
 
 export default class LitApp extends LitElement {
     static get properties() {
