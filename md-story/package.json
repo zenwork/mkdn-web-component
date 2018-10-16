@@ -7,11 +7,12 @@
         "src"
     ],
     "scripts": {
+        "start:dev": "webpack-dev-server",
         "start": "http-server dist -g",
         "build": "webpack",
         "build-watch": "webpack --watch",
         "build-prod": "webpack --mode=production",
-        "test": "xo && ava"
+        "test": "jest"
     },
     "repository": {
         "type": "git",
@@ -35,9 +36,14 @@
         "@babel/core": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
         "@polymer/lit-element": "~0.6.2",
+        "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.0",
+        "babel-preset-env": "^1.7.0",
+        "faker": "^4.1.0",
         "html-webpack-plugin": "3.2.0",
+        "jest": "^23.6.0",
         "postcss-easy-import": "3.0.0",
+        "puppeteer": "^1.9.0",
         "webpack": "4.16.1",
         "webpack-cli": "3.0.8",
         "xo": "0.21.1"

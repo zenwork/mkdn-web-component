@@ -1,3 +1,3 @@
 
-import './components/CounterElement.js';
+import './components/md-story.js';
 

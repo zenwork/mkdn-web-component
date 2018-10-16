@@ -1,11 +1,11 @@
 import * as logger from './logger.js';
-import {LitElement,html} from '@polymer/lit-element';
+import {LitElement,html} from '@polymer/lit-element/lit-element.js';
 
-export default class CounterElement extends LitElement {
+export default class MdStory extends LitElement {
+
 	static get properties() {
 		return {
-			clicks:{type:Number},
-			value:{type:Number}
+			markdown:{type:String}
 		};
 	}
 
@@ -19,7 +19,7 @@ export default class CounterElement extends LitElement {
 		this.value++;
 		this.clicks++;
 		logger.log();
-		this.dispatchEvent(new CustomEvent('counter-incremented'));
+		this.dispatchEvent(new CustomEvent('md-story-rendered'));
 	}
 
 	onDecrement() {
@@ -51,4 +51,4 @@ export default class CounterElement extends LitElement {
 	}
 }
 
-window.customElements.define('counter-element', CounterElement);
+window.customElements.define('md-story', MdStory);
