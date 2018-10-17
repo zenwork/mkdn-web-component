@@ -1,5 +1,4 @@
-import * as logger from './logger.js';
-import {LitElement,html} from '@polymer/lit-element/lit-element.js';
+import {html, LitElement} from '@polymer/lit-element/lit-element.js';
 
 export default class MdStory extends LitElement {
 
@@ -9,14 +8,18 @@ export default class MdStory extends LitElement {
 		};
 	}
 
+	static get name() { return 'md-story';}
+
 	constructor() {
 		super();
-		this.markdown = 'no markdown provided';
+		this.markdown = '';
 	}
 
 	render() {
-		return html`<section id="story" class="story">${this.markdown}</section>`
+		return html`<section class="story">
+    <slot>no markdown provided</slot>
+</section>`;
 	}
 }
 
-window.customElements.define('md-story', MdStory);
+window.customElements.define(MdStory.name, MdStory);
