@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="test all (watch)" type="JavaScriptTestRunnerJest" factoryName="Jest">
+    <node-interpreter value="$USER_HOME$/.nvm/versions/node/v8.12.0/bin/node" />
+    <node-options value="--inspect-brk" />
+    <working-dir value="$PROJECT_DIR$/md-story" />
+    <envs />
+    <scope-kind value="ALL" />
+    <method v="2" />
+  </configuration>
+</component>
