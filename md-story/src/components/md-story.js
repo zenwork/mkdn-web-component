@@ -12,7 +12,6 @@ export default class MdStory extends LitElement {
 
 	constructor() {
 		super();
-		this.markdown = '';
 	}
 
 	render() {

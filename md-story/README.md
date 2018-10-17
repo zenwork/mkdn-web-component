@@ -43,7 +43,7 @@ e2e tests:
 npm run test:e2e
 ```
 
-note: using testcafe for e2e tests.
+note: using testcafe and headless chrome for e2e tests.
 
 
 
