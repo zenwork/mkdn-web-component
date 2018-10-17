@@ -4,7 +4,7 @@ let testcafe =null
 
 createTestCafe('localhost', 1337, 1338)
 	.then(tc => {
-		testcafe = tc
+		testcafe = tc;
 		runner = tc.createRunner();
 
 		return tc.createBrowserConnection();
