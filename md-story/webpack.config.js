@@ -12,17 +12,17 @@ module.exports = {
 	plugins:[
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
-			                      filename:'index.html',
+			                      filename:'demo/index.html',
 			                      template:'./src/templates/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
-			                      filename:'empty.html',
+			                      filename:'demo/empty.html',
 			                      template:'!!ejs-webpack-loader!./src/templates/empty.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story simple',
-			                      filename:'simple.html',
+			                      filename:'demo/simple.html',
 			                      template:'!!ejs-webpack-loader!./src/templates/simple.ejs'
 		                      }),
 		new CopyWebpackPlugin([
