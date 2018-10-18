@@ -1,8 +1,0 @@
-{
-    "name": "simplest",
-    "version": "1.0.0",
-    "dependencies": {
-        "slim-js": "^4.0.1",
-        "lit-html": "^0.11.4"
-    }
-}
