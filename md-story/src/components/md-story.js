@@ -5,7 +5,9 @@ export default class MdStory extends LitElement {
 
 	static get properties() {
 		return {
-			markdown:{type:String, attribute:false}
+			markdown:{type:String, attribute:false},
+			style:{type:String},
+			hidden:{type:Boolean}
 		};
 	}
 
@@ -25,10 +27,14 @@ export default class MdStory extends LitElement {
 	}
 
 	render() {
-		return html`
-<section class="story">
+		if (this.hidden) {
+			return html``;
+		} else {
+			return html`
+<section style="${this.style}" class="story">
     ${this.markdown}
 </section>`;
+		}
 	}
 }
 

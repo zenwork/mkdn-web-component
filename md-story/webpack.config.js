@@ -30,6 +30,11 @@ module.exports = {
 			                      filename:'demo/simple-formatting.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/simple-formatting.ejs'
 		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'md-story attributes',
+			                      filename:'demo/attributes.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/attributes.ejs'
+		                      }),
 		new CopyWebpackPlugin([
 			                      {
 				                      from:'./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
