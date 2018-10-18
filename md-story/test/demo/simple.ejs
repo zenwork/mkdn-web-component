@@ -5,10 +5,9 @@
 </head>
 <body>
     <md-story>some markdown</md-story>
-    <p>
-        <code>
-            &lt;md-story&gt;some markdown&lt;/md-story&gt;
-        </code>
-    </p>
+
+<%- include partials/code-header.ejs %>
+&lt;md-story&gt;some markdown&lt;/md-story&gt;
+<%- include partials/code-footer.ejs %>
 </body>
 </html>
