@@ -12,7 +12,17 @@ This is a web component that renders markdown provided through the element's mai
 ## Usage in Browser
 
 ```
-<md-story>some markdown content</md-story>
+    <html>
+        <head>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+        </head>
+        <body>
+            <md-story>
+                some markdown
+            </md-story>
+            <script src="md-story.js"></script>
+        </body>
+    </html>
 ```
 
 ## Runinng in demo mode
