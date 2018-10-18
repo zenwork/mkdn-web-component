@@ -48,6 +48,11 @@ module.exports = {
 			                      filename:'demo/mdstory/attributes.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/attributes.ejs'
 		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'md-story attributes',
+			                      filename:'demo/mdhistory/base.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdhistory/base.ejs'
+		                      }),
 		new CopyWebpackPlugin([
 			                      {
 				                      from:'./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',

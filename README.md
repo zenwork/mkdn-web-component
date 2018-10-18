@@ -7,4 +7,5 @@ Collection of Web Components to show markdown content.
 
 ## TODO:
 * e2e tests do not work in firefox
+* simplify the demo html generating
 
