@@ -46,14 +46,14 @@ unit tests:
 ```
 npm run test
 ```
-note: using jest for unit tests
+note: using [jest](https://jestjs.io/) for unit tests
 
 e2e tests:
 ```
 npm run test:e2e
 ```
 
-note: using testcafe and headless chrome for e2e tests.
+note: using [testcafe](https://devexpress.github.io/testcafe/) and [headless chrome](https://chromium.googlesource.com/chromium/src/+/lkgr/headless/) for e2e tests.
 
 
 
