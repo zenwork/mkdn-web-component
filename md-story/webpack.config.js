@@ -21,12 +21,12 @@ module.exports = {
 			                      template:'!!ejs-webpack-loader!./test/demo/empty.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-story simple',
+			                      title:'md-story string',
 			                      filename:'demo/simple.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/simple.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-story simple',
+			                      title:'md-story simple formatting',
 			                      filename:'demo/simple-formatting.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/simple-formatting.ejs'
 		                      }),
