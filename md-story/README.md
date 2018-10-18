@@ -5,7 +5,7 @@ This is a web component that renders markdown provided through the element's mai
 
 ## Status
 
-* In development
+* Basic implementation
 * it currently does not actually convert the markdown to html
 
 
@@ -24,6 +24,11 @@ This is a web component that renders markdown provided through the element's mai
         </body>
     </html>
 ```
+
+## Supported attributes
+
+* `hidden` - flag that hides the content of the component. The `<md-story>` element is still visible in the DOM.
+* `style`  - canonical attribute is injected into the component. 
 
 ## Runinng in demo mode
 make sure `http-server` is installed glabally
