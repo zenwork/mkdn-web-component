@@ -13,3 +13,14 @@ test('hidden attributes ', async t => {
 	await t.expect(await wbco.exists).eql(true);
 
 });
+
+test('hidden attribute value ignored', async t => {
+	let wbco = Selector(() => document.querySelector('md-story').shadowRoot.querySelector('section'));
+	await t.expect(await wbco.exists).eql(false);
+
+	let fn = ClientFunction(() => {document.querySelector('md-story').setAttribute('hidden','false');});
+	await fn();
+
+	await t.expect(await wbco.exists).eql(false);
+
+});

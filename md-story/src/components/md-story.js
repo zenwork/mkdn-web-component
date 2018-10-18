@@ -27,7 +27,7 @@ export default class MdStory extends LitElement {
 	}
 
 	render() {
-		if (this.hidden) {
+		if (this.hidden && this.hidden !== null) {
 			return html``;
 		} else {
 			return html`
