@@ -23,6 +23,11 @@ export default class MdStory extends LitElement {
 		this.markdown.innerHTML = '<p>no markdown provided</p>';
 	}
 
+	createRenderRoot() {
+		//use a closed shadow dom
+		return this.attachShadow({ mode: 'closed' });
+	}
+
 	connectedCallback() {
 		let markdown = this.innerHTML;
 		if (markdown && !this.hidden) {
