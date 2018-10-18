@@ -21,11 +21,13 @@ export default class MdStory extends LitElement {
 		super();
 		this.markdown = document.createElement('div');
 		this.markdown.innerHTML = '<p>no markdown provided</p>';
+
+
 	}
 
 	createRenderRoot() {
-		//use a closed shadow dom
-		return this.attachShadow({ mode: 'closed' });
+		//should use a closed shadow dom but must be open for testing!!! Need to figure this out
+		return this.attachShadow({ mode: 'open' });
 	}
 
 	connectedCallback() {
@@ -33,6 +35,29 @@ export default class MdStory extends LitElement {
 		if (markdown && !this.hidden) {
 			this.markdown.innerHTML = marked(markdown);
 		}
+
+		// Options for the observer (which mutations to observe)
+		let config = { attributes: false, childList: true, subtree: false };
+		const that = this;
+		this.observer = new MutationObserver(function(mutations){
+			mutations.forEach(function(mutation) {
+				if (mutation.type === 'childList' && mutation.target.nodeName === 'MD-STORY') {
+				  console.log(mutation);
+					that.markdown.innerHTML = marked(mutation.target.innerHTML);
+				}
+			});
+		});
+
+		// Start observing the target node for configured mutations
+		this.observer.observe(this, config);
+	}
+
+	disconnectedCallback() {
+		this.observer.disconnect();
+	}
+
+	updated(changedProperties) {
+		console.log("updated")
 	}
 
 	render() {
