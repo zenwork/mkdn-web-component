@@ -5,10 +5,13 @@ This is a web component that renders markdown provided through the element's mai
 
 ## Status
 
-* Basic implementation
-* it currently does not actually convert the markdown to html
-
-
+* Basic implementation works
+* TODO:
+  * add support for dropcaps at document start 
+  * expose some kind of styling interface.
+  * ...
+  
+ 
 ## Usage in Browser
 
 ```
