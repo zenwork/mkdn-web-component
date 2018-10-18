@@ -1,7 +1,7 @@
 import {Selector, ClientFunction} from 'testcafe';
 
 fixture`md-story - update content`
-	.page`http://localhost:8080/demo/empty.html`;
+	.page`http://localhost:8080/demo/mdstory/empty.html`;
 
 
 test('hidden attributes ', async t => {

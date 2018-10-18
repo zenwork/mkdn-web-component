@@ -13,6 +13,7 @@ createTestCafe('localhost', 1337, 1338)
 		runner
 			.src('test/**/*page*')
 			.browsers(['chrome:headless'])
+			// .browsers(['firefox'])
 			.screenshots('./screenshots',true)
 			.run()
 			.then(failedCount => {

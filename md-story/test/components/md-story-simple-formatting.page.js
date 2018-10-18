@@ -1,7 +1,7 @@
 import {Selector} from 'testcafe';
 
 fixture`md-story - simple formatting`
-	.page`http://localhost:8080/demo/simple-formatting.html`;
+	.page`http://localhost:8080/demo/mdstory/simple-formatting.html`;
 
 test('component with content is present and formatted ', async t => {
 	//find title

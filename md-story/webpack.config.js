@@ -4,36 +4,49 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
 	mode:'none',
-	entry:'./src',
+	entry:{
+		'md-story':'./src/components/md-story.js',
+		'md-history':'./src/components/md-history.js'
+	},
 	output:{
-		path:path.resolve('./dist'),
-		filename:'md-story.js'
+		filename:'[name].js',
+		path:path.resolve(__dirname, 'dist')
 	},
 	plugins:[
 		new HtmlWebpackPlugin({
-			                      title:'md-story empty',
+			                      title:'demo',
 			                      filename:'demo/index.html',
 			                      template:'./test/demo/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
+			                      title:'demo md-story',
+			                      filename:'demo/mdstory/index.html',
+			                      template:'./test/demo/mdstory/index.html'
+		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'demo md-history',
+			                      filename:'demo/mdhistory/index.html',
+			                      template:'./test/demo/mdhistory/index.html'
+		                      }),
+		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
-			                      filename:'demo/empty.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/empty.ejs'
+			                      filename:'demo/mdstory/empty.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/empty.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story string',
-			                      filename:'demo/simple.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/simple.ejs'
+			                      filename:'demo/mdstory/simple.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/simple.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story simple formatting',
-			                      filename:'demo/simple-formatting.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/simple-formatting.ejs'
+			                      filename:'demo/mdstory/simple-formatting.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/simple-formatting.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story attributes',
-			                      filename:'demo/attributes.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/attributes.ejs'
+			                      filename:'demo/mdstory/attributes.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/attributes.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {
@@ -45,4 +58,10 @@ module.exports = {
 	module:{
 		rules:[]
 	}
+	// ,
+	// optimization:{
+	// 	splitChunks: {
+	// 		chunks:'all'
+	// 	}
+	// }
 };

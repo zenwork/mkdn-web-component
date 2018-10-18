@@ -1,7 +1,7 @@
 import {Selector, ClientFunction} from 'testcafe';
 
 fixture`md-story - attributes`
-	.page`http://localhost:8080/demo/attributes.html`;
+	.page`http://localhost:8080/demo/mdstory/attributes.html`;
 
 test('hidden attributes ', async t => {
 	let wbco = Selector(() => document.querySelector('md-story').shadowRoot.querySelector('section'));
