@@ -13,17 +13,17 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
 			                      filename:'demo/index.html',
-			                      template:'./src/templates/index.html'
+			                      template:'./test/demo/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
 			                      filename:'demo/empty.html',
-			                      template:'!!ejs-webpack-loader!./src/templates/empty.ejs'
+			                      template:'!!ejs-webpack-loader!./test/demo/empty.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story simple',
 			                      filename:'demo/simple.html',
-			                      template:'!!ejs-webpack-loader!./src/templates/simple.ejs'
+			                      template:'!!ejs-webpack-loader!./test/demo/simple.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {
