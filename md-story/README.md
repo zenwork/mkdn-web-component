@@ -8,7 +8,10 @@ This is a web component that renders markdown provided through the element's mai
 * Basic implementation works
 * TODO:
   * add support for dropcaps at document start 
-  * expose some kind of styling interface.
+  * expose some kind of styling interface
+  * sort out minification and uglification
+  * create online version of demo
+  * build and publish
   * ...
   
  
