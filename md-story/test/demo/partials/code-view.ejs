@@ -1,6 +1,6 @@
 <% id = Math.random() %>
-<div style="background: lightgray;border: darkslategrey solid 1; border-radius: 10px; padding: 5px; font-family: sans-serif">
-    <h3>demo template</h3>
+<h3 class="demo-code-title">code template</h3>
+<div class="demo-code">
     <pre>
         <code id="<%- id %>">
 
@@ -9,7 +9,7 @@
     <script>
 		(function (codeId, demoId) {
 			let code = document.getElementById(codeId).innerHTML;
-			document.getElementById(demoId).innerText = '\n    '+code;
+			document.getElementById(demoId).innerText = '\n    ' + code;
 
 		})('<%= componentId %>', '<%= id %>');
 

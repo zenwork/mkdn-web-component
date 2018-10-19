@@ -8,19 +8,19 @@
     <h1>Attributes</h1>
 
     <!-- --------------------------------------------------------------------- -->
-    <h2><code>hidden</code> attribute</h2>
+    <h2 class="demo-code-title"><code>hidden</code> attribute</h2>
 
     <% componentId = 'hidden' %>
-    <div id="<%= componentId %>">
+    <div id="<%= componentId %>" class="demo">
         <md-story id="<%= componentId %>" hidden="false">some markdown</md-story>
     </div>
     <%- include ../partials/code-view.ejs %>
 
     <!-- --------------------------------------------------------------------- -->
-    <h2><code>style</code> attribute</h2>
+    <h2 class="demo-code-title"><code>style</code> attribute</h2>
 
     <% componentId = 'style' %>
-    <div id="<%= componentId %>">
+    <div id="<%= componentId %>" class="demo">
         <md-story style="background:salmon;font-family: monospace">
             # SALMON MARKDOWN
 

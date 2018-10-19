@@ -37,7 +37,6 @@ export default class MdHistory extends BaseElement {
 	}
 
 	select(key) {
-		console.log(key);
 		let storyDef = new Story(key, this.inputList[key]);
 		let event = new CustomEvent('md-history-selected', {detail:storyDef});
 		this.dispatchEvent(event);

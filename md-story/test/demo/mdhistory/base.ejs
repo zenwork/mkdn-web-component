@@ -5,22 +5,22 @@
 </head>
 <body>
     <%- include ../partials/style.ejs %>
-    <h1>Basic Demo</h1>
+    <h1>md-history Demo</h1>
 
     <!-- --------------------------------------------------------------------- -->
-    <h2>Empty</h2>
+    <h2 class="demo-code-title">Empty</h2>
 
     <% componentId = 'empty' %>
-    <div id="<%= componentId %>">
+    <div id="<%= componentId %>" class="demo">
         <md-history></md-history>
     </div>
     <%- include ../partials/code-view.ejs %>
-
+    <p><strong>Note:</strong> open the console to see events being logged</p>
     <!-- --------------------------------------------------------------------- -->
-    <h2>Simple List</h2>
+    <h2 class="demo-code-title">Simple List</h2>
 
     <% componentId = 'simple-list' %>
-    <div id="<%= componentId %>">
+    <div id="<%= componentId %>" class="demo">
         <md-history>
             {
             "title-1": "Title 1",
@@ -29,6 +29,21 @@
         </md-history>
     </div>
     <%- include ../partials/code-view.ejs %>
+
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for history selection events
+		 */
+		document
+			.querySelectorAll('md-history')
+			.forEach((el) => el.addEventListener('md-history-selected',
+			                                     function (e) {
+				                                     console.log(`event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+    </script>
 
 </body>
 </html>
