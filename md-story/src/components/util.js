@@ -12,7 +12,7 @@ export function observeContent(ofComponent, handleMutationFn, root) {
 
 	const observer = new MutationObserver(function (mutations) {
 		mutations.forEach(function (mutation) {
-			if (mutation.type === 'childList' && mutation.target.nodeName === ofComponent) {
+			if (mutation.type === 'childList' && mutation.target.nodeName === ofComponent.toUpperCase()) {
 				handleMutationFn(mutation);
 			}
 		});

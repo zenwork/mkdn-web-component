@@ -15,7 +15,6 @@ export default class MdHistory extends BaseElement {
 
 	connectedCallback() {
 		let input = this.innerHTML.trim();
-		console.log(`input ${input}`);
 		if (input) {
 			this.inputList = JSON.parse(input);
 		}
@@ -23,9 +22,10 @@ export default class MdHistory extends BaseElement {
 			this.inputList = {na:'no history'};
 		}
 
-		this.observer = observeContent(this.name,
+		this.observer = observeContent('MD-HISTORY',
 		                               (mut) => {
-			                               this.inputList = JSON.parse(mut.innerHTML);
+
+			                               this.inputList = JSON.parse(mut.target.innerHTML.trim());
 		                               }, this);
 
 	}
