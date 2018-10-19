@@ -11,7 +11,7 @@ test('empty component is present ', async t => {
 		.querySelector('section > ul > li'));
 
 	let actual = await wbco.nth(0).innerText;
-	await t.expect(actual).eql('no history');
+	await t.expect(actual).eql('no items');
 });
 
 test('simple list is rendered', async t => {
