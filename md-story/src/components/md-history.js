@@ -38,7 +38,7 @@ export default class MdHistory extends BaseElement {
 		return html` <section><ul> 
 			${repeat(Object.keys(this.inputList),
 		             (key) => {return key;},
-		             (key) => { return html`<li><button @click=${key}>${this.inputList[key]}</button></li>`;})}
+		             (key) => { return html`<li><button @click=${(key) => { console.log(key); }}>${this.inputList[key]}</button></li>`;})}
 </ul></section>`;
 
 	}
