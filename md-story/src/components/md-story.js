@@ -1,6 +1,6 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 import * as marked from 'marked';
-import {observeContent} from './util';
+import {observeContentChange} from './events';
 import {BaseElement} from './base-element';
 
 /**
@@ -26,7 +26,7 @@ export default class MdStory extends BaseElement {
 		if (input && !this.hidden) {this.formatStory(input);}
 
 		const that = this;
-		this.observer = observeContent('MD-STORY', mutation => that.formatStory(mutation.target.innerHTML), this);
+		this.observer = observeContentChange('MD-STORY', mutation => that.formatStory(mutation.target.innerHTML), this);
 	}
 
 	formatStory(markdown) {

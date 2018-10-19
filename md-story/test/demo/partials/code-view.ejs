@@ -1,0 +1,17 @@
+<% id = Math.random() %>
+<div style="background: lightgray;border: darkslategrey solid 1; border-radius: 10px; padding: 5px; font-family: sans-serif">
+    <h3>demo template</h3>
+    <pre>
+        <code id="<%- id %>">
+
+        </code>
+    </pre>
+    <script>
+		(function (codeId, demoId) {
+			let code = document.getElementById(codeId).outerHTML;
+			document.getElementById(demoId).innerText = '\n    '+code;
+
+		})('<%= componentId %>', '<%= id %>');
+
+    </script>
+</div>

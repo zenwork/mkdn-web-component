@@ -1,7 +1,8 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 import {repeat} from 'lit-html/directives/repeat';
 import {BaseElement} from './base-element';
-import {observeContent} from './util';
+import {observeContentChange} from './events';
+import {Story} from './story';
 
 export default class MdHistory extends BaseElement {
 
@@ -22,11 +23,12 @@ export default class MdHistory extends BaseElement {
 			this.inputList = {na:'no history'};
 		}
 
-		this.observer = observeContent('MD-HISTORY',
-		                               (mut) => {
+		this.observer = observeContentChange('MD-HISTORY',
+		                                     (mut) => {
 
-			                               this.inputList = JSON.parse(mut.target.innerHTML.trim());
-		                               }, this);
+			                                     this.inputList = JSON.parse(mut.target.innerHTML.trim());
+		                                     },
+		                                     this);
 
 	}
 
@@ -34,11 +36,18 @@ export default class MdHistory extends BaseElement {
 		this.observer.disconnect();
 	}
 
+	select(key) {
+		console.log(key);
+		let storyDef = new Story(key, this.inputList[key]);
+		let event = new CustomEvent('md-history-selected', {detail:storyDef});
+		this.dispatchEvent(event);
+	}
+
 	render() {
 		return html` <section><ul> 
 			${repeat(Object.keys(this.inputList),
 		             (key) => {return key;},
-		             (key) => { return html`<li><button @click=${(key) => { console.log(key); }}>${this.inputList[key]}</button></li>`;})}
+		             (key) => { return html`<li><a href="#" @click=${(event) => { this.select(key); }}>${this.inputList[key]}</a></li>`;})}
 </ul></section>`;
 
 	}

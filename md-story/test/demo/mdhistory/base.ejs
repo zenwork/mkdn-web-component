@@ -6,30 +6,25 @@
 <body>
     <%- include ../partials/style.ejs %>
     <h1>Basic Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
     <h2>Empty</h2>
 
-    <md-history id="empty"></md-history>
+    <% componentId = 'empty' %>
+    <md-history id="<%= componentId %>"></md-history>
+    <%- include ../partials/code-view.ejs %>
 
-<%- include ../partials/code-header.ejs %>
-&lt;md-history id="empty"&gt;&lt;/md-history&gt;
-<%- include ../partials/code-footer.ejs %>
-
+    <!-- --------------------------------------------------------------------- -->
     <h2>Simple List</h2>
 
-    <md-history id="simple-list">
+    <% componentId = 'simple-list' %>
+    <md-history id="<%= componentId %>">
         {
-            "title-1": "Title 1",
-            "title-2": "Title 2"
+        "title-1": "Title 1",
+        "title-2": "Title 2"
         }
     </md-history>
+    <%- include ../partials/code-view.ejs %>
 
-    <%- include ../partials/code-header.ejs %>
-&lt;md-history id="simple-list"&gt;
-{
-    title-1: "Title 1",
-    title-2: "Title 2"
-}
-&lt;/md-history&gt;
-    <%- include ../partials/code-footer.ejs %>
 </body>
 </html>
