@@ -6,7 +6,7 @@ fixture`md-history `
 test('empty component is present ', async t => {
 
 	let wbco = Selector(() => document
-		.querySelector('#empty')
+		.querySelector('#empty > md-history')
 		.shadowRoot
 		.querySelector('section > ul > li'));
 
@@ -17,7 +17,7 @@ test('empty component is present ', async t => {
 test('simple list is rendered', async t => {
 
 	let list = Selector(() => document
-		.querySelector('#simple-list')
+		.querySelector('#simple-list > md-history')
 		.shadowRoot
 		.querySelectorAll('section > ul > li'));
 
@@ -30,14 +30,14 @@ test('simple list is rendered', async t => {
 test('event dispatching', async t => {
 
 	let selection = Selector(() => document
-		.querySelector('#simple-list')
+		.querySelector('#simple-list > md-history')
 		.shadowRoot
 		.querySelector('section > ul > li > a'));
 
 	let addListener = ClientFunction(() => {
 		console.log('adding listener');
 		document
-			.querySelector('#simple-list')
+			.querySelector('#simple-list > md-history')
 			.addEventListener('md-history-selected',
 			                  function (e) {
 				                  console.log(e);

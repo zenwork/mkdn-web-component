@@ -8,7 +8,7 @@
     </pre>
     <script>
 		(function (codeId, demoId) {
-			let code = document.getElementById(codeId).outerHTML;
+			let code = document.getElementById(codeId).innerHTML;
 			document.getElementById(demoId).innerText = '\n    '+code;
 
 		})('<%= componentId %>', '<%= id %>');

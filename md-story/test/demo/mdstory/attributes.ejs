@@ -6,25 +6,28 @@
 <body>
     <%- include ../partials/style.ejs %>
     <h1>Attributes</h1>
+
+    <!-- --------------------------------------------------------------------- -->
     <h2><code>hidden</code> attribute</h2>
 
-    <md-story hidden="false">some markdown</md-story>
+    <% componentId = 'hidden' %>
+    <div id="<%= componentId %>">
+        <md-story id="<%= componentId %>" hidden="false">some markdown</md-story>
+    </div>
+    <%- include ../partials/code-view.ejs %>
 
-<%- include ../partials/code-header.ejs %>
-&lt;md-story hidden&gt;some markdown&lt;/md-story&gt;
-<%- include ../partials/code-footer.ejs %>
-
+    <!-- --------------------------------------------------------------------- -->
     <h2><code>style</code> attribute</h2>
 
-    <md-story style="background:salmon;font-family: monospace">
-# SALMON MARKDOWN
+    <% componentId = 'style' %>
+    <div id="<%= componentId %>">
+        <md-story style="background:salmon;font-family: monospace">
+            # SALMON MARKDOWN
 
-The _salmon_ jumped over the moon
-    </md-story>
-
-    <%- include ../partials/code-header.ejs %>
-&lt;md-story style="background:salmon;font-family: monospace"&gt;some markdown with a salmon background&lt;/md-story&gt;
-    <%- include ../partials/code-footer.ejs %>
+            The _salmon_ jumped over the moon
+        </md-story>
+    </div>
+    <%- include ../partials/code-view.ejs %>
 
 </body>
 </html>

@@ -11,19 +11,23 @@
     <h2>Empty</h2>
 
     <% componentId = 'empty' %>
-    <md-history id="<%= componentId %>"></md-history>
+    <div id="<%= componentId %>">
+        <md-history></md-history>
+    </div>
     <%- include ../partials/code-view.ejs %>
 
     <!-- --------------------------------------------------------------------- -->
     <h2>Simple List</h2>
 
     <% componentId = 'simple-list' %>
-    <md-history id="<%= componentId %>">
-        {
-        "title-1": "Title 1",
-        "title-2": "Title 2"
-        }
-    </md-history>
+    <div id="<%= componentId %>">
+        <md-history>
+            {
+            "title-1": "Title 1",
+            "title-2": "Title 2"
+            }
+        </md-history>
+    </div>
     <%- include ../partials/code-view.ejs %>
 
 </body>

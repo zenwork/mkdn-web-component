@@ -6,11 +6,11 @@
 <body>
     <%- include ../partials/style.ejs %>
     <h1>Empty Component</h1>
+    <%componentId='empty'%>
+    <div id="<%= componentId %>">
     <md-story></md-story>
+    </div>
+<%- include ../partials/code-view.ejs %>
 
-<%- include ../partials/code-header.ejs %>
-&lt;md-story&gt;&lt;/md-story&gt;
-<%- include ../partials/code-footer.ejs %>
-    
 </body>
 </html>
