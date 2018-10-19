@@ -49,7 +49,7 @@ module.exports = {
 			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/attributes.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-story attributes',
+			                      title:'md-history',
 			                      filename:'demo/mdhistory/base.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/mdhistory/base.ejs'
 		                      }),

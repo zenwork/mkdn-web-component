@@ -1,12 +1,13 @@
-import {html, LitElement} from '@polymer/lit-element/lit-element.js';
+import {html} from '@polymer/lit-element/lit-element.js';
 import * as marked from 'marked';
+import {observeContent} from './util';
+import {BaseElement} from './base-element';
 
 /**
  * Web Component that formats and displays a markdown story. Reads markdown from the component elements content.
  * supports 'hidden' boolean/flag attribute and the canonical style attribute for injecting css.
  */
-export default class MdStory extends LitElement {
-
+export default class MdStory extends BaseElement {
 	static get name() { return 'md-story';}
 
 	static get properties() {
@@ -17,45 +18,23 @@ export default class MdStory extends LitElement {
 		};
 	}
 
-	constructor() {
-		super();
-		this.markdown = document.createElement('div');
-		this.markdown.innerHTML = '<p>no markdown provided</p>';
-
-	}
-
-	createRenderRoot() {
-		//should use a closed shadow dom but must be open for testing!!! Need to figure this out
-		return this.attachShadow({mode:'open'});
-	}
-
 	connectedCallback() {
-		let markdown = this.innerHTML;
-		if (markdown && !this.hidden) {
-			this.markdown.innerHTML = marked(markdown);
-		}
+		this.markdown = document.createElement('div');
+		this.formatStory('no markdown provided');
 
-		// Options for the observer (which mutations to observe)
-		let config = {attributes:false, childList:true, subtree:false};
+		let input = this.innerHTML;
+		if (input && !this.hidden) {this.formatStory(input);}
+
 		const that = this;
-		this.observer = new MutationObserver(function (mutations) {
-			mutations.forEach(function (mutation) {
-				if (mutation.type === 'childList' && mutation.target.nodeName === 'MD-STORY') {
-					that.markdown.innerHTML = marked(mutation.target.innerHTML);
-				}
-			});
-		});
+		this.observer = observeContent('MD-STORY', mutation => that.formatStory(mutation.target.innerHTML), this);
+	}
 
-		// Start observing the target node for configured mutations
-		this.observer.observe(this, config);
+	formatStory(markdown) {
+		this.markdown.innerHTML = marked(markdown);
 	}
 
 	disconnectedCallback() {
 		this.observer.disconnect();
-	}
-
-	updated(changedProperties) {
-		console.log('updated');
 	}
 
 	render() {
@@ -70,4 +49,4 @@ export default class MdStory extends LitElement {
 	}
 }
 
-window.customElements.define(MdStory.name, MdStory);
+MdStory.define();
