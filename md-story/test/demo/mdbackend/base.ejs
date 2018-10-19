@@ -5,37 +5,44 @@
 </head>
 <body>
     <%- include ../partials/style.ejs %>
-    <h1>md-history Demo</h1>
+    <h1>md-backend Demo</h1>
 
     <!-- --------------------------------------------------------------------- -->
     <h2 class="demo-code-title">Empty</h2>
 
     <% componentId = 'empty' %>
     <div id="<%= componentId %>" class="demo">
-        <md-history></md-history>
+        <md-backend>
+            <md-history></md-history>
+            <md-story></md-story>
+        </md-backend>
     </div>
     <%- include ../partials/code-view.ejs %>
+
     <!-- --------------------------------------------------------------------- -->
-    <h2 class="demo-code-title">Simple List</h2>
+    <h2 class="demo-code-title">Static Backend</h2>
 
-    <% componentId = 'simple-list' %>
+    <% componentId = 'static' %>
     <div id="<%= componentId %>" class="demo">
-        <md-history>
-            {
-            "title-1": "Title 1",
-            "title-2": "Title 2"
-            }
-        </md-history>
+        <md-backend>
+            <md-history></md-history>
+            <md-story></md-story>
+            <md-static-store>
+                [
+                {"key": "title-1", "title": "Title 1", "content": "# Title 1\n\nSome content about #1"},
+                {"key": "title-2", "title": "Title 2", "content": "# Title 2\n\nSome content about #2"}
+                ]
+            </md-static-store>
+        </md-backend>
     </div>
     <%- include ../partials/code-view.ejs %>
-
     <p><strong>Note:</strong> open the console to see events being logged</p>
     <script>
 		/**
 		 * Event listener for history selection events
 		 */
 		document
-			.querySelectorAll('md-history')
+			.querySelectorAll('#static > md-backend > md-history')
 			.forEach((el) => el.addEventListener('md-history-selected',
 			                                     function (e) {
 				                                     console.log(`event dispatched: ${JSON.stringify(e.detail)}`);
@@ -43,6 +50,5 @@
 			));
 
     </script>
-
 </body>
 </html>

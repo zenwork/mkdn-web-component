@@ -28,8 +28,13 @@ export default class MdHistory extends BaseElement {
 
 		this.observer = observeContentChange('MD-HISTORY',
 		                                     (mut) => {
-
-			                                     this.inputList = JSON.parse(mut.target.innerHTML.trim());
+			                                     let input = mut.target.innerHTML;
+			                                     try {
+				                                     if (input) { this.inputList = JSON.parse(input.trim());}
+			                                     } catch (e) {
+				                                     console.log(`invalid history: ${input}`);
+				                                     throw e;
+			                                     }
 		                                     },
 		                                     this);
 	}
@@ -45,9 +50,9 @@ export default class MdHistory extends BaseElement {
 			if (inputList === empty) {
 				return html`<li>no items</li>`;
 			} else {
-				return repeat(Object.keys(inputList),
-				              (key) => {return key;},
-				              (key) => {return itemTemplate(key);});
+				return html`${repeat(Object.keys(inputList),
+				                     (key) => {return key;},
+				                     (key) => {return itemTemplate(key);})}`;
 			}
 		}
 

@@ -6,7 +6,8 @@ module.exports = {
 	mode:'none',
 	entry:{
 		'md-story':'./src/components/md-story.js',
-		'md-history':'./src/components/md-history.js'
+		'md-history':'./src/components/md-history.js',
+		'md-backend':'./src/components/md-backend.js'
 	},
 	output:{
 		filename:'[name].js',
@@ -52,6 +53,11 @@ module.exports = {
 			                      title:'md-history',
 			                      filename:'demo/mdhistory/base.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/mdhistory/base.ejs'
+		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'md-backend',
+			                      filename:'demo/mdbackend/base.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdbackend/base.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {
