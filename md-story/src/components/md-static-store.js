@@ -16,8 +16,7 @@ export default class MdStaticStore extends BaseElement {
 	connectedCallback() {
 
 		if (this.innerHTML) {
-			this.store = JSON.parse(this.innerHTML.trim());
-			this.shadowRoot.store = this.store;
+			this.updateStore(this.innerHTML);
 		} else {
 			this.store = [];
 		}
@@ -27,9 +26,7 @@ export default class MdStaticStore extends BaseElement {
 			                     let input = mut.target.innerHTML;
 			                     try {
 				                     if (input) {
-				                     	this.store = JSON.parse(input.trim());
-				                     	let event = new CustomEvent('md-store-updated');
-				                     	this.dispatchEvent(event);
+					                     this.updateStore(input);
 				                     }
 			                     } catch (e) {
 				                     throw e;
@@ -37,6 +34,13 @@ export default class MdStaticStore extends BaseElement {
 		                     },
 		                     this);
 
+	}
+
+	updateStore(input) {
+		this.store = JSON.parse(input.trim());
+		this.shadowRoot.store = this.store;
+		let event = new CustomEvent('md-store-updated');
+		this.dispatchEvent(event);
 	}
 
 	disconnectedCallback() {

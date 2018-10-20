@@ -45,7 +45,15 @@
 			.querySelectorAll('#static > md-backend > md-history')
 			.forEach((el) => el.addEventListener('md-history-selected',
 			                                     function (e) {
-				                                     console.log(`event dispatched: ${JSON.stringify(e.detail)}`);
+				                                     console.log(`selected event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+		document
+			.querySelectorAll('#static > md-backend > md-static-store')
+			.forEach((el) => el.addEventListener('md-store-updated',
+			                                     function (e) {
+				                                     console.log(`update event dispatched: ${JSON.stringify(e.detail)}`);
 			                                     }
 			));
 
