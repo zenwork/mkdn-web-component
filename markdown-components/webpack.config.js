@@ -7,7 +7,7 @@ module.exports = {
 	entry:{
 		'md-story':'./src/components/md-story.js',
 		'md-list':'./src/components/md-list.js',
-		'md-backend':'./src/components/md-backend.js'
+		'md-view':'./src/components/md-view.js'
 	},
 	output:{
 		filename:'[name].js',
@@ -55,9 +55,9 @@ module.exports = {
 			                      template:'!!ejs-webpack-loader!./test/demo/mdlist/base.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-backend',
-			                      filename:'demo/mdbackend/base.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdbackend/base.ejs'
+			                      title:'md-view',
+			                      filename:'demo/mdview/base.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdview/base.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {

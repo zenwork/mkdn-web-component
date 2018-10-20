@@ -2,33 +2,33 @@ import {ClientFunction, Selector} from 'testcafe';
 
 function getListSelector() {
 	return Selector(() => document
-		.querySelector('#static > md-backend > md-list')
+		.querySelector('#static > md-view > md-list')
 		.shadowRoot
 		.querySelectorAll('section > ul > li > a'));
 }
 
 function getTitleSelector() {
 	return Selector(() => document
-		.querySelector('#static > md-backend > md-story')
+		.querySelector('#static > md-view > md-story')
 		.shadowRoot
 		.querySelectorAll('section > div > h1'));
 }
 
-fixture`md-backend `
-	.page`http://localhost:8080/demo/mdbackend/base.html`;
+fixture`md-view `
+	.page`http://localhost:8080/demo/mdview/base.html`;
 
 test('empty component is present ', async t => {
 
-	await t.expect(await Selector('#empty > md-backend > md-list').nth(0))
+	await t.expect(await Selector('#empty > md-view > md-list').nth(0))
 		.ok('list found');
 
-	await t.expect(await Selector('#empty > md-backend > md-story').nth(0))
+	await t.expect(await Selector('#empty > md-view > md-story').nth(0))
 		.ok('list found');
 });
 
 test('list rendered', async t => {
 	let list = Selector(() => document
-		.querySelector('#static > md-backend > md-list')
+		.querySelector('#static > md-view > md-list')
 		.shadowRoot
 		.querySelectorAll('section > ul > li'));
 
@@ -48,9 +48,9 @@ test('story rendered', async t => {
 });
 
 test('update static store', async t => {
-	let wbco = Selector('#static > md-backend > md-static-store');
+	let wbco = Selector('#static > md-view > md-static-store');
 
-	let updateData = ClientFunction(() => document.querySelector('#static > md-backend > md-static-store')
+	let updateData = ClientFunction(() => document.querySelector('#static > md-view > md-static-store')
 		.innerHTML = '[ {"key": "title-1", "title": "Title 1", "content": "# Title 1\\n\\nSome content about #1"},' +
 	                 ' {"key": "title-2", "title": "Title 2", "content": "# Title 2\\n\\nSome content about #2"}, ' +
 	                 '{"key": "title-3", "title": "Title 3", "content": "# Title 3\\n\\nSome content about #3"}, ' +

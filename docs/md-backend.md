@@ -1,4 +1,4 @@
-# MD-BACKEND
+# MD-VIEW
 
 This is a web component provides state, event handling, and data-caching facilities  
 
@@ -11,13 +11,13 @@ This is a web component provides state, event handling, and data-caching facilit
             <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
         </head>
         <body>
-            <md-backend>
+            <md-view>
                 <md-list></md-list>
                 <md-story></md-story>
                 <md-store indexbase="/index.json" storybase="/"></md-store>
-            </md-backend>
+            </md-view>
             
-            <script src="md-backend.js"></script>
+            <script src="md-view.js"></script>
             <script src="md-list.js"></script>
             <script src="md-story.js"></script>
         </body>
@@ -32,11 +32,11 @@ This is a web component provides state, event handling, and data-caching facilit
 ### MD-STORE (not implemented yet)
 
 ```
-    <md-backend>
+    <md-view>
         <md-list></md-list>
         <md-story></md-story>
         <md-store indexbase="/index.json" storybase="/"></md-store>
-    </md-backend>
+    </md-view>
 ```
 
 #### attributes
@@ -50,7 +50,7 @@ This is a web component provides state, event handling, and data-caching facilit
 this sub-component is intended for testing and possibly for server-side templating
 
 ```
-    <md-backend>
+    <md-view>
         <md-list></md-list>
         <md-story></md-story>
         <md-static-store >
@@ -59,7 +59,7 @@ this sub-component is intended for testing and possibly for server-side templati
                 {"key": "title-2", "title": "Title 2", "content": "# Title 2\n\nSome content about #2"}
             ]
         </md-store>
-    </md-backend>
+    </md-view>
 ```
 
 

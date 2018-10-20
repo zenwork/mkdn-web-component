@@ -5,9 +5,9 @@ import {BaseElement} from '../shared/base-element';
 //do not remove importing it so that component gets defined
 import {MdStaticStore} from './md-static-store';
 
-export class MdBackend extends BaseElement {
+export class MdView extends BaseElement {
 
-	static get name() { return 'md-backend';}
+	static get name() { return 'md-view';}
 
 	static get properties() {
 		return {
@@ -52,4 +52,4 @@ export class MdBackend extends BaseElement {
 	}
 }
 
-MdBackend.define();
+MdView.define();

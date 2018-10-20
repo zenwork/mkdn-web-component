@@ -7,7 +7,7 @@ Collection of Web Components to show markdown content.
 ## Reference Doc
 * [md-story](docs/md-story.md)
 * [md-list](docs/md-list.md)
-* [md-backend](docs/md-backend.md)
+* [md-view](docs/md-view.md)
 * [md-excerpt](docs/md-excerpt.md) (not implemented yet) 
 
 ## Status
@@ -19,7 +19,7 @@ Collection of Web Components to show markdown content.
       * expose some kind of styling interface
   * md-list
       * implement support for groups
-  * md-backend
+  * md-view
       * implement support for a rest-based back-end(md-store)
       * rename to md-view
   * general
