@@ -1,4 +1,4 @@
-# MD-HISTORY Web Component
+# MD-LIST Web Component
 
 This is a web component that renders a list of selectable stories.
 
