@@ -15,9 +15,8 @@ make sure `http-server` is installed globally
 
 ```
 npm install
-npm run build
+npm run build //or build:watch
 http-serve dist
-
 ```
 
 browse to `http://localhost:8080/demo`
