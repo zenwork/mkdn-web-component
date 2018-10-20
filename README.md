@@ -1,11 +1,14 @@
 # mkdn-web-component
 Collection of Web Components to show markdown content.
 
-* [overview](markdown-components/README.md) 
-* [md-story](markdown-components/md-story.md)
-* [md-history](markdown-components/md-history.md)
-* [md-backend](markdown-components/md-backend.md)
-* [md-excerpt](markdown-components/md-excerpt.md) (not implemented yet) 
+## Repo Doc
+* [project overview](markdown-components/README.md) 
+
+## Reference Doc
+* [md-story](docs/md-story.md)
+* [md-history](docs/md-history.md)
+* [md-backend](docs/md-backend.md)
+* [md-excerpt](docs/md-excerpt.md) (not implemented yet) 
 
 ## Status
 
