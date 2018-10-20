@@ -1,10 +1,10 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 import {repeat} from 'lit-html/directives/repeat';
-import {BaseElement} from './base-element';
-import {observeContentChange} from './events';
-import {Story} from './story';
+import {BaseElement} from '../shared/base-element';
+import {observeContentChange} from '../shared/events';
+import {Story} from '../shared/story';
 
-export default class MdHistory extends BaseElement {
+export class MdHistory extends BaseElement {
 	constructor() {
 		super();
 		this.empty = {};

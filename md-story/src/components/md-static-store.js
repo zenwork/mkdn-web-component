@@ -1,9 +1,9 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 
-import {BaseElement} from './base-element';
-import {observeContentChange} from './events';
+import {BaseElement} from '../shared/base-element';
+import {observeContentChange} from '../shared/events';
 
-export default class MdStaticStore extends BaseElement {
+export class MdStaticStore extends BaseElement {
 
 	static get name() { return 'md-static-store';}
 

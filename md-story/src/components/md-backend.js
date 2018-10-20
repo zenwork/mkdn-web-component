@@ -1,9 +1,11 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 
-import {BaseElement} from './base-element';
+import {BaseElement} from '../shared/base-element';
+
+//do not remove importing it so that component gets defined
 import {MdStaticStore} from './md-static-store';
 
-export default class MdBackend extends BaseElement {
+export class MdBackend extends BaseElement {
 
 	static get name() { return 'md-backend';}
 

@@ -1,13 +1,13 @@
 import {html} from '@polymer/lit-element/lit-element.js';
 import * as marked from 'marked';
-import {observeContentChange} from './events';
-import {BaseElement} from './base-element';
+import {observeContentChange} from '../shared/events';
+import {BaseElement} from '../shared/base-element';
 
 /**
  * Web Component that formats and displays a markdown story. Reads markdown from the component elements content.
  * supports 'hidden' boolean/flag attribute and the canonical style attribute for injecting css.
  */
-export default class MdStory extends BaseElement {
+export class MdStory extends BaseElement {
 	static get name() { return 'md-story';}
 
 	static get properties() {
