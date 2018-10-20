@@ -68,10 +68,10 @@ module.exports = {
 	],
 	module:{
 		rules:[]
-	}
-	// ,
+	},
+	devtool:'source-map',
 	// optimization:{
-	// 	splitChunks: {
+	// 	splitChunks:{
 	// 		chunks:'all'
 	// 	}
 	// }
