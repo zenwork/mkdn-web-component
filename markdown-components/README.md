@@ -3,7 +3,7 @@
 This is a collection of web components meant to work together.
 
 * [md-story](../docs/md-story.md) - display a story
-* [md-history](../docs/md-history.md) - provide a list of stories that can be displayed
+* [md-list](../docs/md-list.md) - provide a list of stories that can be displayed
 * [md-backend](../docs/md-backend.md) - provide state, event handling, and data-caching(eventually) to the other two components
 
 

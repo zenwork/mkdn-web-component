@@ -18,16 +18,16 @@ export class MdBackend extends BaseElement {
 	connectedCallback() {
 
 		this.store = this.querySelector('md-static-store');
-		this.history = this.querySelector('md-history');
+		this.list = this.querySelector('md-list');
 		this.story = this.querySelector('md-story');
 
-		if (this.store && this.history) {
+		if (this.store && this.list) {
 			this.updateStories();
 			this.store.addEventListener('md-store-updated', () => {this.updateStories();});
 		}
 		let that = this;
-		this.history.addEventListener('md-history-selected',
-		                              function (e) {
+		this.list.addEventListener('md-list-selected',
+		                           function (e) {
 			                              that.stories.forEach((story) => {
 				                              if (story.key === e.detail.key) {
 					                              that.story.innerHTML = story.content;
@@ -40,7 +40,7 @@ export class MdBackend extends BaseElement {
 		this.stories = this.store.shadowRoot.store;
 		let links = {};
 		this.stories.forEach((story) => links[story.key] = story.title);
-		this.history.innerHTML = JSON.stringify(links);
+		this.list.innerHTML = JSON.stringify(links);
 	}
 
 	disconnectedCallback() {

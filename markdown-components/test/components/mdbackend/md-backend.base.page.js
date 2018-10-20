@@ -2,7 +2,7 @@ import {ClientFunction, Selector} from 'testcafe';
 
 function getListSelector() {
 	return Selector(() => document
-		.querySelector('#static > md-backend > md-history')
+		.querySelector('#static > md-backend > md-list')
 		.shadowRoot
 		.querySelectorAll('section > ul > li > a'));
 }
@@ -19,16 +19,16 @@ fixture`md-backend `
 
 test('empty component is present ', async t => {
 
-	await t.expect(await Selector('#empty > md-backend > md-history').nth(0))
-		.ok('history found');
+	await t.expect(await Selector('#empty > md-backend > md-list').nth(0))
+		.ok('list found');
 
 	await t.expect(await Selector('#empty > md-backend > md-story').nth(0))
-		.ok('history found');
+		.ok('list found');
 });
 
 test('list rendered', async t => {
 	let list = Selector(() => document
-		.querySelector('#static > md-backend > md-history')
+		.querySelector('#static > md-backend > md-list')
 		.shadowRoot
 		.querySelectorAll('section > ul > li'));
 

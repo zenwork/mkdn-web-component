@@ -12,13 +12,13 @@ This is a web component provides state, event handling, and data-caching facilit
         </head>
         <body>
             <md-backend>
-                <md-history></md-history>
+                <md-list></md-list>
                 <md-story></md-story>
                 <md-store indexbase="/index.json" storybase="/"></md-store>
             </md-backend>
             
             <script src="md-backend.js"></script>
-            <script src="md-history.js"></script>
+            <script src="md-list.js"></script>
             <script src="md-story.js"></script>
         </body>
     </html>
@@ -33,7 +33,7 @@ This is a web component provides state, event handling, and data-caching facilit
 
 ```
     <md-backend>
-        <md-history></md-history>
+        <md-list></md-list>
         <md-story></md-story>
         <md-store indexbase="/index.json" storybase="/"></md-store>
     </md-backend>
@@ -51,7 +51,7 @@ this sub-component is intended for testing and possibly for server-side templati
 
 ```
     <md-backend>
-        <md-history></md-history>
+        <md-list></md-list>
         <md-story></md-story>
         <md-static-store >
             [

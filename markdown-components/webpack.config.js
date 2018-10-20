@@ -6,7 +6,7 @@ module.exports = {
 	mode:'none',
 	entry:{
 		'md-story':'./src/components/md-story.js',
-		'md-history':'./src/components/md-history.js',
+		'md-list':'./src/components/md-list.js',
 		'md-backend':'./src/components/md-backend.js'
 	},
 	output:{
@@ -25,9 +25,9 @@ module.exports = {
 			                      template:'./test/demo/mdstory/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'demo md-history',
-			                      filename:'demo/mdhistory/index.html',
-			                      template:'./test/demo/mdhistory/index.html'
+			                      title:'demo md-list',
+			                      filename:'demo/mdlist/index.html',
+			                      template:'./test/demo/mdlist/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
@@ -50,9 +50,9 @@ module.exports = {
 			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/attributes.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-history',
-			                      filename:'demo/mdhistory/base.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdhistory/base.ejs'
+			                      title:'md-list',
+			                      filename:'demo/mdlist/base.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdlist/base.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-backend',

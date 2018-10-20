@@ -1,12 +1,12 @@
 import {ClientFunction, Selector} from 'testcafe';
 
-fixture`md-history `
-	.page`http://localhost:8080/demo/mdhistory/base.html`;
+fixture`md-list `
+	.page`http://localhost:8080/demo/mdlist/base.html`;
 
 test('empty component is present ', async t => {
 
 	let wbco = Selector(() => document
-		.querySelector('#empty > md-history')
+		.querySelector('#empty > md-list')
 		.shadowRoot
 		.querySelector('section > ul > li'));
 
@@ -17,7 +17,7 @@ test('empty component is present ', async t => {
 test('simple list is rendered', async t => {
 
 	let list = Selector(() => document
-		.querySelector('#simple-list > md-history')
+		.querySelector('#simple-list > md-list')
 		.shadowRoot
 		.querySelectorAll('section > ul > li'));
 
@@ -30,15 +30,15 @@ test('simple list is rendered', async t => {
 test('event dispatching', async t => {
 
 	let selection = Selector(() => document
-		.querySelector('#simple-list > md-history')
+		.querySelector('#simple-list > md-list')
 		.shadowRoot
 		.querySelector('section > ul > li > a'));
 
 	let addListener = ClientFunction(() => {
 		console.log('adding listener');
 		document
-			.querySelector('#simple-list > md-history')
-			.addEventListener('md-history-selected',
+			.querySelector('#simple-list > md-list')
+			.addEventListener('md-list-selected',
 			                  function (e) {
 				                  console.log(e);
 				                  window.captured = e.detail.title;

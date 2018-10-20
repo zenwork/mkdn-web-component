@@ -4,13 +4,13 @@ import {BaseElement} from '../shared/base-element';
 import {observeContentChange} from '../shared/events';
 import {Story} from '../shared/story';
 
-export class MdHistory extends BaseElement {
+export class MdList extends BaseElement {
 	constructor() {
 		super();
 		this.empty = {};
 	}
 
-	static get name() { return 'md-history';}
+	static get name() { return 'md-list';}
 
 	static get properties() {
 		return {
@@ -26,13 +26,13 @@ export class MdHistory extends BaseElement {
 			this.inputList = this.empty;
 		}
 
-		this.observer = observeContentChange('MD-HISTORY',
+		this.observer = observeContentChange('MD-LIST',
 		                                     (mut) => {
 			                                     let input = mut.target.innerHTML;
 			                                     try {
 				                                     if (input) { this.inputList = JSON.parse(input.trim());}
 			                                     } catch (e) {
-				                                     console.log(`invalid history: ${input}`);
+				                                     console.log(`invalid list: ${input}`);
 				                                     throw e;
 			                                     }
 		                                     },
@@ -62,10 +62,10 @@ export class MdHistory extends BaseElement {
 
 	select(key) {
 		let storyDef = new Story(key, this.inputList[key]);
-		let event = new CustomEvent('md-history-selected', {detail:storyDef});
+		let event = new CustomEvent('md-list-selected', {detail:storyDef});
 		this.dispatchEvent(event);
 	}
 }
 
-MdHistory.define();
+MdList.define();
 

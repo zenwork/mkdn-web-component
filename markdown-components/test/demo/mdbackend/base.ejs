@@ -13,7 +13,7 @@
     <% componentId = 'empty' %>
     <div id="<%= componentId %>" class="demo">
         <md-backend>
-            <md-history></md-history>
+            <md-list></md-list>
             <md-story></md-story>
         </md-backend>
     </div>
@@ -25,7 +25,7 @@
     <% componentId = 'static' %>
     <div id="<%= componentId %>" class="demo">
         <md-backend>
-            <md-history></md-history>
+            <md-list></md-list>
             <md-story></md-story>
             <md-static-store>
                 [
@@ -39,11 +39,11 @@
     <p><strong>Note:</strong> open the console to see events being logged</p>
     <script>
 		/**
-		 * Event listener for history selection events
+		 * Event listener for list selection events
 		 */
 		document
-			.querySelectorAll('#static > md-backend > md-history')
-			.forEach((el) => el.addEventListener('md-history-selected',
+			.querySelectorAll('#static > md-backend > md-list')
+			.forEach((el) => el.addEventListener('md-list-selected',
 			                                     function (e) {
 				                                     console.log(`selected event dispatched: ${JSON.stringify(e.detail)}`);
 			                                     }
