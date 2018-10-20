@@ -1,19 +1,24 @@
-import {html, LitElement} from '@polymer/lit-element/lit-element.js';
+import {LitElement} from '@polymer/lit-element/lit-element.js';
 
 export class BaseElement extends LitElement {
 
-	constructor(){
+	constructor() {
 		super();
+
 	}
 
-	static define(name){
-		const Class = this;
-		if(name){
-			window.customElements.define(name, Class);
-		} else if(this.name){
-			window.customElements.define(this.name, Class);
-		} else{
-			throw Error('either define [static this.name] or provide a valid name to the define(name) function')
+	static define(name) {
+		try {
+			const Class = this;
+			if (name) {
+				window.customElements.define(name, Class);
+			} else if (this.name) {
+				window.customElements.define(this.name, Class);
+			} else {
+				throw Error('either define [static this.name] or provide a valid name to the define(name) function');
+			}
+		} catch (e) {
+			console.debug(`swallowing custom component define() error: ${e.message}`);
 		}
 	}
 

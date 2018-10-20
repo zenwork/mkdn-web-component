@@ -1,9 +1,9 @@
-import {html} from '@polymer/lit-element/lit-element.js';
+import { html } from '@polymer/lit-element/lit-element.js';
 
-import {BaseElement} from '../shared/base-element';
+import { BaseElement } from '../shared/base-element';
+import { MdStaticStore } from './md-static-store';
 
-//do not remove importing it so that component gets defined
-import {MdStaticStore} from './md-static-store';
+MdStaticStore.define();
 
 export class MdView extends BaseElement {
 
@@ -16,31 +16,9 @@ export class MdView extends BaseElement {
 	}
 
 	connectedCallback() {
-
-		this.store = this.querySelector('md-static-store');
-		this.list = this.querySelector('md-list');
-		this.story = this.querySelector('md-story');
-
-		if (this.store && this.list) {
-			this.updateStories();
-			this.store.addEventListener('md-store-updated', () => {this.updateStories();});
-		}
-		let that = this;
-		this.list.addEventListener('md-list-selected',
-		                           function (e) {
-			                              that.stories.forEach((story) => {
-				                              if (story.key === e.detail.key) {
-					                              that.story.innerHTML = story.content;
-				                              }
-			                              });
-		                              });
-	}
-
-	updateStories() {
-		this.stories = this.store.shadowRoot.store;
-		let links = {};
-		this.stories.forEach((story) => links[story.key] = story.title);
-		this.list.innerHTML = JSON.stringify(links);
+		this.init();
+		this.listenToStoreUpdates(this);
+		this.listenToSelectionChanges(this);
 	}
 
 	disconnectedCallback() {
@@ -49,6 +27,40 @@ export class MdView extends BaseElement {
 
 	render() {
 		return html`<slot></slot>`;
+	}
+
+	init() {
+		this.store = this.querySelector('md-static-store');
+		this.list = this.querySelector('md-list');
+		this.story = this.querySelector('md-story');
+	}
+
+	listenToStoreUpdates(root) {
+		if (root.store && root.list) {
+			root.updateStories(root);
+			root.store.addEventListener('md-store-updated', () => {root.updateStories(root);});
+		}
+	}
+
+	listenToSelectionChanges(root) {
+
+		this.list.addEventListener('md-list-selected',
+		                           function (e) {
+			                           root.stories.forEach((story) => {
+				                           if (story.key === e.detail.key) {
+					                           root.story.innerHTML = story.content;
+				                           }
+			                           });
+		                           });
+	}
+
+	updateStories(root) {
+		if (root.store.shadowRoot) {
+			root.stories = root.store.shadowRoot.store;
+			let links = {};
+			root.stories.forEach((story) => links[story.key] = story.title);
+			root.list.innerHTML = JSON.stringify(links);
+		}
 	}
 }
 

@@ -14,33 +14,8 @@ export class MdStaticStore extends BaseElement {
 	}
 
 	connectedCallback() {
-
-		if (this.innerHTML) {
-			this.updateStore(this.innerHTML);
-		} else {
-			this.store = [];
-		}
-
-		observeContentChange('MD-STATIC-STORE',
-		                     (mut) => {
-			                     let input = mut.target.innerHTML;
-			                     try {
-				                     if (input) {
-					                     this.updateStore(input);
-				                     }
-			                     } catch (e) {
-				                     throw e;
-			                     }
-		                     },
-		                     this);
-
-	}
-
-	updateStore(input) {
-		this.store = JSON.parse(input.trim());
-		this.shadowRoot.store = this.store;
-		let event = new CustomEvent('md-store-updated');
-		this.dispatchEvent(event);
+		this.init();
+		this.observeContentChange();
 	}
 
 	disconnectedCallback() {
@@ -49,6 +24,25 @@ export class MdStaticStore extends BaseElement {
 
 	render() {
 		return html``;
+	}
+
+	init() {
+		this.store = [];
+		this.shadowRoot.store = this.store;
+		if (this.innerHTML) {
+			this.updateStore(this.innerHTML, this);
+		} 
+	}
+
+	updateStore(input, root) {
+		root.store = JSON.parse(input.trim());
+		root.shadowRoot.store = root.store;
+		let event = new CustomEvent('md-store-updated');
+		root.dispatchEvent(event);
+	}
+
+	observeContentChange() {
+		observeContentChange('MD-STATIC-STORE', this.updateStore, this);
 	}
 }
 

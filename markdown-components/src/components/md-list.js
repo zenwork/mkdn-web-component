@@ -1,14 +1,10 @@
-import {html} from '@polymer/lit-element/lit-element.js';
-import {repeat} from 'lit-html/directives/repeat';
-import {BaseElement} from '../shared/base-element';
-import {observeContentChange} from '../shared/events';
-import {Story} from '../shared/story';
+import { html } from '@polymer/lit-element/lit-element.js';
+import { repeat } from 'lit-html/directives/repeat';
+import { BaseElement } from '../shared/base-element';
+import { observeContentChange } from '../shared/events';
+import { Story } from '../shared/story';
 
 export class MdList extends BaseElement {
-	constructor() {
-		super();
-		this.empty = {};
-	}
 
 	static get name() { return 'md-list';}
 
@@ -18,25 +14,14 @@ export class MdList extends BaseElement {
 		};
 	}
 
-	connectedCallback() {
-		let input = this.innerHTML.trim();
-		if (input) {
-			this.inputList = JSON.parse(input);
-		} else {
-			this.inputList = this.empty;
-		}
+	constructor() {
+		super();
+		this.empty = {};
+	}
 
-		this.observer = observeContentChange('MD-LIST',
-		                                     (mut) => {
-			                                     let input = mut.target.innerHTML;
-			                                     try {
-				                                     if (input) { this.inputList = JSON.parse(input.trim());}
-			                                     } catch (e) {
-				                                     console.log(`invalid list: ${input}`);
-				                                     throw e;
-			                                     }
-		                                     },
-		                                     this);
+	connectedCallback() {
+		this.init();
+		this.observer = observeContentChange('MD-LIST', this.updateList, this);
 	}
 
 	disconnectedCallback() {
@@ -58,6 +43,18 @@ export class MdList extends BaseElement {
 
 		return html` <section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
 
+	}
+
+	init() {
+		if (this.innerHTML) {
+			this.updateList(this.innerHTML, this);
+		} else {
+			this.inputList = this.empty;
+		}
+	}
+
+	updateList(input, root) {
+		root.inputList = JSON.parse(input.trim());
 	}
 
 	select(key) {

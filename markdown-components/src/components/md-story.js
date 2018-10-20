@@ -19,33 +19,39 @@ export class MdStory extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.markdown = document.createElement('div');
-		this.formatStory('no markdown provided');
-
-		let input = this.innerHTML;
-		if (input && !this.hidden) {this.formatStory(input);}
-
-		const that = this;
-		this.observer = observeContentChange('MD-STORY', mutation => that.formatStory(mutation.target.innerHTML), this);
-	}
-
-	formatStory(markdown) {
-		this.markdown.innerHTML = marked(markdown);
+		this.init();
+		this.observeMarkdownChanges();
 	}
 
 	disconnectedCallback() {
 		this.observer.disconnect();
 	}
 
+	init() {
+		this.marked = marked;
+		this.markdown = document.createElement('div');
+		this.formatStory('no markdown provided', this);
+
+		let input = this.innerHTML;
+		if (input && !this.hidden) {this.formatStory(input, this);}
+	}
+
 	render() {
 		if (this.hidden && this.hidden !== null) {
 			return html``;
 		} else {
-			return html`
-<section style="${this.style}" class="story">
-    ${this.markdown}
+			return html`<section style="${this.style}" class="story"> 
+${this.markdown}
 </section>`;
 		}
+	}
+
+	observeMarkdownChanges() {
+		this.observer = observeContentChange('MD-STORY', this.formatStory, this);
+	}
+
+	formatStory(markdown,root) {
+		root.markdown.innerHTML = root.marked(markdown);
 	}
 }
 

@@ -6,14 +6,23 @@
  * @param root node on which to attach the observer
  * @returns {MutationObserver}
  */
-export function observeContentChange(ofComponent, handleMutationFn, root) {
+export function observeContentChange(ofComponent, handleInputFn, root) {
 	// Options for the observer (which mutations to observe)
 	const config = {attributes:false, childList:true, subtree:false};
 
 	const observer = new MutationObserver(function (mutations) {
 		mutations.forEach(function (mutation) {
 			if (mutation.type === 'childList' && mutation.target.nodeName === ofComponent.toUpperCase()) {
-				handleMutationFn(mutation);
+					let input = mutation.target.innerHTML;
+					try {
+						if (input) {
+							handleInputFn(input,root);
+						}
+					} catch (e) {
+						throw e;
+					}
+
+
 			}
 		});
 	});
@@ -22,4 +31,3 @@ export function observeContentChange(ofComponent, handleMutationFn, root) {
 	observer.observe(root, config);
 	return observer;
 }
-
