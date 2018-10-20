@@ -21,7 +21,6 @@ Collection of Web Components to show markdown content.
       * implement support for groups
   * md-view
       * implement support for a rest-based back-end(md-store)
-      * rename to md-view
   * general
       * e2e tests do not work in firefox
       * sort out minification and uglification
