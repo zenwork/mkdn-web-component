@@ -1,43 +1,17 @@
-# MdStory Web Component
+# Markdown Web Components Documentation
 
-This is a web component that renders markdown provided through the element's main slot (and probably in some other way as I figure things out with web components and this project)  
+This is a collection of web components meant to work together.
+
+* [md-story]('md-story.md') - display a story
+* [md-history]('md-history.md') - provide a list of stories that can be displayed
+* [md-backend]('md-backend.md) - provide state, event handling, and data-caching(eventually) to the other two components
 
 
-## Status
+## Runinng the demos
 
-* Basic implementation works
-* TODO:
-  * add support for dropcaps at document start 
-  * expose some kind of styling interface
-  * sort out minification and uglification
-  * create online version of demo
-  * build and publish
-  * ...
-  
- 
-## Usage in Browser
+Each component has a set of demos that are used to demo the features AND run e2e tests against.
 
-```
-    <html>
-        <head>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
-        </head>
-        <body>
-            <md-story>
-                some markdown
-            </md-story>
-            <script src="md-story.js"></script>
-        </body>
-    </html>
-```
-
-## Supported attributes
-
-* `hidden` - flag that hides the content of the component. The `<md-story>` element is still visible in the DOM.
-* `style`  - canonical attribute is injected into the component. 
-
-## Runinng in demo mode
-make sure `http-server` is installed glabally
+make sure `http-server` is installed globally
 
 ```
 npm install
@@ -52,14 +26,15 @@ there will be links to different use-cases
 
 ## Running tests
 
-unit tests:
+### unit tests
 
 ```
 npm run test
 ```
 note: using [jest](https://jestjs.io/) for unit tests
 
-e2e tests:
+### e2e tests
+End-to-end tests require that the demo be running
 ```
 npm run test:e2e
 ```
