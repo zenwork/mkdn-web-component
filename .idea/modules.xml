@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/md-history/md-history.iml" filepath="$PROJECT_DIR$/md-history/md-history.iml" />
-      <module fileurl="file://$PROJECT_DIR$/md-story/md-story.iml" filepath="$PROJECT_DIR$/md-story/md-story.iml" />
+      <module fileurl="file://$PROJECT_DIR$/markdown-components/markdown-components.iml" filepath="$PROJECT_DIR$/markdown-components/markdown-components.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/mkdn-web-component.iml" filepath="$PROJECT_DIR$/.idea/mkdn-web-component.iml" />
     </modules>
   </component>
