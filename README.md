@@ -21,7 +21,7 @@ This set of components makes laying out a markdown based blog as simple as this
         <meta charset="UTF-8">
         <title>Test Home</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="/api/webcomponents-bundle.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
     </head>
     <body>
         <h1>My Blog</h1>
