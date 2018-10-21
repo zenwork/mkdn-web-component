@@ -10,6 +10,36 @@ Collection of Web Components to show markdown content.
 * [md-view](docs/md-view.md)
 * [md-excerpt](docs/md-excerpt.md) (not implemented yet) 
 
+## Example
+
+This set of components makes laying out a markdown based blog as simple as this
+
+```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Test Home</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="/api/webcomponents-bundle.js"></script>
+    </head>
+    <body>
+        <h1>My Blog</h1>
+        <div class="container">
+           <md-view class="row">
+                <md-story class="col-7"></md-story>
+                <md-list class="col-3"></md-list>
+                <md-store src="/md/titles" stories="/md/title/"></md-store>
+            </md-view>
+        </div>
+    
+        <script src="/api/md-story.js"></script>
+        <script src="/api/md-list.js"></script>
+        <script src="/api/md-view.js"></script>
+    
+    </body>
+    </html>
+```
 ## Status
 
 * Basic implementation works
