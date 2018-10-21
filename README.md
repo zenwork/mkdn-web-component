@@ -51,6 +51,8 @@ This set of components makes laying out a markdown based blog as simple as this
       * implement support for groups
   * md-view
       * implement support for a rest-based back-end(md-store)
+  * md-store and md-static-store
+      * document the data formats and back-end api specification
   * general
       * e2e tests do not work in firefox
       * sort out minification and uglification
