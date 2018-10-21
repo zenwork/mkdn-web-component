@@ -14,7 +14,7 @@ function getTitleSelector() {
 		.querySelectorAll('section > div > h1'));
 }
 
-fixture`md-view `
+fixture`md-view`
 	.page`http://localhost:8080/demo/mdview/base.html`;
 
 test('empty component is present ', async t => {

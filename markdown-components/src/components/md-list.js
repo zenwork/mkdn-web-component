@@ -1,13 +1,7 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
 import { BaseElement } from '../shared/base-element';
-import {
-	listenForEventMode,
-	listenForIndexUpdate,
-	listenForStartEvents,
-	observeContentChange,
-	setupEventMode
-} from '../shared/events';
+import { dispatchSelection, listenForIndexUpdate, observeContentChange, setupEventMode } from '../shared/events';
 import { Story } from '../shared/story';
 
 export class MdList extends BaseElement {
@@ -35,7 +29,10 @@ export class MdList extends BaseElement {
 	}
 
 	render() {
-		let itemTemplate = (key) => html`<li><a href="#" @click=${() => { this.select(key); }}>${this.inputList[key]}</a></li>`;
+		let itemTemplate = (key) => html`<li><a href="#" @click=${() => {
+			this.select(this,
+			            key);
+		}}>${this.inputList[key]}</a></li>`;
 
 		function renderItems(inputList, empty) {
 			if (inputList === empty) {
@@ -57,15 +54,13 @@ export class MdList extends BaseElement {
 			let store = event.detail.shadowRoot.store;
 			if (store) {
 				const onIndexUpdate = (event) => {
-					console.log('index update:' + event.detail);
 					return this.inputList = event.detail;
 				};
 				listenForIndexUpdate(store, onIndexUpdate);
 			}
 		};
 
-
-		setupEventMode(this,null,onStart);
+		setupEventMode(this, null, onStart);
 
 		if (this.innerHTML) {
 			this.updateList(this.innerHTML, this);
@@ -78,10 +73,8 @@ export class MdList extends BaseElement {
 		root.inputList = JSON.parse(input.trim());
 	}
 
-	select(key) {
-		let storyDef = new Story(key, this.inputList[key]);
-		let event = new CustomEvent('md-list-selected', {detail:storyDef});
-		this.dispatchEvent(event);
+	select(root, key) {
+		dispatchSelection(root, new Story(key, this.inputList[key]));
 	}
 }
 

@@ -38,7 +38,7 @@ test('event dispatching', async t => {
 		console.log('adding listener');
 		document
 			.querySelector('#simple-list > md-list')
-			.addEventListener('md-list-selected',
+			.addEventListener('md-list-selection',
 			                  function (e) {
 				                  console.log(e);
 				                  window.captured = e.detail.title;

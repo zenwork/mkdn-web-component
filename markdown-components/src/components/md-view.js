@@ -72,11 +72,11 @@ export class MdView extends BaseElement {
 
 		this.list.addEventListener('md-list-selected',
 		                           function (e) {
-			                           root.stories.forEach((story) => {
-				                           if (story.key === e.detail.key) {
-					                           root.story.innerHTML = story.content;
-				                           }
-			                           });
+			                           // root.stories.forEach((story) => {
+				                       //     if (story.key === e.detail.key) {
+					                   //         root.story.innerHTML = story.content;
+				                       //     }
+			                           // });
 		                           });
 	}
 

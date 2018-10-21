@@ -42,7 +42,7 @@ export function dispatchEventMode(root) {
 export function listenForEventMode(root, onEventFn) {
 	// console.log('<<<: event mode');
 	let closestView = root.closest('md-view');
-	if(closestView) closestView.addEventListener(eventMode, onEventFn);
+	if (closestView) closestView.addEventListener(eventMode, onEventFn);
 }
 
 const start = 'md-view-start-events';
@@ -71,9 +71,29 @@ export function listenForIndexUpdate(store, onEventFn) {
 
 export function setupEventMode(root, onEventModefn, onStartFn) {
 	const wrapper = (event) => {
-		if (onEventModefn) { onEventModefn();}
+		if (onEventModefn) { onEventModefn(root, event);}
 		let view = event.detail;
-		listenForStartEvents(view, onStartFn);
+		if(onStartFn) listenForStartEvents(view, onStartFn);
 	};
 	listenForEventMode(root, wrapper);
+}
+
+export function dispatchSelection(root, storyDef) {
+	let event = new CustomEvent('md-list-selection', {detail:storyDef});
+	root.dispatchEvent(event);
+}
+
+export function listenForSelection(list, actionFn) {
+	// console.log('<<<: selection');
+	list.addEventListener('md-list-selection', actionFn);
+}
+
+export function dispatchStory(root, storyDef) {
+	let event = new CustomEvent('md-store-story', {detail:storyDef});
+	root.dispatchEvent(event);
+}
+
+export function listenForStory(store, actionFn) {
+	// console.log('<<<: selection');
+	if(store) store.addEventListener('md-store-story', actionFn);
 }

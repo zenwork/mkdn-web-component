@@ -1,7 +1,14 @@
-import {html} from '@polymer/lit-element/lit-element.js';
+import { html } from '@polymer/lit-element/lit-element.js';
 
-import {BaseElement} from '../shared/base-element';
-import { observeContentChange, dispatchIndexUpdate, setupEventMode } from '../shared/events';
+import { BaseElement } from '../shared/base-element';
+import {
+	dispatchIndexUpdate,
+	dispatchStory,
+	listenForSelection,
+	observeContentChange,
+	setupEventMode
+} from '../shared/events';
+import { Story } from '../shared/story';
 
 export class MdStaticStore extends BaseElement {
 
@@ -32,8 +39,15 @@ export class MdStaticStore extends BaseElement {
 		if (this.innerHTML) {
 			this.updateStore(this.innerHTML, this);
 		}
-		setupEventMode(this,null,()=>{
-			dispatchIndexUpdate(this,this.index)
+		const that = this;
+		setupEventMode(this, null, () => {
+			listenForSelection(event.detail.list, (event) => {
+				let key = event.detail.key;
+				let title = event.detail.title;
+				let content = that.findContent(that, key);
+				dispatchStory(that, new Story(key, title, content));
+			});
+			dispatchIndexUpdate(this, this.index);
 		});
 	}
 
@@ -67,6 +81,11 @@ export class MdStaticStore extends BaseElement {
 
 	observeContentChange() {
 		observeContentChange('MD-STATIC-STORE', this.updateStore, this);
+	}
+
+	findContent(root, key) {
+		let result = root.store.filter((story) => story.key === key);
+		return result[0].content;
 	}
 }
 

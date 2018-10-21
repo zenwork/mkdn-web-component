@@ -1,7 +1,8 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 
 import { BaseElement } from '../shared/base-element';
-import { dispatchIndexUpdate, setupEventMode } from '../shared/events';
+import { dispatchIndexUpdate, dispatchStory, listenForSelection, setupEventMode } from '../shared/events';
+import { Story } from '../shared/story';
 
 export class MdStore extends BaseElement {
 
@@ -16,15 +17,18 @@ export class MdStore extends BaseElement {
 
 	connectedCallback() {
 		this.init();
+		this.fetch(this, this.src, (root, rawJson) => {root.updateIndex(JSON.parse(rawJson), root);});
+	}
+
+	fetch(root, url, handleResponseFn) {
 		var xmlhttp = new XMLHttpRequest();
-		const that = this;
 		xmlhttp.onreadystatechange = () => {
 
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				that.updateIndex(JSON.parse(xmlhttp.responseText), that);
+				handleResponseFn(root, xmlhttp.responseText);
 			}
 		};
-		xmlhttp.open('GET', this.src, true);
+		xmlhttp.open('GET', url, true);
 		xmlhttp.send();
 	}
 
@@ -54,10 +58,25 @@ export class MdStore extends BaseElement {
 
 	init() {
 		this.index = {};
-		this.updateIndex(this.index,this);
-		setupEventMode(this, null, () => {
+		this.updateIndex(this.index, this);
+		const that = this;
+		setupEventMode(this, null, (event) => {
+			listenForSelection(event.detail.list, (event) => {
+				// console.log('fetching story:' + event.detail.key);
+				this.fetch(that,
+				           that.stories + event.detail.key + '.md',
+				           (root, story) => {root.addToStore(event.detail, story, root);});
+			});
 			dispatchIndexUpdate(this, this.index);
 		});
+	}
+
+	addToStore(def, story, root) {
+		let newDef = new Story(def.key, def.title);
+		newDef.content = story;
+		root.story = newDef;
+		// console.log(JSON.stringify(root.story));
+		dispatchStory(root, root.story);
 	}
 
 	updateIndex(value, root) {

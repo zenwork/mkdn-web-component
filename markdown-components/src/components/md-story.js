@@ -1,7 +1,7 @@
-import {html} from '@polymer/lit-element/lit-element.js';
+import { html } from '@polymer/lit-element/lit-element.js';
 import * as marked from 'marked';
-import {observeContentChange} from '../shared/events';
-import {BaseElement} from '../shared/base-element';
+import { BaseElement } from '../shared/base-element';
+import { listenForStory, observeContentChange, setupEventMode } from '../shared/events';
 
 /**
  * Web Component that formats and displays a markdown story. Reads markdown from the component elements content.
@@ -21,6 +21,7 @@ export class MdStory extends BaseElement {
 	connectedCallback() {
 		this.init();
 		this.observeMarkdownChanges();
+
 	}
 
 	disconnectedCallback() {
@@ -34,6 +35,20 @@ export class MdStory extends BaseElement {
 
 		let input = this.innerHTML;
 		if (input && !this.hidden) {this.formatStory(input, this);}
+
+		this.initEventMode();
+	}
+
+	initEventMode() {
+		let doNothingOnStart = null;
+		let setup = (root, eventModeEvent) => {
+			let updateStory = (storyEvent) => {
+				root.formatStory(storyEvent.detail.content, root);
+			};
+			listenForStory(eventModeEvent.detail.store, updateStory);
+		};
+
+		setupEventMode(this, setup, doNothingOnStart);
 	}
 
 	render() {
@@ -50,7 +65,7 @@ ${this.markdown}
 		this.observer = observeContentChange('MD-STORY', this.formatStory, this);
 	}
 
-	formatStory(markdown,root) {
+	formatStory(markdown, root) {
 		root.markdown.innerHTML = root.marked(markdown);
 	}
 }
