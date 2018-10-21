@@ -10,9 +10,11 @@ Collection of Web Components to show markdown content.
 * [md-view](docs/md-view.md)
 * [md-excerpt](docs/md-excerpt.md) (not implemented yet) 
 
-## Example
+## Examples
 
 This set of components makes laying out a markdown based blog as simple as this
+
+### example #1: all components bound to a backend
 
 ```
     <!DOCTYPE html>
@@ -40,6 +42,60 @@ This set of components makes laying out a markdown based blog as simple as this
     </body>
     </html>
 ```
+
+### example 2: single story bound to a backend
+```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Test Home</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    </head>
+    <body>
+        <h1>My Blog</h1>
+        <div class="container">
+            <md-view class="row">
+                <md-story class="col-10"></md-story>
+                <md-store story="/md/title/some-story.md"></md-store>
+            </md-view>
+        </div>
+    
+        <script src="/api/md-story.js"></script>
+        <script src="/api/md-view.js"></script>
+    
+    </body>
+    </html>
+```
+
+### example 3: story with content provided by other means
+```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Test Home</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
+    </head>
+    <body>
+        <h1>My Blog</h1>
+        <div class="container">
+                <md-story class="col-10">
+# The Story
+
+with some text
+                </md-story>     
+        </div>
+    
+        <script src="/api/md-story.js"></script>
+       
+    </body>
+    </html>
+```
+
+
 ## Status
 
 * Basic implementation works
