@@ -18,10 +18,10 @@ export class MdStore extends BaseElement {
 		this.init();
 		var xmlhttp = new XMLHttpRequest();
 		const that = this;
-		xmlhttp.onreadystatechange = function () {
+		xmlhttp.onreadystatechange = () => {
 
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				that.updateIndex(JSON.parse(xmlhttp.responseText),this);
+				that.updateIndex(JSON.parse(xmlhttp.responseText), that);
 			}
 		};
 		xmlhttp.open('GET', this.src, true);
@@ -53,17 +53,17 @@ export class MdStore extends BaseElement {
 	}
 
 	init() {
-		this.updateIndex({});
-		// setupEventMode(this,null,()=>{
-		// 	dispatchIndexUpdate(this,this.index)
-		// });
+		this.index = {};
+		this.updateIndex(this.index,this);
+		setupEventMode(this, null, () => {
+			dispatchIndexUpdate(this, this.index);
+		});
 	}
 
 	updateIndex(value, root) {
-		this.shadowRoot.value = this.index = value;
-		if(Object.keys(this.index).length >0){
-			let event = new CustomEvent('md-store-index-updated');
-			root.dispatchEvent(event,{detail:this.index});
+		root.shadowRoot.value = root.index = value;
+		if (Object.keys(root.index).length > 0) {
+			dispatchIndexUpdate(root, root.index);
 		}
 	}
 }
