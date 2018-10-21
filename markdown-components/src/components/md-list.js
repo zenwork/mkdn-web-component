@@ -1,7 +1,13 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
 import { BaseElement } from '../shared/base-element';
-import { observeContentChange } from '../shared/events';
+import {
+	listenForEventMode,
+	listenForIndexUpdate,
+	listenForStartEvents,
+	observeContentChange,
+	setupEventMode
+} from '../shared/events';
 import { Story } from '../shared/story';
 
 export class MdList extends BaseElement {
@@ -46,6 +52,21 @@ export class MdList extends BaseElement {
 	}
 
 	init() {
+		let onStart = (event) => {
+
+			let store = event.detail.shadowRoot.store;
+			if (store) {
+				const onIndexUpdate = (event) => {
+					console.log('index update:' + event.detail);
+					return this.inputList = event.detail;
+				};
+				listenForIndexUpdate(store, onIndexUpdate);
+			}
+		};
+
+
+		setupEventMode(this,null,onStart);
+
 		if (this.innerHTML) {
 			this.updateList(this.innerHTML, this);
 		} else {

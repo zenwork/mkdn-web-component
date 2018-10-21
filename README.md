@@ -29,4 +29,5 @@ Collection of Web Components to show markdown content.
       * move /demo out /test one level up
       * review decision to have json and markdown transclusion... seems weird practice
       * figure out what the magic that webpack is doing!
+      * events.js should probably be split into smaller files
 

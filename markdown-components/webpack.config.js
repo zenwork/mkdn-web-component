@@ -55,21 +55,49 @@ module.exports = {
 			                      template:'!!ejs-webpack-loader!./test/demo/mdlist/base.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
-			                      title:'md-view',
+			                      title:'static md-view',
 			                      filename:'demo/mdview/base.html',
 			                      template:'!!ejs-webpack-loader!./test/demo/mdview/base.ejs'
+		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'md-view',
+			                      filename:'demo/mdview/backend.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/mdview/backend.ejs'
+		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'md-view',
+			                      filename:'demo/mdview/index.html',
+			                      template:'./test/demo/mdview/index.html'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {
 				                      from:'./node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
 				                      to:'webcomponents-bundle.js'
 			                      }
+		                      ]),
+		new CopyWebpackPlugin([
+			                      {
+				                      from:'./test/demo/mdview/index.json',
+				                      to:'demo/mdview/index.json'
+			                      }
+		                      ]),
+		new CopyWebpackPlugin([
+			                      {
+				                      from:'./test/demo/mdview/story-1.md',
+				                      to:'demo/mdview/story-1.md'
+			                      }
+		                      ]),
+		new CopyWebpackPlugin([
+			                      {
+				                      from:'./test/demo/mdview/story-2.md',
+				                      to:'demo/mdview/story-2.md'
+			                      }
 		                      ])
 	],
 	module:{
 		rules:[]
 	},
-	devtool:'source-map',
+	devtool:'source-map'
 	// optimization:{
 	// 	splitChunks:{
 	// 		chunks:'all'

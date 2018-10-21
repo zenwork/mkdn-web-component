@@ -1,4 +1,4 @@
-import {ClientFunction, Selector} from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 
 function getListSelector() {
 	return Selector(() => document
@@ -19,11 +19,17 @@ fixture`md-view `
 
 test('empty component is present ', async t => {
 
-	await t.expect(await Selector('#empty > md-view > md-list').nth(0))
+	await t.expect(await Selector(() => document
+		.querySelector('#empty > md-list')
+		.shadowRoot
+		.querySelector('section > ul > li'), {visibilityCheck:true}))
 		.ok('list found');
 
-	await t.expect(await Selector('#empty > md-view > md-story').nth(0))
-		.ok('list found');
+	await t.expect(await Selector(() => document
+		.querySelector('#empty > md-view > md-story')
+		.shadowRoot
+		.querySelector('section > div > p'), {visibilityCheck:true}))
+		.ok('story found');
 });
 
 test('list rendered', async t => {
