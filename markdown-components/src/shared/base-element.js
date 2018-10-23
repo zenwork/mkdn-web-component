@@ -1,9 +1,10 @@
 import { LitElement } from '@polymer/lit-element/lit-element.js';
-
+let id=0;
 export class BaseElement extends LitElement {
 
 	constructor() {
 		super();
+		this.Id = id++;
 		this.Class = new.target.name;
 		// console.debug(`constructing: ${this.Class}`);
 		if (new.target === BaseElement) {

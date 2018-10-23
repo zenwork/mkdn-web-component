@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>parent/child Demo</h1>
+    <h2>This is only for testing the child-parent init process</h2>
+    <h3>enable verbose logging to see life-cycle logging</h3>
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Cooperative</h2>
+
+    <% componentId = 'with-parent' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-parent>
+            <md-child></md-child>
+            <md-child></md-child>
+            <md-child></md-child>
+            <md-child></md-child>
+            <md-child></md-child>
+            <md-child></md-child>
+        </md-parent>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Standalone</h2>
+
+    <% componentId = 'without-parent' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-child></md-child>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+
+</body>
+</html>

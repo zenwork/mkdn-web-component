@@ -7,7 +7,8 @@ module.exports = {
 	entry:{
 		'md-story':'./src/components/md-story.js',
 		'md-list':'./src/components/md-list.js',
-		'md-view':'./src/components/md-view.js'
+		'md-view':'./src/components/md-view.js',
+		'md-parentchild':'./src/shared/test-parent-child.js'
 	},
 	output:{
 		filename:'[name].js',
@@ -68,6 +69,11 @@ module.exports = {
 			                      title:'md-view',
 			                      filename:'demo/mdview/index.html',
 			                      template:'./test/demo/mdview/index.html'
+		                      }),
+		new HtmlWebpackPlugin({
+			                      title:'child-parent',
+			                      filename:'demo/childparent/base.html',
+			                      template:'!!ejs-webpack-loader!./test/demo/childparent/base.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {

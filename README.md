@@ -80,7 +80,7 @@ This set of components makes laying out a markdown based blog as simple as this
         <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
     </head>
     <body>
-        <h1>My Blog</h1>
+        <h1>My Story</h1>
         <div class="container">
                 <md-story class="col-10">
 # The Story
