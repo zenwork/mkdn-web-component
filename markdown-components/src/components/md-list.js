@@ -19,10 +19,6 @@ export class MdList extends ChildElement {
 		this.empty = {};
 	}
 
-	static updateList(input, root) {
-		root.inputList = JSON.parse(input.trim());
-	}
-
 	connectedCallback() {
 		this.inputList = this.empty;
 		super.joinParent('md-view');
@@ -34,9 +30,14 @@ export class MdList extends ChildElement {
 
 	initStandalone() {
 		if (this.innerHTML) {
-			MdList.updateList(this.innerHTML, this);
+			updateList(this.innerHTML, this);
 		}
-		this.observer = observeContentChange('MD-LIST', this.updateList, this);
+		this.observer = observeContentChange('MD-LIST', updateList, this);
+
+		function updateList(input, root) {
+			root.inputList = JSON.parse(input.trim());
+		}
+
 	}
 
 	onSiblingReady(sibling) {
