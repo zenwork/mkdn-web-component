@@ -32,7 +32,6 @@ export class MdStore extends ChildElement {
 		const that = this;
 		switch (sibling.Class) {
 			case 'md-list':
-				console.log(`SS: ${this.hashcode()} >> md-list`);
 				listenForSelection(sibling, (event) => {
 					this.fetch(that,
 					           that.stories + event.detail.key + '.md',

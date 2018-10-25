@@ -25,7 +25,7 @@ export class MdStory extends ChildElement {
 		this.joinParent('md-view');
 	}
 
-	beforeStandalone() {
+	initStandalone() {
 		let input = this.innerHTML;
 		if (input && !this.hidden) {this.formatStory(input, this);}
 		this.observer = observeContentChange('MD-STORY', this.formatStory, this);
@@ -39,7 +39,6 @@ export class MdStory extends ChildElement {
 		switch (sibling.Class) {
 			case 'md-store':
 			case 'md-static-store':
-				console.log(`${this.hashcode()} >> store`);
 				listenForStory(sibling,
 				               (storyEvent) => {
 					               this.formatStory(storyEvent.detail.content, this);

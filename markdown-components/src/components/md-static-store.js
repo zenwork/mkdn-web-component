@@ -25,7 +25,6 @@ export class MdStaticStore extends ChildElement {
 	}
 
 	onAccepted(parent) {
-		console.log('SS: store joining accepted');
 		this.store = [];
 		this.shadowRoot.store = this.store;
 		observeContentChange('MD-STATIC-STORE', this.updateStore, this);
@@ -39,7 +38,6 @@ export class MdStaticStore extends ChildElement {
 				// console.log(`${this.hashcode()} >> md-story`);
 				break;
 			case 'md-list':
-				console.log(`SS: ${this.hashcode()} >> md-list`);
 				const that = this;
 				listenForSelection(sibling, (event) => {
 					let key = event.detail.key;

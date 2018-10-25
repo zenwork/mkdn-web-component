@@ -6,13 +6,11 @@ export const JOINER_READY = 'md-join-ready';
 export const JOINER_CATCHUP = 'md-join-catchup';
 export const JOINER_LEAVING = 'md-join-leaving';
 
+/**
+ * Events used for parent-child collaboration
+ */
 export class Events {
 
-	/**
-	 *
-	 * @param joiner
-	 * @returns {CustomEvent<{type : string, source : *}>}
-	 */
 	static createRequest(joiner) {
 		let details = {detail:{type:JOINER_REQUEST, source:joiner}};
 		return new CustomEvent(JOIN_EVENT, details);

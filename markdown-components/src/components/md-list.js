@@ -32,7 +32,7 @@ export class MdList extends ChildElement {
 		if (this.observer) this.observer.disconnect();
 	}
 
-	beforeStandalone() {
+	initStandalone() {
 		if (this.innerHTML) {
 			MdList.updateList(this.innerHTML, this);
 		}
@@ -43,7 +43,6 @@ export class MdList extends ChildElement {
 		switch (sibling.Class) {
 			case 'md-store':
 			case 'md-static-store':
-				console.log(`LL: ${this.hashcode()} >> store`);
 				listenForIndexUpdate(sibling,
 				                     (event) => {
 					                     return this.inputList = event.detail;

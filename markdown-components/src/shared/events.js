@@ -31,32 +31,6 @@ export function observeContentChange(ofComponent, handleInputFn, root) {
 	return observer;
 }
 
-const eventMode = 'md-view-event-mode';
-
-export function dispatchEventMode(root) {
-	// console.log('>>>: event mode');
-	let event = new CustomEvent(eventMode, {detail:root});
-	root.dispatchEvent(event);
-}
-
-export function listenForEventMode(root, onEventFn) {
-	// console.log('<<<: event mode');
-	let closestView = root.closest('md-view');
-	if (closestView) closestView.addEventListener(eventMode, onEventFn);
-}
-
-const start = 'md-view-start-events';
-
-export function dispatchStartEvents(root) {
-	// console.log('>>>: start');
-	root.dispatchEvent(new CustomEvent(start, {detail:root}));
-}
-
-export function listenForStartEvents(root, onEventFn) {
-	// console.log('<<<: start');
-	root.addEventListener(start, onEventFn);
-}
-
 const indexUpdate = 'md-store-index-updated';
 
 export function dispatchIndexUpdate(store, index) {
@@ -67,15 +41,6 @@ export function dispatchIndexUpdate(store, index) {
 export function listenForIndexUpdate(store, onEventFn) {
 	// console.log('<<<: index update');
 	store.addEventListener(indexUpdate, onEventFn);
-}
-
-export function setupEventMode(root, onEventModefn, onStartFn) {
-	const wrapper = (event) => {
-		if (onEventModefn) { onEventModefn(root, event);}
-		let view = event.detail;
-		if(onStartFn) listenForStartEvents(view, onStartFn);
-	};
-	listenForEventMode(root, wrapper);
 }
 
 export function dispatchSelection(root, storyDef) {

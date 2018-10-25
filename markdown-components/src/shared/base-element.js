@@ -7,7 +7,7 @@ export class BaseElement extends LitElement {
 		super();
 		this.Id = id++;
 		this.Class = new.target.name;
-		console.debug(`constructing: ${this.Class}:${this.Id}`);
+		// console.debug(`constructing: ${this.Class}:${this.Id}`);
 		if (new.target === BaseElement) {
 			throw new TypeError('Cannot construct BaseElement instances directly');
 		}
@@ -20,14 +20,6 @@ export class BaseElement extends LitElement {
 
 	connectedCallback() {
 		// console.debug(`connected: ${this.Class}`);
-	}
-
-	setRoot(root) {
-		this.root = root;
-	}
-
-	$(selector) {
-		return this.root.querySelector(selector);
 	}
 
 	static define(name) {

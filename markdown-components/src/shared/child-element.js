@@ -16,30 +16,70 @@ export class ChildElement extends BaseElement {
 		super();
 		this.ancestor = null;
 		this.siblings = [];
-		console.debug(`constructing ${this.Class}`);
+		// console.debug(`constructing ${this.Class}`);
 	}
 
+	/**
+	 * Called before requesting to join parent
+	 */
+	beforeJoining() {}
+
+	/**
+	 * Called when the element will run in alone without the support of a containing parent
+	 */
+	initStandalone() {}
+
+	/**
+	 * Called when this element's request to join is accepted. Any initialization with the parent can be done then.
+	 * @param parent
+	 */
+	onAccepted(parent) {}
+
+	/**
+	 * Called when a sibling elements have called ready(). It will only be called once per lide-cycle.
+	 * @param sibling the ready element
+	 */
+	onSiblingReady(sibling) {}
+
+	/**
+	 * Called when a component that has joined is leaving. It will only be called once
+	 * @param sibling the leaving element
+	 */
+	onJoinerLeaving(sibling) {}
+
+	/**
+	 * Must be called when the element is ready to collaborate. Other elements colaborating under the same parent
+	 * will receive a ready event from this element only after ready() has been called.
+	 */
+	ready() {this.ancestor.dispatchEvent(Events.createReady(this));}
+
+	/**
+	 * Custom Element standard call when element instance connected to DOM
+	 */
 	connectedCallback() {
-		console.debug(`${this.Class} is connected`);
+		// console.debug(`${this.Class} is connected`);
 		this.joinParent('md-parent');
 	}
 
+	/**
+	 * Custom Element standard call when element instance disconnected from DOM
+	 */
 	disconnectedCallback() {
 		this.ancestor.dispatchEvent(Events.createLeaving(this));
 	}
 
 	/**
-	 * Initialize the component in standalone or cooperative mode. Pass not
+	 * Initialize the component in standalone or cooperative mode.
 	 * @param ancestorSelector  a selector to find the ancestor that accepts joiners
 	 * @returns {string} 'cooperative' if attempted to register with parent; 'standalone' otherwise
 	 */
 	joinParent(ancestorSelector) {
-		console.debug(`${this.Class}:${this.Id} trying to join ${ancestorSelector}`);
+		// console.debug(`${this.Class}:${this.Id} trying to join ${ancestorSelector}`);
 		const that = this;
 		//if no parent provided then standalone mode
 		if (!ancestorSelector) {
-			console.debug(`${this.Class} initializing for standalone`);
-			this.beforeStandalone();
+			// console.debug(`${this.Class} initializing for standalone`);
+			this.initStandalone();
 			return 'standalone';
 		}
 
@@ -47,15 +87,16 @@ export class ChildElement extends BaseElement {
 		const ancestor = this.ancestor = this.closest(ancestorSelector);
 
 		if (ancestor) {
-			console.debug(`${this.Class} initializing for cooperation`);
+			// console.debug(`${this.Class} initializing for cooperation`);
 			this.beforeJoining();
 			this.addEventListener(JOIN_EVENT, localEventAction);
 			this.ancestor.addEventListener(JOIN_EVENT, sharedEventAction);
 			this.join();
 			return 'cooperative';
 		} else {
-			console.debug(`${this.Class} initializing standalone mode because no parent [${ancestorSelector}] was found`);
-			this.beforeStandalone();
+			// console.debug(`${this.Class} initializing standalone mode because no parent [${ancestorSelector}] was
+			// found`);
+			this.initStandalone();
 			return 'standalone';
 		}
 
@@ -85,11 +126,12 @@ export class ChildElement extends BaseElement {
 				let type = detail.type;
 				switch (type) {
 					case PARENT_READY:
+						//join because parent indicates it will accept requests
 						that.join();
 						break;
 					case JOINER_READY:
 						if (!that.siblings.includes(source.hashcode())) {
-							console.debug(`${that.hashcode()} receiving ready from ${source.hashcode()}`);
+							// console.debug(`${that.hashcode()} receiving ready from ${source.hashcode()}`);
 							that.siblings.push(source.hashcode());
 							that.onSiblingReady(source);
 						}
@@ -109,47 +151,11 @@ export class ChildElement extends BaseElement {
 		}
 	}
 
+	/**
+	 * dispatch a join request
+	 */
 	join() {
 		if (this.ancestor) this.ancestor.dispatchEvent(Events.createRequest(this));
-	}
-
-	beforeJoining() {
-
-	}
-
-	beforeStandalone() {
-
-	}
-
-	/**
-	 * Called when this element's joining request is accepted.
-	 * @param parent
-	 */
-	onAccepted(parent) {
-		// this.ready();
-	}
-
-	/**
-	 * Must be called when component is ready to receive external
-	 */
-	ready() {
-		this.ancestor.dispatchEvent(Events.createReady(this));
-	}
-
-	/**
-	 * Called when a component that has joined is ready
-	 * @param sibling
-	 */
-	onSiblingReady(sibling) {
-
-	}
-
-	/**
-	 * Called when a component that has joined is leaving
-	 * @param sibling
-	 */
-	onJoinerLeaving(sibling) {
-
 	}
 
 }
