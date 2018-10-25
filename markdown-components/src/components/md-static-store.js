@@ -1,6 +1,5 @@
 import { html } from '@polymer/lit-element/lit-element.js';
-
-import { BaseElement } from '../shared/base-element';
+import { ChildElement } from '../shared/child-element';
 import {
 	dispatchIndexUpdate,
 	dispatchStory,
@@ -10,7 +9,7 @@ import {
 } from '../shared/events';
 import { Story } from '../shared/story';
 
-export class MdStaticStore extends BaseElement {
+export class MdStaticStore extends ChildElement {
 
 	static get name() { return 'md-static-store';}
 
@@ -21,7 +20,7 @@ export class MdStaticStore extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.init();
+		this.initt();
 		this.observeContentChange();
 	}
 
@@ -33,7 +32,7 @@ export class MdStaticStore extends BaseElement {
 		return html``;
 	}
 
-	init() {
+	initt() {
 		this.store = [];
 		this.shadowRoot.store = this.store;
 		if (this.innerHTML) {

@@ -1,14 +1,13 @@
 import { html } from '@polymer/lit-element/lit-element.js';
-
-import { BaseElement } from '../shared/base-element';
+import { dispatchEventMode, dispatchStartEvents } from '../shared/events';
+import { ParentElement } from '../shared/parent-element';
 import { MdStaticStore } from './md-static-store';
 import { MdStore } from './md-store';
-import { dispatchEventMode,dispatchStartEvents } from '../shared/events';
 
 MdStaticStore.define();
 MdStore.define();
 
-export class MdView extends BaseElement {
+export class MdView extends ParentElement {
 
 	static get name() { return 'md-view';}
 
@@ -25,9 +24,8 @@ export class MdView extends BaseElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.init(this);
+		this.initt(this);
 		this.listenToStoreUpdates(this);
-		this.listenToSelectionChanges(this);
 	}
 
 	disconnectedCallback() {
@@ -38,7 +36,7 @@ export class MdView extends BaseElement {
 		return html`<slot></slot>`;
 	}
 
-	init(root) {
+	initt(root) {
 		
 		if (this.$('md-static-store')) {
 			root.shadowRoot.store = root.store = this.$('md-static-store');
@@ -68,17 +66,7 @@ export class MdView extends BaseElement {
 	}
 
 
-	listenToSelectionChanges(root) {
 
-		this.list.addEventListener('md-list-selected',
-		                           function (e) {
-			                           // root.stories.forEach((story) => {
-				                       //     if (story.key === e.detail.key) {
-					                   //         root.story.innerHTML = story.content;
-				                       //     }
-			                           // });
-		                           });
-	}
 
 	updateStories(root) {
 		if (root.store.shadowRoot) {

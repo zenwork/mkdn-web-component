@@ -1,13 +1,13 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import * as marked from 'marked';
-import { BaseElement } from '../shared/base-element';
+import { ChildElement } from '../shared/child-element';
 import { listenForStory, observeContentChange, setupEventMode } from '../shared/events';
 
 /**
  * Web Component that formats and displays a markdown story. Reads markdown from the component elements content.
  * supports 'hidden' boolean/flag attribute and the canonical style attribute for injecting css.
  */
-export class MdStory extends BaseElement {
+export class MdStory extends ChildElement {
 	static get name() { return 'md-story';}
 
 	static get properties() {
@@ -19,7 +19,7 @@ export class MdStory extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.init();
+		this.initt();
 		this.observeMarkdownChanges();
 
 	}
@@ -28,7 +28,7 @@ export class MdStory extends BaseElement {
 		this.observer.disconnect();
 	}
 
-	init() {
+	initt() {
 		this.marked = marked;
 		this.markdown = document.createElement('div');
 		this.formatStory('no markdown provided', this);

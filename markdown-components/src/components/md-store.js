@@ -1,10 +1,9 @@
 import { html } from '@polymer/lit-element/lit-element.js';
-
-import { BaseElement } from '../shared/base-element';
+import { ChildElement } from '../shared/child-element';
 import { dispatchIndexUpdate, dispatchStory, listenForSelection, setupEventMode } from '../shared/events';
 import { Story } from '../shared/story';
 
-export class MdStore extends BaseElement {
+export class MdStore extends ChildElement {
 
 	static get name() { return 'md-store';}
 
@@ -16,7 +15,7 @@ export class MdStore extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.init();
+		this.initt();
 		this.fetch(this, this.src, (root, rawJson) => {root.updateIndex(JSON.parse(rawJson), root);});
 	}
 
@@ -56,7 +55,7 @@ export class MdStore extends BaseElement {
 		console.debug('updated');
 	}
 
-	init() {
+	initt() {
 		this.index = {};
 		this.updateIndex(this.index, this);
 		const that = this;

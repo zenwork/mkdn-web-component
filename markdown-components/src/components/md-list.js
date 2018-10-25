@@ -1,10 +1,10 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
-import { BaseElement } from '../shared/base-element';
+import { ChildElement } from '../shared/child-element';
 import { dispatchSelection, listenForIndexUpdate, observeContentChange, setupEventMode } from '../shared/events';
 import { Story } from '../shared/story';
 
-export class MdList extends BaseElement {
+export class MdList extends ChildElement {
 
 	static get name() { return 'md-list';}
 
@@ -28,7 +28,7 @@ export class MdList extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.init();
+		this.initt();
 		this.observer = observeContentChange('MD-LIST', MdList.updateList, this);
 	}
 
@@ -51,7 +51,7 @@ export class MdList extends BaseElement {
 
 	}
 
-	init() {
+	initt() {
 		let onStart = (event) => {
 
 			let store = event.detail.shadowRoot.store;
