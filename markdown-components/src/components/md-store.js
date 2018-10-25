@@ -1,6 +1,6 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { ChildElement } from '../shared/child-element';
-import { dispatchIndexUpdate, dispatchStory, listenForSelection, setupEventMode } from '../shared/events';
+import { dispatchIndexUpdate, dispatchStory, listenForSelection } from '../shared/events';
 import { Story } from '../shared/story';
 
 export class MdStore extends ChildElement {
@@ -15,12 +15,35 @@ export class MdStore extends ChildElement {
 	}
 
 	connectedCallback() {
-		this.initt();
+		let state = this.joinParent('md-view');
+		if (state === 'standalone') {
+			throw Error('md-static-store can not work in standalone mode');
+		}
+	}
+
+	onAccepted(parent) {
+		this.index = {};
+		this.updateIndex(this.index, this);
 		this.fetch(this, this.src, (root, rawJson) => {root.updateIndex(JSON.parse(rawJson), root);});
+		this.ready();
+	}
+
+	onSiblingReady(sibling) {
+		const that = this;
+		switch (sibling.Class) {
+			case 'md-list':
+				console.log(`SS: ${this.hashcode()} >> md-list`);
+				listenForSelection(sibling, (event) => {
+					this.fetch(that,
+					           that.stories + event.detail.key + '.md',
+					           (root, story) => {root.addToStore(event.detail, story, root);});
+				});
+				break;
+		}
 	}
 
 	fetch(root, url, handleResponseFn) {
-		var xmlhttp = new XMLHttpRequest();
+		const xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = () => {
 
 			if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
@@ -31,43 +54,8 @@ export class MdStore extends ChildElement {
 		xmlhttp.send();
 	}
 
-	disconnectedCallback() {
-	}
-
 	render() {
 		return html``;
-	}
-
-	shouldUpdate(changedProperties) {
-		console.debug('should update');
-		return true;
-	}
-
-	update(changedProperties) {
-		console.debug('update');
-	}
-
-	firstUpdated(changedProperties) {
-		console.debug('first update');
-	}
-
-	updated(changedProperties) {
-		console.debug('updated');
-	}
-
-	initt() {
-		this.index = {};
-		this.updateIndex(this.index, this);
-		const that = this;
-		setupEventMode(this, null, (event) => {
-			listenForSelection(event.detail.list, (event) => {
-				// console.log('fetching story:' + event.detail.key);
-				this.fetch(that,
-				           that.stories + event.detail.key + '.md',
-				           (root, story) => {root.addToStore(event.detail, story, root);});
-			});
-			dispatchIndexUpdate(this, this.index);
-		});
 	}
 
 	addToStore(def, story, root) {

@@ -10,10 +10,10 @@ export class ParentElement extends BaseElement {
 	}
 
 	connectedCallback() {
-		this.init();
+		this.initParent();
 	}
 
-	init() {
+	initParent() {
 		this.addEventListener(JOIN_EVENT, (event) => {
 			let source = event.detail.source;
 			switch (event.detail.type) {

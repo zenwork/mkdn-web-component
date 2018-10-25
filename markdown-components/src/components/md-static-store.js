@@ -1,12 +1,6 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { ChildElement } from '../shared/child-element';
-import {
-	dispatchIndexUpdate,
-	dispatchStory,
-	listenForSelection,
-	observeContentChange,
-	setupEventMode
-} from '../shared/events';
+import { dispatchIndexUpdate, dispatchStory, listenForSelection, observeContentChange } from '../shared/events';
 import { Story } from '../shared/story';
 
 export class MdStaticStore extends ChildElement {
@@ -20,34 +14,46 @@ export class MdStaticStore extends ChildElement {
 	}
 
 	connectedCallback() {
-		this.initt();
-		this.observeContentChange();
+		let state = this.joinParent('md-view');
+		if (state === 'standalone') {
+			throw Error('md-static-store can not work in standalone mode');
+		}
 	}
 
 	disconnectedCallback() {
 		this.observer.disconnect();
 	}
 
-	render() {
-		return html``;
-	}
-
-	initt() {
+	onAccepted(parent) {
+		console.log('SS: store joining accepted');
 		this.store = [];
 		this.shadowRoot.store = this.store;
-		if (this.innerHTML) {
-			this.updateStore(this.innerHTML, this);
+		observeContentChange('MD-STATIC-STORE', this.updateStore, this);
+		dispatchIndexUpdate(this, this.index);
+		super.ready();
+	}
+
+	onSiblingReady(sibling) {
+		switch (sibling.Class) {
+			case 'md-story':
+				// console.log(`${this.hashcode()} >> md-story`);
+				break;
+			case 'md-list':
+				console.log(`SS: ${this.hashcode()} >> md-list`);
+				const that = this;
+				listenForSelection(sibling, (event) => {
+					let key = event.detail.key;
+					let title = event.detail.title;
+					let content = that.findContent(that, key);
+					dispatchStory(that, new Story(key, title, content));
+				});
+
+				if (this.innerHTML) {
+					this.updateStore(this.innerHTML, this);
+				}
+
+				break;
 		}
-		const that = this;
-		setupEventMode(this, null, () => {
-			listenForSelection(event.detail.list, (event) => {
-				let key = event.detail.key;
-				let title = event.detail.title;
-				let content = that.findContent(that, key);
-				dispatchStory(that, new Story(key, title, content));
-			});
-			dispatchIndexUpdate(this, this.index);
-		});
 	}
 
 	updateStore(input, root) {
@@ -78,13 +84,13 @@ export class MdStaticStore extends ChildElement {
 		dispatchIndexUpdate(root, root.index);
 	}
 
-	observeContentChange() {
-		observeContentChange('MD-STATIC-STORE', this.updateStore, this);
-	}
-
 	findContent(root, key) {
 		let result = root.store.filter((story) => story.key === key);
 		return result[0].content;
+	}
+
+	render() {
+		return html``;
 	}
 }
 

@@ -23,7 +23,7 @@ export class MdView extends ParentElement {
 	}
 
 	connectedCallback() {
-		super.connectedCallback();
+		this.initParent();
 		this.initt(this);
 		this.listenToStoreUpdates(this);
 	}

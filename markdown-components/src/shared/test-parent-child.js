@@ -32,19 +32,14 @@ export class TestChild extends ChildElement {
 
 	}
 
-	cooperative() {
-		// console.log('cooperative init');
-
-	}
-
-	onJoinAccepted(parent) {
+	onAccepted(parent) {
 		this.relationship = `READY: ${parent.Class}:${parent.Id} -> ${this.Class}:${this.getAttribute('id')
 		                                                                            ? this.getAttribute('id')
 		                                                                            : this.Id}`;
 		this.ready();
 	}
 
-	onJoinerReady(sibling) {
+	onSiblingReady(sibling) {
 		this.messages[sibling.hashcode()] = `sibling READY: ${sibling.Class}:${sibling.getAttribute('id')
 		                                                                       ? sibling.getAttribute('id')
 		                                                                       : sibling.Id}`;
@@ -81,7 +76,7 @@ export class TestParent extends ParentElement {
 
 	connectedCallback() {
 		this.ready = true;
-		this.init();
+		this.initParent();
 	}
 
 	render() {

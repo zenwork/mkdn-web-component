@@ -21,7 +21,7 @@ export class ChildElement extends BaseElement {
 
 	connectedCallback() {
 		console.debug(`${this.Class} is connected`);
-		this.init('md-parent');
+		this.joinParent('md-parent');
 	}
 
 	disconnectedCallback() {
@@ -33,14 +33,13 @@ export class ChildElement extends BaseElement {
 	 * @param ancestorSelector  a selector to find the ancestor that accepts joiners
 	 * @returns {string} 'cooperative' if attempted to register with parent; 'standalone' otherwise
 	 */
-	init(ancestorSelector) {
+	joinParent(ancestorSelector) {
 		console.debug(`${this.Class}:${this.Id} trying to join ${ancestorSelector}`);
 		const that = this;
-
 		//if no parent provided then standalone mode
 		if (!ancestorSelector) {
 			console.debug(`${this.Class} initializing for standalone`);
-			this.standalone();
+			this.beforeStandalone();
 			return 'standalone';
 		}
 
@@ -49,14 +48,14 @@ export class ChildElement extends BaseElement {
 
 		if (ancestor) {
 			console.debug(`${this.Class} initializing for cooperation`);
-			this.cooperative();
+			this.beforeJoining();
 			this.addEventListener(JOIN_EVENT, localEventAction);
 			this.ancestor.addEventListener(JOIN_EVENT, sharedEventAction);
 			this.join();
 			return 'cooperative';
 		} else {
 			console.debug(`${this.Class} initializing standalone mode because no parent [${ancestorSelector}] was found`);
-			this.standalone();
+			this.beforeStandalone();
 			return 'standalone';
 		}
 
@@ -66,13 +65,13 @@ export class ChildElement extends BaseElement {
 			let type = detail.type;
 			switch (type) {
 				case JOINER_ACCEPTED:
-					that.onJoinAccepted(source);
+					that.onAccepted(source);
 					break;
 				case JOINER_CATCHUP:
-					if (that.siblings.indexOf(source.hashcode()) < 0) {
-						console.log(`${that.hashcode()} catching up with ${source.hashcode()}`);
+					if (source.hashcode() !== that.hashcode() && that.siblings.indexOf(source.hashcode()) < 0) {
+						console.debug(`${that.hashcode()} catching up with ${source.hashcode()}`);
 						that.siblings.push(source.hashcode());
-						that.onJoinerReady(source);
+						that.onSiblingReady(source);
 					}
 					break;
 			}
@@ -89,10 +88,10 @@ export class ChildElement extends BaseElement {
 						that.join();
 						break;
 					case JOINER_READY:
-						console.log(`${that.hashcode()} receiving ready from ${source.hashcode()}`);
 						if (!that.siblings.includes(source.hashcode())) {
+							console.debug(`${that.hashcode()} receiving ready from ${source.hashcode()}`);
 							that.siblings.push(source.hashcode());
-							that.onJoinerReady(source);
+							that.onSiblingReady(source);
 						}
 						break;
 					case JOINER_LEAVING:
@@ -114,11 +113,11 @@ export class ChildElement extends BaseElement {
 		if (this.ancestor) this.ancestor.dispatchEvent(Events.createRequest(this));
 	}
 
-	cooperative() {
+	beforeJoining() {
 
 	}
 
-	standalone() {
+	beforeStandalone() {
 
 	}
 
@@ -126,10 +125,13 @@ export class ChildElement extends BaseElement {
 	 * Called when this element's joining request is accepted.
 	 * @param parent
 	 */
-	onJoinAccepted(parent) {
-		this.ready();
+	onAccepted(parent) {
+		// this.ready();
 	}
 
+	/**
+	 * Must be called when component is ready to receive external
+	 */
 	ready() {
 		this.ancestor.dispatchEvent(Events.createReady(this));
 	}
@@ -138,7 +140,7 @@ export class ChildElement extends BaseElement {
 	 * Called when a component that has joined is ready
 	 * @param sibling
 	 */
-	onJoinerReady(sibling) {
+	onSiblingReady(sibling) {
 
 	}
 

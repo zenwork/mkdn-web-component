@@ -1,7 +1,7 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
 import { ChildElement } from '../shared/child-element';
-import { dispatchSelection, listenForIndexUpdate, observeContentChange, setupEventMode } from '../shared/events';
+import { dispatchSelection, listenForIndexUpdate, observeContentChange } from '../shared/events';
 import { Story } from '../shared/story';
 
 export class MdList extends ChildElement {
@@ -23,13 +23,34 @@ export class MdList extends ChildElement {
 		root.inputList = JSON.parse(input.trim());
 	}
 
-	disconnectedCallback() {
-		this.observer.disconnect();
+	connectedCallback() {
+		this.inputList = this.empty;
+		super.joinParent('md-view');
 	}
 
-	connectedCallback() {
-		this.initt();
-		this.observer = observeContentChange('MD-LIST', MdList.updateList, this);
+	disconnectedCallback() {
+		if (this.observer) this.observer.disconnect();
+	}
+
+	beforeStandalone() {
+		if (this.innerHTML) {
+			MdList.updateList(this.innerHTML, this);
+		}
+		this.observer = observeContentChange('MD-LIST', this.updateList, this);
+	}
+
+	onSiblingReady(sibling) {
+		switch (sibling.Class) {
+			case 'md-store':
+			case 'md-static-store':
+				console.log(`LL: ${this.hashcode()} >> store`);
+				listenForIndexUpdate(sibling,
+				                     (event) => {
+					                     return this.inputList = event.detail;
+				                     });
+				super.ready();
+				break;
+		}
 	}
 
 	render() {
@@ -49,27 +70,6 @@ export class MdList extends ChildElement {
 
 		return html` <section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
 
-	}
-
-	initt() {
-		let onStart = (event) => {
-
-			let store = event.detail.shadowRoot.store;
-			if (store) {
-				const onIndexUpdate = (event) => {
-					return this.inputList = event.detail;
-				};
-				listenForIndexUpdate(store, onIndexUpdate);
-			}
-		};
-
-		setupEventMode(this, null, onStart);
-
-		if (this.innerHTML) {
-			MdList.updateList(this.innerHTML, this);
-		} else {
-			this.inputList = this.empty;
-		}
 	}
 
 	select(root, key) {
