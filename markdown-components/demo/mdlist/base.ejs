@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>md-list Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Empty</h2>
+
+    <% componentId = 'empty' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-list></md-list>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Simple List</h2>
+
+    <% componentId = 'simple-list' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-list>
+            {
+            "title-1": "Title 1",
+            "title-2": "Title 2"
+            }
+        </md-list>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for list selection events
+		 */
+		document
+			.querySelectorAll('md-list')
+			.forEach((el) => el.addEventListener('md-list-selection',
+			                                     function (e) {
+				                                     console.log(`event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+    </script>
+
+</body>
+</html>

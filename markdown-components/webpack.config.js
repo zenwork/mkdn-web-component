@@ -18,62 +18,62 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			                      title:'demo',
 			                      filename:'demo/index.html',
-			                      template:'./test/demo/index.html'
+			                      template:'./demo/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'demo md-story',
 			                      filename:'demo/mdstory/index.html',
-			                      template:'./test/demo/mdstory/index.html'
+			                      template:'./demo/mdstory/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'demo md-list',
 			                      filename:'demo/mdlist/index.html',
-			                      template:'./test/demo/mdlist/index.html'
+			                      template:'./demo/mdlist/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story empty',
 			                      filename:'demo/mdstory/empty.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/empty.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdstory/empty.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story string',
 			                      filename:'demo/mdstory/simple.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/simple.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdstory/simple.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story simple formatting',
 			                      filename:'demo/mdstory/simple-formatting.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/simple-formatting.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdstory/simple-formatting.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-story attributes',
 			                      filename:'demo/mdstory/attributes.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdstory/attributes.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdstory/attributes.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-list',
 			                      filename:'demo/mdlist/base.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdlist/base.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdlist/base.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'static md-view',
 			                      filename:'demo/mdview/base.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdview/base.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdview/base.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-view',
 			                      filename:'demo/mdview/backend.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/mdview/backend.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/mdview/backend.ejs'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'md-view',
 			                      filename:'demo/mdview/index.html',
-			                      template:'./test/demo/mdview/index.html'
+			                      template:'./demo/mdview/index.html'
 		                      }),
 		new HtmlWebpackPlugin({
 			                      title:'child-parent',
 			                      filename:'demo/childparent/base.html',
-			                      template:'!!ejs-webpack-loader!./test/demo/childparent/base.ejs'
+			                      template:'!!ejs-webpack-loader!./demo/childparent/base.ejs'
 		                      }),
 		new CopyWebpackPlugin([
 			                      {
@@ -83,19 +83,19 @@ module.exports = {
 		                      ]),
 		new CopyWebpackPlugin([
 			                      {
-				                      from:'./test/demo/mdview/index.json',
+				                      from:'./demo/mdview/index.json',
 				                      to:'demo/mdview/index.json'
 			                      }
 		                      ]),
 		new CopyWebpackPlugin([
 			                      {
-				                      from:'./test/demo/mdview/story-1.md',
+				                      from:'./demo/mdview/story-1.md',
 				                      to:'demo/mdview/story-1.md'
 			                      }
 		                      ]),
 		new CopyWebpackPlugin([
 			                      {
-				                      from:'./test/demo/mdview/story-2.md',
+				                      from:'./demo/mdview/story-2.md',
 				                      to:'demo/mdview/story-2.md'
 			                      }
 		                      ])
@@ -104,6 +104,7 @@ module.exports = {
 		rules:[]
 	},
 	devtool:'source-map'
+	// ,
 	// optimization:{
 	// 	splitChunks:{
 	// 		chunks:'all'

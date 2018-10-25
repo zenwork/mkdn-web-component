@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>md-view Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Empty</h2>
+
+    <% componentId = 'empty' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-view>
+            <md-list></md-list>
+            <md-story></md-story>
+        </md-view>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Static Backend</h2>
+
+    <% componentId = 'static' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-view>
+            <md-list></md-list>
+            <md-story></md-story>
+            <md-static-store>
+                [
+                {"key": "title-1", "title": "Title 1", "content": "# Title 1\n\nSome content about #1"},
+                {"key": "title-2", "title": "Title 2", "content": "# Title 2\n\nSome content about #2"}
+                ]
+            </md-static-store>
+        </md-view>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for list selection events
+		 */
+		document
+			.querySelectorAll('#static > md-view > md-list')
+			.forEach((el) => el.addEventListener('md-list-selected',
+			                                     function (e) {
+				                                     console.log(`selected event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+		document
+			.querySelectorAll('#static > md-view > md-static-store')
+			.forEach((el) => el.addEventListener('md-store-updated',
+			                                     function (e) {
+				                                     console.log(`store updated event dispatched`);
+			                                     }
+			));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>Attributes</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title"><code>hidden</code> attribute</h2>
+
+    <% componentId = 'hidden' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-story id="<%= componentId %>" hidden="false">some markdown</md-story>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title"><code>style</code> attribute</h2>
+
+    <% componentId = 'style' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-story style="background:salmon;font-family: monospace">
+            # SALMON MARKDOWN
+
+            The _salmon_ jumped over the moon
+        </md-story>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+</body>
+</html>
