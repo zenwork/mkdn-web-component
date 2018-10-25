@@ -6,12 +6,10 @@ export class ParentElement extends BaseElement {
 
 	constructor() {
 		super();
-		console.debug(`constructing ${this.Class}`);
 		this.joiners = {};
 	}
 
 	connectedCallback() {
-		console.debug(`${this.Class} is connected`);
 		this.init();
 	}
 
@@ -44,11 +42,11 @@ export class ParentElement extends BaseElement {
 			let alreadyJoined = this.joiners[key];
 			source.dispatchEvent(Events.createCatchup(alreadyJoined));
 		});
-		this.joiners[source.Class + source.Id] = source;
+		this.joiners[source.hashcode()] = source;
 	}
 
 	joinerLeaving(source) {
-		delete this.joiners[source.Class + source.Id];
+		delete this.joiners[source.hashcode()];
 
 	}
 }

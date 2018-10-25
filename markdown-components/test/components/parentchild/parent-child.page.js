@@ -13,11 +13,6 @@ const selectChildReadyMessage = Selector(value =>
 		                                         .shadowRoot
 		                                         .querySelectorAll('p')[0]);
 
-const selectSiblingsFor = Selector(value => document
-	.getElementById('c1')
-	.shadowRoot
-	.querySelectorAll('ul > li'));
-
 fixture`parent child test`
 	.page`http://localhost:8080/demo/childparent/base.html`;
 
@@ -97,4 +92,25 @@ test('add child', async t => {
 		.getElementById('c3')
 		.shadowRoot
 		.querySelectorAll('ul > li')).count).eql(3);
+});
+
+test('remove child', async t => {
+
+	let removeElement = new ClientFunction(() => {
+		document.querySelector('#with-parent > md-parent').removeChild(document.querySelector('#c1'));
+	});
+
+	await removeElement();
+
+	await t.expect(await Selector(() => document.getElementById('c1')).exists).notOk();
+
+	await t.expect(await Selector(() => document
+		.getElementById('c2')
+		.shadowRoot
+		.querySelectorAll('ul > li')).count).eql(1);
+
+	await t.expect(await Selector(() => document
+		.getElementById('c3')
+		.shadowRoot
+		.querySelectorAll('ul > li')).count).eql(1);
 });

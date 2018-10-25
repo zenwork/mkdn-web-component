@@ -1,5 +1,5 @@
 export const JOIN_EVENT = 'md-join';
-export const ACCEPTOR_READY = 'md-acceptor-ready';
+export const PARENT_READY = 'md-acceptor-ready';
 export const JOINER_REQUEST = 'md-join-request';
 export const JOINER_ACCEPTED = 'md-join-accepted';
 export const JOINER_READY = 'md-join-ready';
@@ -34,7 +34,7 @@ export class Events {
 	}
 
 	static createAcceptorReady(joiner) {
-		let details = {detail:{type:ACCEPTOR_READY, source:joiner}};
+		let details = {detail:{type:PARENT_READY, source:joiner}};
 		return new CustomEvent(JOIN_EVENT, details);
 	}
 

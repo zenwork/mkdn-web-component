@@ -1,12 +1,12 @@
 import { BaseElement } from './base-element';
 import {
-	ACCEPTOR_READY,
 	Events,
 	JOIN_EVENT,
 	JOINER_ACCEPTED,
 	JOINER_CATCHUP,
 	JOINER_LEAVING,
-	JOINER_READY
+	JOINER_READY,
+	PARENT_READY
 } from './cooperation-events';
 
 export class ChildElement extends BaseElement {
@@ -69,8 +69,9 @@ export class ChildElement extends BaseElement {
 					that.onJoinAccepted(source);
 					break;
 				case JOINER_CATCHUP:
-					if (this.siblings.indexOf(source.Class + source.Id)<0) {
-						this.siblings.push((source.Class + source.Id));
+					if (that.siblings.indexOf(source.hashcode()) < 0) {
+						console.log(`${that.hashcode()} catching up with ${source.hashcode()}`);
+						that.siblings.push(source.hashcode());
 						that.onJoinerReady(source);
 					}
 					break;
@@ -84,26 +85,27 @@ export class ChildElement extends BaseElement {
 			if (notFromSelf()) {
 				let type = detail.type;
 				switch (type) {
-					case ACCEPTOR_READY:
+					case PARENT_READY:
 						that.join();
 						break;
 					case JOINER_READY:
-						if (!that.siblings.includes(source.Class + source.Id)) {
-							that.siblings.push((source.Class + source.Id));
+						console.log(`${that.hashcode()} receiving ready from ${source.hashcode()}`);
+						if (!that.siblings.includes(source.hashcode())) {
+							that.siblings.push(source.hashcode());
 							that.onJoinerReady(source);
 						}
 						break;
 					case JOINER_LEAVING:
-						if (that.siblings.indexOf(source.Class + source.Id)>-1) {
-							delete that.siblings[that.sibling.findIndex((i)=>i.Class + i.Id)];
-							that.onJoinerReady(source);
+						if (that.siblings.indexOf(source.hashcode()) > -1) {
+							delete that.siblings[that.siblings.findIndex((i) => i === source.hashcode())];
+							that.onJoinerLeaving(source);
 						}
 						break;
 				}
 			}
 
 			function notFromSelf() {
-				return source.Id ? source.Id !== that.Id : false;
+				return source.hashcode() ? source.hashcode() !== that.hashcode() : false;
 			}
 		}
 	}

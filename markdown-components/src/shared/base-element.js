@@ -1,4 +1,5 @@
 import { LitElement } from '@polymer/lit-element/lit-element.js';
+
 let id=0;
 export class BaseElement extends LitElement {
 
@@ -6,11 +7,15 @@ export class BaseElement extends LitElement {
 		super();
 		this.Id = id++;
 		this.Class = new.target.name;
-		// console.debug(`constructing: ${this.Class}`);
+		console.debug(`constructing: ${this.Class}:${this.Id}`);
 		if (new.target === BaseElement) {
 			throw new TypeError('Cannot construct BaseElement instances directly');
 		}
 
+	}
+
+	hashcode() {
+		return this.Class + ':' + this.Id;
 	}
 
 	connectedCallback() {

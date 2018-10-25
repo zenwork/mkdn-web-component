@@ -19,19 +19,22 @@ export class MdList extends BaseElement {
 		this.empty = {};
 	}
 
-	connectedCallback() {
-		this.init();
-		this.observer = observeContentChange('MD-LIST', this.updateList, this);
+	static updateList(input, root) {
+		root.inputList = JSON.parse(input.trim());
 	}
 
 	disconnectedCallback() {
 		this.observer.disconnect();
 	}
 
+	connectedCallback() {
+		this.init();
+		this.observer = observeContentChange('MD-LIST', MdList.updateList, this);
+	}
+
 	render() {
 		let itemTemplate = (key) => html`<li><a href="#" @click=${() => {
-			this.select(this,
-			            key);
+			this.select(this, key);
 		}}>${this.inputList[key]}</a></li>`;
 
 		function renderItems(inputList, empty) {
@@ -63,14 +66,10 @@ export class MdList extends BaseElement {
 		setupEventMode(this, null, onStart);
 
 		if (this.innerHTML) {
-			this.updateList(this.innerHTML, this);
+			MdList.updateList(this.innerHTML, this);
 		} else {
 			this.inputList = this.empty;
 		}
-	}
-
-	updateList(input, root) {
-		root.inputList = JSON.parse(input.trim());
 	}
 
 	select(root, key) {

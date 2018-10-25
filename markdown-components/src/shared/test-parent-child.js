@@ -11,18 +11,18 @@ export class TestChild extends ChildElement {
 
 	static get name() {return 'md-child';}
 
-	static get properties() {
-		return {
-			relationship:{type:String},
-			messages:{type:Array}
-		};
-	}
-
 	constructor() {
 		super();
 		this.relationship = '';
-		this.messages = [];
+		this.messages = {};
 
+	}
+
+	static get properties() {
+		return {
+			relationship:{type:String, attribute:false},
+			messages:{type:Object, attribute:false}
+		};
 	}
 
 	connectedCallback() {
@@ -45,9 +45,16 @@ export class TestChild extends ChildElement {
 	}
 
 	onJoinerReady(sibling) {
-		this.messages.push(`sibling READY: ${sibling.Class}:${sibling.getAttribute('id')
-		                                                      ? sibling.getAttribute('id')
-		                                                      : sibling.Id}`);
+		this.messages[sibling.hashcode()] = `sibling READY: ${sibling.Class}:${sibling.getAttribute('id')
+		                                                                       ? sibling.getAttribute('id')
+		                                                                       : sibling.Id}`;
+
+		this.messages = {...this.messages};
+	}
+
+	onJoinerLeaving(sibling) {
+		delete this.messages[sibling.hashcode()];
+		this.messages = {...this.messages};
 	}
 
 	render() {
@@ -56,9 +63,9 @@ export class TestChild extends ChildElement {
 				<p>${this.relationship}</p>
 				<h3>siblings:</h3>
 				<ul>
-				${repeat(this.messages,
-		                 (item) => item,
-		                 (item) => html`<li>${item}</li>`)}
+				${repeat(Object.keys(this.messages),
+		                 (key) => key,
+		                 (key) => html`<li>${this.messages[key]}</li>`)}
 				</ul>
 			       `;
 	}
