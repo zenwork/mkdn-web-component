@@ -27,32 +27,40 @@ export class TestChild extends ChildElement {
 
 	connectedCallback() {
 		super.connectedCallback();
+		this.shadowRoot.Id = this.Id;
+		this.shadowRoot.Class = this.Class;
 
 	}
 
 	cooperative() {
-		console.log('cooperative init');
+		// console.log('cooperative init');
 
 	}
 
 	onJoinAccepted(parent) {
-		this.relationship = `${parent.Class}:${parent.Id} -> ${this.Class}:${this.Id}`;
+		this.relationship = `READY: ${parent.Class}:${parent.Id} -> ${this.Class}:${this.getAttribute('id')
+		                                                                            ? this.getAttribute('id')
+		                                                                            : this.Id}`;
 		this.ready();
 	}
 
 	onJoinerReady(sibling) {
-		this.messages.push(`${sibling.Class}:${sibling.Id}`);
+		this.messages.push(`sibling READY: ${sibling.Class}:${sibling.getAttribute('id')
+		                                                      ? sibling.getAttribute('id')
+		                                                      : sibling.Id}`);
 	}
 
 	render() {
 		return html`
-<h3>union:</h3>
-<p>${this.relationship}</p>
-<h3>siblings:</h3>
-${
-			repeat(this.messages,
-			       (item) => item,
-			       (item) => html`<p>${item}</p>`)}`;
+				<h3>union:</h3>
+				<p>${this.relationship}</p>
+				<h3>siblings:</h3>
+				<ul>
+				${repeat(this.messages,
+		                 (item) => item,
+		                 (item) => html`<li>${item}</li>`)}
+				</ul>
+			       `;
 	}
 }
 
