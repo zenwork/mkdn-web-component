@@ -43,6 +43,7 @@
         "@babel/preset-es2015": "^7.0.0-beta.53",
         "babel-jest": "^23.6.0",
         "babel-loader": "^8.0.0",
+        "clean-webpack-plugin": "^0.1.19",
         "copy-webpack-plugin": "^4.5.3",
         "ejs-webpack-loader": "^2.2.2",
         "faker": "^4.1.0",
