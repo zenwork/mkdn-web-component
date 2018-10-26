@@ -1,5 +1,6 @@
 {
     "name": "md-story",
+    "sideEffects": false,
     "version": "1.0.0",
     "description": "A web component that renders a markdown document",
     "main": "src/index.js",

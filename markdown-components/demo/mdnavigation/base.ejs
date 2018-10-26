@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>Navigation</h1>
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Empty</h2>
+
+    <% componentId = 'empty' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-crumbs></md-crumbs>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Standalone</h2>
+
+    <% componentId = 'standalone' %>
+    <div id="<%= componentId %>" class="demo">
+        <md-crumbs>
+            [
+                {"id": "home", "name": "home", "link": "http://localhost:8080/demo/"},
+                {"id": "section-1", "name": "section 1", "link": "http://localhost:8080/demo/mdnavigation/"},
+                {"id": "my-page", "name": "my page", "link": "#my-page"}
+            ]
+        </md-crumbs>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+
+</body>
+</html>

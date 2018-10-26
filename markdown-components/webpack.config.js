@@ -23,6 +23,7 @@ module.exports = {
 		'md-story':'./src/components/md-story.js',
 		'md-list':'./src/components/md-list.js',
 		'md-view':'./src/components/md-view.js',
+		'md-crumbs':'./src/components/md-crumbs.js',
 		'md-parentchild':'./src/shared/test-parent-child.js'
 	},
 	output:{

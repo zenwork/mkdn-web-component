@@ -37,7 +37,8 @@ const ejs = [
 	'mdlist/base',
 	'mdview/base',
 	'mdview/backend',
-	'childparent/base'
+	'childparent/base',
+	'mdnavigation/base'
 ];
 
 const ejsPlugins = [];
