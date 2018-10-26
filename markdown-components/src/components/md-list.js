@@ -54,9 +54,9 @@ export class MdList extends ChildElement {
 	}
 
 	render() {
-		let itemTemplate = (key) => html`<li><a href="#" @click=${() => {
+		let itemTemplate = (key) => html`<li><button class="link" @click=${() => {
 			this.select(this, key);
-		}}>${this.inputList[key]}</a></li>`;
+		}}>${this.inputList[key]}</button></li>`;
 
 		function renderItems(inputList, empty) {
 			if (inputList === empty) {
@@ -68,7 +68,36 @@ export class MdList extends ChildElement {
 			}
 		}
 
-		return html` <section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
+		return html` 
+ 		<style>
+	    button {
+		    overflow: visible;
+		    width: auto;
+		}
+		button.link {
+		    font-family: sans-serif;
+		    font-size: 1em;
+		    text-align: left;
+		    color: blue;
+		    background: none;
+		    margin: 0;
+		    padding: 0;
+		    border: none;
+		    cursor: pointer;
+		   
+		    -moz-user-select: text;
+		 
+		    /* override all your button styles here if there are any others */
+		}
+		button.link span {
+		    text-decoration: underline;
+		}
+		button.link:hover span,
+		button.link:focus span {
+		    color: black;
+		}
+		</style>
+ 		<section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
 
 	}
 

@@ -35,6 +35,7 @@ export class ParentElement extends BaseElement {
 	requestToJoin(source) {
 		console.debug(`${this.Class} is accepting ${source.Class}:${source.Id} request to join`);
 		source.dispatchEvent(Events.createAccept(this));
+		this.joiners[source.hashcode()] = source;
 	}
 
 	joinerReady(source) {
@@ -42,7 +43,6 @@ export class ParentElement extends BaseElement {
 			let alreadyJoined = this.joiners[key];
 			source.dispatchEvent(Events.createCatchup(alreadyJoined));
 		});
-		this.joiners[source.hashcode()] = source;
 	}
 
 	joinerLeaving(source) {

@@ -12,7 +12,8 @@
 
     <% componentId = 'live' %>
     <div id="<%= componentId %>" class="demo">
-        <md-view>
+        <md-crumbs view="main"></md-crumbs>
+        <md-view id="main">
             <md-list></md-list>
             <md-story></md-story>
             <md-store src="http://localhost:8080/demo/mdview/index.json"
@@ -36,7 +37,7 @@
 		document
 			.querySelectorAll('#static > md-view > md-static-store')
 			.forEach((el) => el.addEventListener('md-store-updated',
-			                                     function (e) {
+			                                     function () {
 				                                     console.log(`store updated event dispatched`);
 			                                     }
 			));

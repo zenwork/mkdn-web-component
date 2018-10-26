@@ -45,7 +45,7 @@ export class ChildElement extends BaseElement {
 	 * Called when a component that has joined is leaving. It will only be called once
 	 * @param sibling the leaving element
 	 */
-	onJoinerLeaving(sibling) {}
+	onSiblingLeaving(sibling) {}
 
 	/**
 	 * Must be called when the element is ready to collaborate. Other elements colaborating under the same parent
@@ -71,9 +71,11 @@ export class ChildElement extends BaseElement {
 	/**
 	 * Initialize the component in standalone or cooperative mode.
 	 * @param ancestorSelector  a selector to find the ancestor that accepts joiners
+	 * @param options  option flags. currently supports 'byId=false|true' to lookup ancestor by ID in whole
+	 * document. otherwise searches closest ancestor.
 	 * @returns {string} 'cooperative' if attempted to register with parent; 'standalone' otherwise
 	 */
-	joinParent(ancestorSelector) {
+	joinParent(ancestorSelector, options) {
 		// console.debug(`${this.Class}:${this.Id} trying to join ${ancestorSelector}`);
 		const that = this;
 		//if no parent provided then standalone mode
@@ -84,11 +86,18 @@ export class ChildElement extends BaseElement {
 		}
 
 		//find parent
-		const ancestor = this.ancestor = this.closest(ancestorSelector);
+		let ancestor;
+		if (options && options.byId) {
+			ancestor = this.ancestor = document.getElementById(ancestorSelector);
+		} else {
+			ancestor = this.ancestor = this.closest(ancestorSelector);
+
+		}
+
+		this.beforeJoining();
 
 		if (ancestor) {
 			// console.debug(`${this.Class} initializing for cooperation`);
-			this.beforeJoining();
 			this.addEventListener(JOIN_EVENT, localEventAction);
 			this.ancestor.addEventListener(JOIN_EVENT, sharedEventAction);
 			this.join();
@@ -139,7 +148,7 @@ export class ChildElement extends BaseElement {
 					case JOINER_LEAVING:
 						if (that.siblings.indexOf(source.hashcode()) > -1) {
 							delete that.siblings[that.siblings.findIndex((i) => i === source.hashcode())];
-							that.onJoinerLeaving(source);
+							that.onSiblingLeaving(source);
 						}
 						break;
 				}

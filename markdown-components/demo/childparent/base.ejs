@@ -13,11 +13,12 @@
 
     <% componentId = 'with-parent' %>
     <div id="<%= componentId %>" class="demo">
-        <md-parent>
+        <md-parent id="main">
             <md-child id="c1"></md-child>
             <md-child id="c2"></md-child>
             <md-child id="c3"></md-child>
         </md-parent>
+        <md-child-two></md-child-two>
     </div>
     <%- include ../partials/code-view.ejs %>
 

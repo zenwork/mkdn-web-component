@@ -25,13 +25,6 @@ export class TestChild extends ChildElement {
 		};
 	}
 
-	connectedCallback() {
-		super.connectedCallback();
-		this.shadowRoot.Id = this.Id;
-		this.shadowRoot.Class = this.Class;
-
-	}
-
 	onAccepted(parent) {
 		this.relationship = `READY: ${parent.Class}:${parent.Id} -> ${this.Class}:${this.getAttribute('id')
 		                                                                            ? this.getAttribute('id')
@@ -47,7 +40,7 @@ export class TestChild extends ChildElement {
 		this.messages = {...this.messages};
 	}
 
-	onJoinerLeaving(sibling) {
+	onSiblingLeaving(sibling) {
 		delete this.messages[sibling.hashcode()];
 		this.messages = {...this.messages};
 	}
@@ -65,6 +58,17 @@ export class TestChild extends ChildElement {
 			       `;
 	}
 }
+
+/*export class TestChildTwo extends TestChild {
+ constructor() {
+ super();
+ }
+
+
+ connectedCallback() {
+ super.joinParent('main', {byId:true});
+ }
+ }*/
 
 /**
  *  Test Parent
@@ -85,4 +89,5 @@ export class TestParent extends ParentElement {
 }
 
 TestChild.define('md-child');
+// TestChildTwo.define('md-child-two');
 TestParent.define('md-parent');

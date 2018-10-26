@@ -4,7 +4,7 @@ function getListSelector() {
 	return Selector(() => document
 		.querySelector('#static > md-view > md-list')
 		.shadowRoot
-		.querySelectorAll('section > ul > li > a'));
+		.querySelectorAll('section > ul > li > button'));
 }
 
 function getTitleSelector() {
@@ -54,7 +54,6 @@ test('story rendered', async t => {
 });
 
 test('update static store', async t => {
-	let wbco = Selector('#static > md-view > md-static-store');
 
 	let updateData = ClientFunction(() => document.querySelector('#static > md-view > md-static-store')
 		.innerHTML = '[ {"key": "title-1", "title": "Title 1", "content": "# Title 1\\n\\nSome content about #1"},' +

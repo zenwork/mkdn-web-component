@@ -9,7 +9,7 @@ test('component is empty', async t => {
 	await t.expect(await wbco.exists).ok();
 	// let content = await wbco.textContent;
 	let content = await t.eval(() => {return document.querySelector('#empty > md-crumbs').shadowRoot.innerHTML;});
-	await t.expect(content).eql('<!----><!---->');
+	await t.expect(content).match(new RegExp('<ul.*&nbsp;.*ul>'));
 });
 
 test('component is static', async t => {

@@ -1,4 +1,4 @@
-import {ClientFunction, Selector} from 'testcafe';
+import { ClientFunction, Selector } from 'testcafe';
 
 fixture`md-list `
 	.page`http://localhost:8080/demo/mdlist/base.html`;
@@ -32,7 +32,7 @@ test('event dispatching', async t => {
 	let selection = Selector(() => document
 		.querySelector('#simple-list > md-list')
 		.shadowRoot
-		.querySelector('section > ul > li > a'));
+		.querySelector('section > ul > li > button'));
 
 	let addListener = ClientFunction(() => {
 		console.log('adding listener');
