@@ -34,7 +34,7 @@ test('selection changes crumbs', async t => {
 			.querySelectorAll('ul > li > a');
 	});
 
-	await t.expect(await selector.count).eql(1);
+	await t.expect(await selector.count).eql(2);
 
 	await t.expect(await selector.nth(0).innerText).eql('home');
 });

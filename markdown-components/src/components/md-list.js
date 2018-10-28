@@ -48,7 +48,8 @@ export class MdList extends ChildElement {
 			case 'md-static-store':
 				listenForIndexUpdate(sibling,
 				                     (event) => {
-					                     return this.inputList = event.detail;
+					                     this.inputList = event.detail;
+					                     this.select(this, this.inputList.default);
 				                     });
 				super.ready();
 				break;
