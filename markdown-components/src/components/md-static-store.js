@@ -1,7 +1,8 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { ChildElement } from '../shared/child-element';
 import { dispatchIndexUpdate, dispatchStory, listenForSelection, observeContentChange } from '../shared/events';
-import { Story } from '../shared/story';
+import { StoreOperations } from '../shared/store';
+import { clone } from '../shared/util';
 
 export class MdStaticStore extends ChildElement {
 
@@ -34,16 +35,12 @@ export class MdStaticStore extends ChildElement {
 
 	onSiblingReady(sibling) {
 		switch (sibling.Class) {
-			case 'md-story':
-				// console.log(`${this.hashcode()} >> md-story`);
-				break;
 			case 'md-list':
 				const that = this;
 				listenForSelection(sibling, (event) => {
-					let key = event.detail.key;
-					let title = event.detail.title;
-					let content = that.findContent(that, key);
-					dispatchStory(that, new Story(key, title, content));
+					let key = event.detail.url;
+					let story = StoreOperations.findStory(that.store.stories, key);
+					dispatchStory(that, story);
 				});
 
 				if (this.innerHTML) {
@@ -55,36 +52,11 @@ export class MdStaticStore extends ChildElement {
 	}
 
 	updateStore(input, root) {
-		root.updateStories(root, input);
-		root.updateIndex(root);
-	}
-
-	/**
-	 * needs fixing/changing
-	 * @param root
-	 * @param input
-	 */
-	updateStories(root, input) {
-		root.store = JSON.parse(input.trim());
+		root.store = StoreOperations.transformIndex(input.trim());
 		root.shadowRoot.store = root.store;
 		let event = new CustomEvent('md-store-updated');
 		root.dispatchEvent(event);
-	}
-
-	/**
-	 * New good way of doing things
-	 * @param root
-	 */
-	updateIndex(root) {
-		let index = {};
-		root.store.forEach((item) => {index[item.key] = item.title;});
-		root.index = index;
-		dispatchIndexUpdate(root, root.index);
-	}
-
-	findContent(root, key) {
-		let result = root.store.filter((story) => story.key === key);
-		return result[0].content;
+		dispatchIndexUpdate(root, clone(root.store));
 	}
 
 	render() {

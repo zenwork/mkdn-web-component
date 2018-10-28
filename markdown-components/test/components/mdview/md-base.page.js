@@ -38,7 +38,7 @@ test('list rendered', async t => {
 		.shadowRoot
 		.querySelectorAll('section > ul > li'));
 
-	await t.expect(await list.count).eql(2);
+	await t.expect(await list.count).eql(3);
 });
 
 test('story rendered', async t => {
@@ -56,10 +56,36 @@ test('story rendered', async t => {
 test('update static store', async t => {
 
 	let updateData = ClientFunction(() => document.querySelector('#static > md-view > md-static-store')
-		.innerHTML = '[ {"key": "title-1", "title": "Title 1", "content": "# Title 1\\n\\nSome content about #1"},' +
-	                 ' {"key": "title-2", "title": "Title 2", "content": "# Title 2\\n\\nSome content about #2"}, ' +
-	                 '{"key": "title-3", "title": "Title 3", "content": "# Title 3\\n\\nSome content about #3"}, ' +
-	                 '{"key": "title-4", "title": "Title 4", "content": "# Title 4\\n\\nSome content about #4"} ]');
+		.innerHTML = `
+                {
+                    "section": {
+                        "title": "November",
+                        "url": "md/2018/index.json",
+                        "member-of": {
+                            "title": "2018",
+                            "url": "md/2018/index.json"
+                        }
+                    },
+                    "stories": {
+                        "my-first-Blog": {
+                            "title":"My First Blog",
+                            "content":"# Title 1\\n\\n First Blog content."
+                            },
+                        "my-second-blog": {
+                            "title": "My Second Blog: Introduction to MkDn",
+                            "hash": "my-second-blog",
+                            "short-title": "My 2nd Blog",
+                            "content":"# Title 2\\n\\nThe content"
+                        },
+                        "https://google.com": {"redirect": "true", "title": "google"},
+                        "my-fourth-blog":{
+                            "title":"My Forth Blog",
+                            "content":"# Title 4\\n\\n Forth Blog content."
+                        }
+                    },
+                    "default":"my-first-Blog"
+                }
+            `);
 	await updateData();
 
 	let list = getListSelector();
@@ -69,8 +95,8 @@ test('update static store', async t => {
 	let title = getTitleSelector();
 
 	await t
-		.click(await list.nth(2))
-		.expect(title.nth(0).innerText).eql('Title 3')
+		.click(await list.nth(1))
+		.expect(title.nth(0).innerText).eql('Title 2')
 		.click(await list.nth(3))
 		.expect(title.nth(0).innerText).eql('Title 4');
 });

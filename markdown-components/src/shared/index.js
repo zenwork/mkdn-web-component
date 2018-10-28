@@ -1,4 +1,4 @@
-export class index {
+export class Index {
 	/**
 	 *
 	 * @param section

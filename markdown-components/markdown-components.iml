@@ -11,5 +11,6 @@
       <excludeFolder url="file://$MODULE_DIR$/../md-story/tmp" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jest" level="project" />
   </component>
 </module>

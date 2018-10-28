@@ -28,10 +28,30 @@
             <md-list></md-list>
             <md-story></md-story>
             <md-static-store>
-                [
-                {"key": "title-1", "title": "Title 1", "content": "# Title 1\n\nSome content about #1"},
-                {"key": "title-2", "title": "Title 2", "content": "# Title 2\n\nSome content about #2"}
-                ]
+                {
+                    "section": {
+                        "title": "November",
+                        "url": "md/2018/index.json",
+                        "member-of": {
+                            "title": "2018",
+                            "url": "md/2018/index.json"
+                        }
+                    },
+                    "stories": {
+                        "my-first-Blog": {
+                            "title": "My First Blog",
+                            "content": "# Title 1\n\nFirst Blog content."
+                        },
+                        "my-second-blog": {
+                            "title": "My Second Blog: Introduction to MkDn",
+                            "hash": "my-second-blog",
+                            "short-title": "My 2nd Blog",
+                            "content": "# Title 2\n\nThe content"
+                        },
+                        "https://google.com": {"redirect": "true", "title": "google"}
+                    },
+                    "default": "my-first-Blog"
+                }
             </md-static-store>
         </md-view>
     </div>
@@ -52,7 +72,7 @@
 		document
 			.querySelectorAll('#static > md-view > md-static-store')
 			.forEach((el) => el.addEventListener('md-store-updated',
-			                                     function (e) {
+			                                     function () {
 				                                     console.log(`store updated event dispatched`);
 			                                     }
 			));

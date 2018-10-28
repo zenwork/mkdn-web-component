@@ -2,7 +2,8 @@ import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
 import { ChildElement } from '../shared/child-element';
 import { dispatchSelection, listenForIndexUpdate, observeContentChange } from '../shared/events';
-import { Story } from '../shared/story';
+import { StoreOperations } from '../shared/store';
+import { clone } from '../shared/util';
 import styles from './md-list.css.js';
 
 export class MdList extends ChildElement {
@@ -36,7 +37,7 @@ export class MdList extends ChildElement {
 		this.observer = observeContentChange('MD-LIST', updateList, this);
 
 		function updateList(input, root) {
-			root.inputList = JSON.parse(input.trim());
+			root.inputList = StoreOperations.transformIndex(input.trim());
 		}
 
 	}
@@ -55,19 +56,7 @@ export class MdList extends ChildElement {
 	}
 
 	render() {
-		let itemTemplate = (key) => html`<li><button class="link" @click=${() => {
-			this.select(this, key);
-		}}>${this.inputList[key]}</button></li>`;
-
-		function renderItems(inputList, empty) {
-			if (inputList === empty) {
-				return html`<li>no items</li>`;
-			} else {
-				return html`${repeat(Object.keys(inputList),
-				                     (key) => {return key;},
-				                     (key) => {return itemTemplate(key);})}`;
-			}
-		}
+		const that = this;
 
 		return html` 
  		<style>
@@ -75,10 +64,34 @@ export class MdList extends ChildElement {
 		</style>
  		<section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
 
+		function renderItems(inputList, empty) {
+			if (inputList === empty) {
+				return html`<li>no items</li>`;
+			} else {
+				return html`${repeat(Object.keys(inputList.stories),
+				                     (key) => {return key;},
+				                     (key) => {return renderItem(key);})}`;
+			}
+		}
+
+		function renderItem(key) {
+			let story = that.inputList.stories[key];
+
+			let select;
+			if (story.redirect) {
+				select = () => {window.location = story.url;};
+			} else {
+				select = () => {that.select(that, key);};
+			}
+			return html`<li> <button class="link" @click=${select}>${story.title}</button> </li>`;
+		}
+
 	}
 
 	select(root, key) {
-		dispatchSelection(root, new Story(key, this.inputList[key]));
+		let story = root.inputList.stories[key];
+		dispatchSelection(root, clone(story));
+
 	}
 }
 

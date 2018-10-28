@@ -53,10 +53,9 @@ export default class MdCrumbs extends ChildElement {
 	}
 
 	onSiblingReady(sibling) {
-		console.log('foo!!!');
 		switch (sibling.Class) {
 			case 'md-list':
-				console.log(sibling.hashcode());
+				// console.log(sibling.hashcode());
 				listenForSelection(sibling, (event) => {
 					let crumbs = [];
 					const storyDef = event.detail;

@@ -1,4 +1,12 @@
 {
-    "story-1": "Story 1",
-    "story-2": "Story 2"
+    "section": {
+        "title": "section",
+        "url": "md/section-index.json"
+    },
+    "stories": {
+
+        "story-1": "Story 1",
+        "story-2": "Story 2"
+    },
+    "default": "story-1"
 }

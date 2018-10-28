@@ -1,7 +1,10 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { ChildElement } from '../shared/child-element';
 import { dispatchIndexUpdate, dispatchStory, listenForSelection } from '../shared/events';
-import { Story } from '../shared/story';
+import { Index } from '../shared/index';
+import { Section } from '../shared/section';
+import { StoreOperations } from '../shared/store';
+import { clone } from '../shared/util';
 
 export class MdStore extends ChildElement {
 
@@ -22,9 +25,12 @@ export class MdStore extends ChildElement {
 	}
 
 	onAccepted(parent) {
-		this.index = {};
+		this.index = new Index(new Section(null, null), {}, null);
 		this.updateIndex(this.index, this);
-		this.fetch(this, this.src, (root, rawJson) => {root.updateIndex(JSON.parse(rawJson), root);});
+		this.fetch(this, this.src, (root, rawJson) => {
+			let index = StoreOperations.transformIndex(rawJson);
+			root.updateIndex(index, root);
+		});
 		this.ready();
 	}
 
@@ -33,8 +39,9 @@ export class MdStore extends ChildElement {
 		switch (sibling.Class) {
 			case 'md-list':
 				listenForSelection(sibling, (event) => {
+					console.log('event.detail:' + JSON.stringify(event.detail));
 					this.fetch(that,
-					           that.stories + event.detail.key + '.md',
+					           that.stories + event.detail.url + '.md',
 					           (root, story) => {root.addToStore(event.detail, story, root);});
 				});
 				break;
@@ -58,7 +65,7 @@ export class MdStore extends ChildElement {
 	}
 
 	addToStore(def, story, root) {
-		let newDef = new Story(def.key, def.title);
+		let newDef = clone(def);
 		newDef.content = story;
 		root.story = newDef;
 		// console.log(JSON.stringify(root.story));
@@ -67,8 +74,8 @@ export class MdStore extends ChildElement {
 
 	updateIndex(value, root) {
 		root.shadowRoot.value = root.index = value;
-		if (Object.keys(root.index).length > 0) {
-			dispatchIndexUpdate(root, root.index);
+		if (Object.keys(root.index.stories).length > 0) {
+			dispatchIndexUpdate(root, clone(root.index));
 		}
 	}
 }
