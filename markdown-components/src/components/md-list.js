@@ -3,6 +3,7 @@ import { repeat } from 'lit-html/directives/repeat';
 import { ChildElement } from '../shared/child-element';
 import { dispatchSelection, listenForIndexUpdate, observeContentChange } from '../shared/events';
 import { Story } from '../shared/story';
+import styles from './md-list.css.js';
 
 export class MdList extends ChildElement {
 
@@ -70,32 +71,7 @@ export class MdList extends ChildElement {
 
 		return html` 
  		<style>
-	    button {
-		    overflow: visible;
-		    width: auto;
-		}
-		button.link {
-		    font-family: sans-serif;
-		    font-size: 1em;
-		    text-align: left;
-		    color: blue;
-		    background: none;
-		    margin: 0;
-		    padding: 0;
-		    border: none;
-		    cursor: pointer;
-		   
-		    -moz-user-select: text;
-		 
-		    /* override all your button styles here if there are any others */
-		}
-		button.link span {
-		    text-decoration: underline;
-		}
-		button.link:hover span,
-		button.link:focus span {
-		    color: black;
-		}
+	    ${styles()}
 		</style>
  		<section><ul>${renderItems(this.inputList, this.empty)}</ul></section>`;
 
