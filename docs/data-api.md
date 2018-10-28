@@ -44,6 +44,7 @@ There are some optional fields.
             "redirect": "false",
             "hash": "my-first-blog",
             "short-title": "My First Blog",
+            "content":"This is the content"
         }
     }
 ```
@@ -52,6 +53,7 @@ There are some optional fields.
 | `redirect`  |  `false` | booolean  | used to redirect page to non-markdown page  |
 |  `hash` | `undefined`  | String  | used as the hash url segment. If not provided then the `short-title` will be used, if not present then the key(url) will be used. |
 | `short-title`  | `undefined`  | String  | used by `md-crumbs` because space is limited|
+| `content`  | `undefined`  | String  | used internally to store retrieved content|
 
 ### Redirecting Story
 
