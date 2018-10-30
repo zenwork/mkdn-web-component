@@ -4,7 +4,7 @@ import { ChildElement } from '../shared/child-element';
 import { listenForSelection, observeContentChange } from '../shared/events';
 import styles from './md-crumbs.css.js';
 
-export default class MdCrumbs extends ChildElement {
+export class MdCrumbs extends ChildElement {
 	static get name() {return 'md-crumbs';}
 
 	constructor() {

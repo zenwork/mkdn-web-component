@@ -1,102 +1,82 @@
-# mkdn-web-component
-Collection of Web Components to show markdown content.
+# Overview
 
-## Repo Doc
-* [project overview](markdown-components/README.md) 
+#### `<MkDn/>` is a collection of web components(v1) to show markdown content.
 
-## Reference Doc
-* [md-story](docs/md-story.md)
-* [md-list](docs/md-list.md)
-* [md-view](docs/md-view.md)
-* [md-excerpt](docs/md-excerpt.md) (not implemented yet) 
+I started this as an exploration of the web components spec v1... and then I got a bit carried away.
 
-## Examples
+Some could say that there is no need for yet another markdown component or yet another blogging platform. And they would be right. That said, I am trying to make the resulting tool as simple, light, and easy to use as possible:
+* Enable end-users to own their own content delivery mechanism.
+* Use as little 3rd-party dependencies as possible.
+* Decouple your content from the presentation layer, frameworks, or any platform.
+ 
 
-This set of components makes laying out a markdown based blog as simple as this
+## Priniciples
 
-### example #1: all components bound to a backend
+* Provide a set of component that allows the easy integration of markdown content into ANY html ANYWHERE.
+* Only require the knowledge of markdown, JSON, and html to create complex documentation-based websites such as blogs, documentation, etc.
+* Provide SPA (single-page application) functionality without any programming
+* Lower level components like `md-story` and `md-list` can be used in standalone mode.
+* Backend integration is provided but is optional and flexible. The backend should be simple enough for simple manual setups... but it should be easy to create intelligent backends that can provide more complex meta-data when there is a lot of content to manage. 
+* The target use-cases are:
+    * A blog.
+    * Online documentation.
+    * Online fiction
+
+## 5 minute setup
+
+1. Create an empty directory with this structure
+1. Copy all of the mkdn libraries to `/lib`
+1. Create/copy markdown content to to `/md`
+1. Create an `index.json` file that lists the `.md` files to render
+1. Create an `index.html` file that contains your header, footer and an `md-view`
+1. run a server like `http-server` on the root of the project. For production you will likely need something designed for production express or nginx.
+
+### Resulting `index.hmtl`
 
 ```
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test Home</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
-    </head>
-    <body>
-        <h1>My Blog</h1>
-        <div class="container">
-           <md-view class="row">
-                <md-story class="col-7"></md-story>
-                <md-list class="col-3"></md-list>
-                <md-store src="/md/titles" stories="/md/title/"></md-store>
-            </md-view>
-        </div>
-    
-        <script src="/api/md-story.js"></script>
-        <script src="/api/md-list.js"></script>
-        <script src="/api/md-view.js"></script>
-    
-    </body>
-    </html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@webcomponents/webcomponentsjs@2.1.3/webcomponents-loader.js"></script>
+</head>
+<body>
+    <h1>My Blog</h1>
+    <div class="container">
+        <md-view class="row">
+            <md-story></md-story>
+            <md-list></md-list>
+            <md-store src="/md/index.json" stories="/md/"></md-store>
+        </md-view>
+    </div>
+    <script src="/api/md-story.js"></script>
+    <script src="/api/md-list.js"></script>
+    <script src="/api/md-view.js"></script>
+</body>
+</html>
 ```
 
-### example 2: single story bound to a backend
-```
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test Home</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
-    </head>
-    <body>
-        <h1>My Blog</h1>
-        <div class="container">
-            <md-view class="row">
-                <md-story class="col-10"></md-story>
-                <md-store story="/md/title/some-story.md"></md-store>
-            </md-view>
-        </div>
-    
-        <script src="/api/md-story.js"></script>
-        <script src="/api/md-view.js"></script>
-    
-    </body>
-    </html>
-```
+### Resulting file structure
 
-### example 3: story with content provided by other means
 ```
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Test Home</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.0.2/webcomponents-bundle.js"></script>
-    </head>
-    <body>
-        <h1>My Story</h1>
-        <div class="container">
-                <md-story class="col-10">
-# The Story
-
-with some text
-                </md-story>     
-        </div>
-    
-        <script src="/api/md-story.js"></script>
-       
-    </body>
-    </html>
+   web-site
+    |- index.html
+    |
+    |- lib
+    |   |- md-view.js
+    |   |- md-story.js
+    |   |- md-list.js
+    |   |- md-crumbs.js
+    |
+    |- md
+    |   |- index.json
+    |   |- md-file-1.md
+    |   |- md-file-2.md
 ```
 
 
-## Status
+
+## Project Status
+
+I am implenting this in my free time. A lot is done. But a lot remains to be done too.
 
 * Basic implementation works
 * TODO:

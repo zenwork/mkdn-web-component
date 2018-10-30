@@ -3,7 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const template = {
 	title:'',
 	filename:'demo/',
-	template:'./demo/'
+	template:'./demo/',
+	chunks:['mkdn-bundle']
 };
 
 const html = [
@@ -26,7 +27,8 @@ html.map((path) => {
 const ejsTemplate = {
 	title:'',
 	filename:'demo/',
-	template:'!!ejs-webpack-loader!./demo/'
+	template:'!!ejs-webpack-loader!./demo/',
+	chunks:['mkdn-bundle']
 };
 
 const ejs = [
