@@ -1,7 +1,7 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
-import { ChildElement } from './child-element';
-import { ParentElement } from './parent-element';
+import { ChildElement } from '../src/shared/child-element';
+import { ParentElement } from '../src/shared/parent-element';
 
 /**
  * This is only used for testing to initialise the child and parent elements for testing purpose

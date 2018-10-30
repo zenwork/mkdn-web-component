@@ -28,3 +28,5 @@ test('component is static', async t => {
 	});
 	await t.expect(await links.count).eql(3);
 });
+
+

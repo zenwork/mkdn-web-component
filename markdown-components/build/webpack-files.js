@@ -4,7 +4,7 @@ const template = {
 	title:'',
 	filename:'demo/',
 	template:'./demo/',
-	chunks:['mkdn-bundle']
+	chunks:['mkdn-bundle', 'md-parentchild']
 };
 
 const html = [
@@ -28,7 +28,7 @@ const ejsTemplate = {
 	title:'',
 	filename:'demo/',
 	template:'!!ejs-webpack-loader!./demo/',
-	chunks:['mkdn-bundle']
+	chunks:['mkdn-bundle', 'md-parentchild']
 };
 
 const ejs = [

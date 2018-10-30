@@ -1,6 +1,6 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { ChildElement } from '../shared/child-element';
-import { dispatchIndexUpdate, dispatchStory, listenForSelection } from '../shared/events';
+import { dispatchIndexUpdate, dispatchStory, listenForHashUrl, listenForSelection } from '../shared/events';
 import { Index } from '../shared/index';
 import { Section } from '../shared/section';
 import { StoreOperations } from '../shared/store';
@@ -35,7 +35,9 @@ export class MdStore extends ChildElement {
 	}
 
 	onSiblingReady(sibling) {
+
 		const that = this;
+
 		switch (sibling.Class) {
 			case 'md-list':
 				listenForSelection(sibling, (event) => {
@@ -43,6 +45,24 @@ export class MdStore extends ChildElement {
 					this.fetch(that,
 					           that.stories + event.detail.url + '.md',
 					           (root, story) => {root.addToStore(event.detail, story, root);});
+				});
+				break;
+			case 'md-crumbs':
+				listenForHashUrl(sibling, (event) => {
+
+					let hash = event.detail;
+					that.getStoryKeys()
+						.map((key) => {
+							let storyDef = that.getStory(key);
+
+							if (storyDef.hash === hash || storyDef.url === hash) {
+								let url = that.stories + storyDef.url + '.md';
+								console.log('url:' + JSON.stringify(url));
+								this.fetch(that,
+								           url,
+								           (root, story) => {root.addToStore(storyDef, story, root);});
+							}
+						});
 				});
 				break;
 		}
@@ -62,6 +82,14 @@ export class MdStore extends ChildElement {
 
 	render() {
 		return html``;
+	}
+
+	getStoryKeys() {
+		return Object.keys(this.index.stories);
+	}
+
+	getStory(key) {
+		return this.index.stories[key];
 	}
 
 	addToStore(def, story, root) {

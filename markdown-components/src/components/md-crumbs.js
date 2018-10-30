@@ -1,7 +1,7 @@
 import { html } from '@polymer/lit-element/lit-element.js';
 import { repeat } from 'lit-html/directives/repeat';
 import { ChildElement } from '../shared/child-element';
-import { listenForSelection, observeContentChange } from '../shared/events';
+import { dispatchHashUrl, listenForSelection, observeContentChange } from '../shared/events';
 import styles from './md-crumbs.css.js';
 
 export class MdCrumbs extends ChildElement {
@@ -42,13 +42,32 @@ export class MdCrumbs extends ChildElement {
 
 	updatePageLink(root) {
 		let crumb = root.crumbs[root.crumbs.length - 1];
-		// window.location.hash =crumb.link
+		console.log('crumb:' + JSON.stringify(crumb));
 		history.pushState({}, crumb.name, crumb.link);
 		document.title = crumb.name;
 	}
 
 	onAccepted(parent) {
 		this.crumbs.push({id:'home', name:'home', link:'http://localhost:8080/demo'});
+
+		window.addEventListener('hashchange', () => {
+			let hash = window.location.hash.substr(1);
+
+			if (hashHasChanged(hash, this.crumbs) || hasNoCrumbs(hash, this.crumbs)) {
+				console.log(`dispatch: ${hash}`);
+				dispatchHashUrl(this, hash);
+			}
+
+			function hasNoCrumbs(hash, crumbs) {
+				return (hash && !crumbs);
+			}
+
+			function hashHasChanged(hash, crumbs) {
+				return (hash && crumbs && hash !== crumbs[crumbs.length - 1]);
+			}
+
+		});
+
 		this.ready();
 	}
 
@@ -60,11 +79,17 @@ export class MdCrumbs extends ChildElement {
 					let crumbs = [];
 					const storyDef = event.detail;
 					crumbs.push({id:'home', name:'home', link:'http://localhost:8080/demo'});
-					crumbs.push({id:storyDef.key, name:storyDef.title, link:`#${storyDef.key}`});
+					crumbs.push({id:storyDef.key, name:storyDef.title, link:`#${storyDef.url}`});
 					this.crumbs = crumbs;
 					this.updatePageLink(this);
 				});
 
+				break;
+			case 'md-store':
+			case 'md-tatic-store':
+				if (window.location.hash) {
+					dispatchHashUrl(this, window.location.hash.substr(1));
+				}
 				break;
 
 		}

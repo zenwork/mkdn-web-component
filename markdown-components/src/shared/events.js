@@ -48,6 +48,17 @@ export function dispatchSelection(root, storyDef) {
 	root.dispatchEvent(event);
 }
 
+export function dispatchHashUrl(root, hash) {
+	let event = new CustomEvent('md-crumbs-hash-url', {detail:hash});
+	root.dispatchEvent(event);
+}
+
+export function listenForHashUrl(list, actionFn) {
+	// console.log('<<<: selection');
+	list.addEventListener('md-crumbs-hash-url', actionFn);
+}
+
+
 export function listenForSelection(list, actionFn) {
 	// console.log('<<<: selection');
 	list.addEventListener('md-list-selection', actionFn);

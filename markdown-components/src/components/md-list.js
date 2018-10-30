@@ -49,7 +49,9 @@ export class MdList extends ChildElement {
 				listenForIndexUpdate(sibling,
 				                     (event) => {
 					                     this.inputList = event.detail;
-					                     this.select(this, this.inputList.default);
+					                     if (!window.location.hash) {
+						                     this.select(this, this.inputList.default);
+					                     }
 				                     });
 				super.ready();
 				break;
