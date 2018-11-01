@@ -27,11 +27,13 @@ export class MdStore extends ChildElement {
 	onAccepted(parent) {
 		this.index = new Index(new Section(null, null), {}, null);
 		this.updateIndex(this.index, this);
+		this.dispatchIndexEvent(this);
 		this.fetch(this, this.src, (root, rawJson) => {
 			let index = StoreOperations.transformIndex(rawJson);
 			root.updateIndex(index, root);
+			this.ready();
+			this.dispatchIndexEvent(root);
 		});
-		this.ready();
 	}
 
 	onSiblingReady(sibling) {
@@ -57,7 +59,7 @@ export class MdStore extends ChildElement {
 
 							if (storyDef.hash === hash || storyDef.url === hash) {
 								let url = that.stories + storyDef.url + '.md';
-								console.log('url:' + JSON.stringify(url));
+								// console.log('url:' + JSON.stringify(url));
 								this.fetch(that,
 								           url,
 								           (root, story) => {root.addToStore(storyDef, story, root);});
@@ -102,6 +104,9 @@ export class MdStore extends ChildElement {
 
 	updateIndex(value, root) {
 		root.shadowRoot.value = root.index = value;
+	}
+
+	dispatchIndexEvent(root) {
 		if (Object.keys(root.index.stories).length > 0) {
 			dispatchIndexUpdate(root, clone(root.index));
 		}
