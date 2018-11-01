@@ -30,7 +30,7 @@ The minimum is to provide just a key and a title, This is enough for simple case
     }
 ```
 ---
-note: To use keys with 'aliased' names you will have to specify the `stories` attribute on `md-store`. 
+note: To use keys with 'aliased' names you will have to specify the `stories` attribute on `mkdn-store`. 
 
 ---
 ### Options
@@ -52,7 +52,7 @@ There are some optional fields.
 |---|---|---|---|
 | `redirect`  |  `false` | booolean  | used to redirect page to non-markdown page  |
 |  `hash` | `undefined`  | String  | used as the hash url segment. If not provided then the `short-title` will be used, if not present then the key(url) will be used. |
-| `short-title`  | `undefined`  | String  | used by `md-crumbs` because space is limited|
+| `short-title`  | `undefined`  | String  | used by `mkdn-nav` because space is limited|
 | `content`  | `undefined`  | String  | used internally to store retrieved content|
 
 ### Redirecting Story

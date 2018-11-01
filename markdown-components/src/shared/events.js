@@ -2,7 +2,7 @@
  * util function that creates and triggers the observation of the content of a given node.
  *
  * @param ofComponent component's name
- * @param handleMutationFn function to handle the mutation
+ * @param handleInputFn function to handle the mutation
  * @param root node on which to attach the observer
  * @returns {MutationObserver}
  */
@@ -31,7 +31,7 @@ export function observeContentChange(ofComponent, handleInputFn, root) {
 	return observer;
 }
 
-const indexUpdate = 'md-store-index-updated';
+const indexUpdate = 'mkdn-store-index-updated';
 
 export function dispatchIndexUpdate(store, index) {
 	// console.log('>>>: index update');
@@ -44,32 +44,32 @@ export function listenForIndexUpdate(store, onEventFn) {
 }
 
 export function dispatchSelection(root, storyDef) {
-	let event = new CustomEvent('md-list-selection', {detail:storyDef});
+	let event = new CustomEvent('mkdn-list-selection', {detail:storyDef});
 	root.dispatchEvent(event);
 }
 
 export function dispatchHashUrl(root, hash) {
-	let event = new CustomEvent('md-crumbs-hash-url', {detail:hash});
+	let event = new CustomEvent('mkdn-nav-hash-url', {detail:hash});
 	root.dispatchEvent(event);
 }
 
 export function listenForHashUrl(list, actionFn) {
 	// console.log('<<<: selection');
-	list.addEventListener('md-crumbs-hash-url', actionFn);
+	list.addEventListener('mkdn-nav-hash-url', actionFn);
 }
 
 
 export function listenForSelection(list, actionFn) {
 	// console.log('<<<: selection');
-	list.addEventListener('md-list-selection', actionFn);
+	list.addEventListener('mkdn-list-selection', actionFn);
 }
 
 export function dispatchStory(root, storyDef) {
-	let event = new CustomEvent('md-store-story', {detail:storyDef});
+	let event = new CustomEvent('mkdn-store-story', {detail:storyDef});
 	root.dispatchEvent(event);
 }
 
 export function listenForStory(store, actionFn) {
 	// console.log('<<<: selection');
-	if(store) store.addEventListener('md-store-story', actionFn);
+	if (store) store.addEventListener('mkdn-store-story', actionFn);
 }

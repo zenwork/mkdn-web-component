@@ -15,7 +15,7 @@ Some could say that there is no need for yet another markdown component or yet a
 * Provide a set of component that allows the easy integration of markdown content into ANY html ANYWHERE.
 * Only require the knowledge of markdown, JSON, and html to create complex documentation-based websites such as blogs, documentation, etc.
 * Provide SPA (single-page application) functionality without any programming
-* Lower level components like `md-story` and `md-list` can be used in standalone mode.
+* Lower level components like `mkdn-story` and `mkdn-list` can be used in standalone mode.
 * Backend integration is provided but is optional and flexible. The backend should be simple enough for simple manual setups... but it should be easy to create intelligent backends that can provide more complex meta-data when there is a lot of content to manage. 
 * The target use-cases are:
     * A blog.
@@ -28,7 +28,7 @@ Some could say that there is no need for yet another markdown component or yet a
 1. Copy all of the mkdn libraries to `/lib`
 1. Create/copy markdown content to to `/md`
 1. Create an `index.json` file that lists the `.md` files to render
-1. Create an `index.html` file that contains your header, footer and an `md-view`
+1. Create an `index.html` file that contains your header, footer and an `mkdn-view`
 1. run a server like `http-server` on the root of the project. For production you will likely need something designed for production express or nginx.
 
 ### Resulting `index.hmtl`
@@ -41,15 +41,15 @@ Some could say that there is no need for yet another markdown component or yet a
 <body>
     <h1>My Blog</h1>
     <div class="container">
-        <md-view class="row">
-            <md-story></md-story>
-            <md-list></md-list>
-            <md-store src="/md/index.json" stories="/md/"></md-store>
-        </md-view>
+        <mkdn-view class="row">
+            <mkdn-story></mkdn-story>
+            <mkdn-list></mkdn-list>
+            <mkdn-store src="/md/index.json" stories="/md/"></mkdn-store>
+        </mkdn-view>
     </div>
-    <script src="/api/md-story.js"></script>
-    <script src="/api/md-list.js"></script>
-    <script src="/api/md-view.js"></script>
+    <script src="/api/mkdn-story.js"></script>
+    <script src="/api/mkdn-list.js"></script>
+    <script src="/api/mkdn-view.js"></script>
 </body>
 </html>
 ```
@@ -61,10 +61,10 @@ Some could say that there is no need for yet another markdown component or yet a
     |- index.html
     |
     |- lib
-    |   |- md-view.js
-    |   |- md-story.js
-    |   |- md-list.js
-    |   |- md-crumbs.js
+    |   |- mkdn-view.js
+    |   |- mkdn-story.js
+    |   |- mkdn-list.js
+    |   |- mkdn-nav.js
     |
     |- md
     |   |- index.json
@@ -80,14 +80,14 @@ I am implenting this in my free time. A lot is done. But a lot remains to be don
 
 * Basic implementation works
 * TODO:
-  * md-story
+  * mkdn-story
       * add support for dropcaps at document start 
       * expose some kind of styling interface
-  * md-list
+  * mkdn-list
       * implement support for groups
-  * md-view
-      * implement support for a rest-based back-end(md-store)
-  * md-store and md-static-store
+  * mkdn-view
+      * implement support for a rest-based back-end(mkdn-store)
+  * mkdn-store and mkdn-static-store
       * document the data formats and back-end api specification
       * add caching support
   * general

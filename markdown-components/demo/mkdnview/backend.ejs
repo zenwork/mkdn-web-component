@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>mkdn-view Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Live Backend</h2>
+
+    <% componentId = 'live' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-nav view="main"></mkdn-nav>
+        <mkdn-view id="main">
+            <mkdn-list></mkdn-list>
+            <mkdn-story></mkdn-story>
+            <mkdn-store src="http://localhost:8080/demo/mkdnview/index.json"
+                        stories="http://localhost:8080/demo/mkdnview/"></mkdn-store>
+        </mkdn-view>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for list selection events
+		 */
+		document
+			.querySelectorAll('#static > mkdn-view > mkdn-list')
+			.forEach((el) => el.addEventListener('mkdn-list-selected',
+			                                     function (e) {
+				                                     console.log(`selected event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+		document
+			.querySelectorAll('#static > mkdn-view > mkdn-static-store')
+			.forEach((el) => el.addEventListener('mkdn-store-updated',
+			                                     function () {
+				                                     console.log(`store updated event dispatched`);
+			                                     }
+			));
+
+    </script>
+</body>
+</html>

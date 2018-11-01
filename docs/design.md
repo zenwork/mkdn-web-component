@@ -7,29 +7,29 @@
 
 description of web component initialization
 
-### `md-view` initialization
-1. `md-store` or `md-static-store` 
+### `mkdn-view` initialization
+1. `mkdn-store` or `mkdn-static-store` 
     - It loads the index specified in the `src` attribute   
     - publishes the index
-1. `md-list`
+1. `mkdn-list`
     - hears the index publication
     - renders the index
     - fires default selection if found
-1. `md-crumbs`
+1. `mkdn-nav`
     - hear the index publication event
     - renders breadcrumbs
-1. `md-store`
+1. `mkdn-store`
     - hears selection
     - request story from backend
     - fires story received event
-1. `md-story`
+1. `mkdn-story`
     - hears story received event
     - renders story
-1. `md-crumbs`
+1. `mkdn-nav`
     - hears story received event
     - updates bread crumbs
     - updates url hash 
-1. user selects a story from `md-list`
+1. user selects a story from `mkdn-list`
     - new selection event is fired
     - goto point 4 above
     

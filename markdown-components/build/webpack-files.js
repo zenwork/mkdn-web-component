@@ -9,10 +9,10 @@ const template = {
 
 const html = [
 	'index.html',
-	'mdstory/index.html',
-	'mdlist/index.html',
-	'mdlist/index.html',
-	'mdview/index.html'
+	'mkdnstory/index.html',
+	'mkdnlist/index.html',
+	'mkdnlist/index.html',
+	'mkdnview/index.html'
 ];
 
 const htmlPlugins = [];
@@ -32,15 +32,15 @@ const ejsTemplate = {
 };
 
 const ejs = [
-	'mdstory/empty',
-	'mdstory/simple',
-	'mdstory/simple-formatting',
-	'mdstory/attributes',
-	'mdlist/base',
-	'mdview/base',
-	'mdview/backend',
+	'mkdnstory/empty',
+	'mkdnstory/simple',
+	'mkdnstory/simple-formatting',
+	'mkdnstory/attributes',
+	'mkdnlist/base',
+	'mkdnview/base',
+	'mkdnview/backend',
 	'childparent/base',
-	'mdnavigation/base'
+	'mkdnnavigation/base'
 ];
 
 const ejsPlugins = [];
@@ -58,16 +58,16 @@ const copyPLugins = [
 		to:'webcomponents-bundle.js'
 	},
 	{
-		from:'./demo/mdview/index.json',
-		to:'demo/mdview/index.json'
+		from:'./demo/mkdnview/index.json',
+		to:'demo/mkdnview/index.json'
 	},
 	{
-		from:'./demo/mdview/story-1.md',
-		to:'demo/mdview/story-1.md'
+		from:'./demo/mkdnview/story-1.md',
+		to:'demo/mkdnview/story-1.md'
 	},
 	{
-		from:'./demo/mdview/story-2.md',
-		to:'demo/mdview/story-2.md'
+		from:'./demo/mkdnview/story-2.md',
+		to:'demo/mkdnview/story-2.md'
 	}
 ];
 

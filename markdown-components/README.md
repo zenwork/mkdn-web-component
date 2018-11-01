@@ -2,9 +2,9 @@
 
 This is a collection of web components meant to work together.
 
-* [md-story](../docs/md-story.md) - display a story
-* [md-list](../docs/md-list.md) - provide a list of stories that can be displayed
-* [md-view](../docs/md-view.md) - provide state, event handling, and data-caching(eventually) to the other two components
+* [mkdn-story](../docs/mkdn-story.md) - display a story
+* [mkdn-list](../docs/mkdn-list.md) - provide a list of stories that can be displayed
+* [mkdn-view](../docs/mkdn-view.md) - provide state, event handling, and data-caching(eventually) to the other two components
 
 
 ## Runinng the demos

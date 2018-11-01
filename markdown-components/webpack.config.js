@@ -20,10 +20,10 @@ allplugins = base
 module.exports = {
 	mode:'none',
 	entry:{
-		'md-story':'./src/components/md-story.js',
-		'md-list':'./src/components/md-list.js',
-		'md-view':'./src/components/md-view.js',
-		'md-crumbs':'./src/components/md-crumbs.js',
+		'mkdn-story':'./src/components/mkdn-story.js',
+		'mkdn-list':'./src/components/mkdn-list.js',
+		'mkdn-view':'./src/components/mkdn-view.js',
+		'mkdn-nav':'./src/components/mkdn-nav.js',
 		'md-parentchild':'./test/test-parent-child.js',
 		'mkdn-bundle':'./src/bundle.js'
 	},

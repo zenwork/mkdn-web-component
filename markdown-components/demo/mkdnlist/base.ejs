@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>mkdn-list Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Empty</h2>
+
+    <% componentId = 'empty' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-list></mkdn-list>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Simple List</h2>
+
+    <% componentId = 'simple-list' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-list>
+            {
+                "section": {
+                    "title": "main",
+                    "url": "md/main=index.json"
+                },
+                "stories": {
+                    "title-1": "Title 1",
+                    "title-2": "Title 2"
+                }
+            }
+        </mkdn-list>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for list selection events
+		 */
+		document
+			.querySelectorAll('mkdn-list')
+			.forEach((el) => el.addEventListener('mkdn-list-selection',
+			                                     function (e) {
+				                                     console.log(`event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+    </script>
+
+</body>
+</html>

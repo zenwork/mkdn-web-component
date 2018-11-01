@@ -1,10 +1,10 @@
-import { MdCrumbs } from './components/md-crumbs';
-import { MdList } from './components/md-list';
-import { MdStory } from './components/md-story';
-import { MdView } from './components/md-view';
+import { MkdnList } from './components/mkdn-list';
+import { MkdnNav } from './components/mkdn-nav';
+import { MkdnStory } from './components/mkdn-story';
+import { MkdnView } from './components/mkdn-view';
 
-MdView;
-MdStory;
-MdList;
-MdCrumbs;
+MkdnView;
+MkdnStory;
+MkdnList;
+MkdnNav;
 

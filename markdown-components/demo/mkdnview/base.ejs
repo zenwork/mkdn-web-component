@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ../partials/header.ejs %>
+</head>
+<body>
+    <%- include ../partials/style.ejs %>
+    <h1>mkdn-view Demo</h1>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Empty</h2>
+
+    <% componentId = 'empty' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-view>
+            <mkdn-list></mkdn-list>
+            <mkdn-story></mkdn-story>
+        </mkdn-view>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title">Static Backend</h2>
+
+    <% componentId = 'static' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-view>
+            <mkdn-list></mkdn-list>
+            <mkdn-story></mkdn-story>
+            <mkdn-static-store>
+                {
+                    "section": {
+                        "title": "November",
+                        "url": "md/2018/index.json",
+                        "member-of": {
+                            "title": "2018",
+                            "url": "md/2018/index.json"
+                        }
+                    },
+                    "stories": {
+                        "my-first-Blog": {
+                            "title": "My First Blog",
+                            "content": "# Title 1\n\nFirst Blog content."
+                        },
+                        "my-second-blog": {
+                            "title": "My Second Blog: Introduction to MkDn",
+                            "hash": "my-second-blog",
+                            "short-title": "My 2nd Blog",
+                            "content": "# Title 2\n\nThe content"
+                        },
+                        "https://google.com": {"redirect": "true", "title": "google"}
+                    },
+                    "default": "my-first-Blog"
+                }
+            </mkdn-static-store>
+        </mkdn-view>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+    <p><strong>Note:</strong> open the console to see events being logged</p>
+    <script>
+		/**
+		 * Event listener for list selection events
+		 */
+		document
+			.querySelectorAll('#static > mkdn-view > mkdn-list')
+			.forEach((el) => el.addEventListener('mkdn-list-selected',
+			                                     function (e) {
+				                                     console.log(`selected event dispatched: ${JSON.stringify(e.detail)}`);
+			                                     }
+			));
+
+		document
+			.querySelectorAll('#static > mkdn-view > mkdn-static-store')
+			.forEach((el) => el.addEventListener('mkdn-store-updated',
+			                                     function () {
+				                                     console.log(`store updated event dispatched`);
+			                                     }
+			));
+
+    </script>
+</body>
+</html>
