@@ -42,7 +42,7 @@ export class MkdnNav extends ChildElement {
 
 	updatePageLink(root) {
 		let crumb = root.crumbs[root.crumbs.length - 1];
-		console.log('crumb:' + JSON.stringify(crumb));
+		// console.log('crumb:' + JSON.stringify(crumb));
 		history.pushState({}, crumb.name, crumb.link);
 		document.title = crumb.name;
 	}
@@ -54,7 +54,7 @@ export class MkdnNav extends ChildElement {
 			let hash = window.location.hash.substr(1);
 
 			if (hashHasChanged(hash, this.crumbs) || hasNoCrumbs(hash, this.crumbs)) {
-				console.log(`dispatch: ${hash}`);
+				// console.log(`dispatch: ${hash}`);
 				dispatchHashUrl(this, hash);
 			}
 

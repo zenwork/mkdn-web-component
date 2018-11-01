@@ -43,7 +43,7 @@ export class MkdnStore extends ChildElement {
 		switch (sibling.Class) {
 			case 'mkdn-list':
 				listenForSelection(sibling, (event) => {
-					console.log('event.detail:' + JSON.stringify(event.detail));
+					// console.log('event.detail:' + JSON.stringify(event.detail));
 					this.fetch(that,
 					           that.stories + event.detail.url + '.md',
 					           (root, story) => {root.addToStore(event.detail, story, root);});
