@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="test all (watch)" type="JavaScriptTestRunnerJest" factoryName="Jest">
-    <node-interpreter value="$USER_HOME$/.nvm/versions/node/v8.12.0/bin/node" />
+  <configuration default="false" name="test all (watch)" type="JavaScriptTestRunnerJest">
+    <node-interpreter value="$USER_HOME$/.nvm/versions/node/v10.13.0/bin/node" />
     <node-options value="" />
+    <jest-package value="$PROJECT_DIR$/markdown-components/node_modules/jest" />
     <working-dir value="$PROJECT_DIR$/markdown-components" />
     <jest-options value="test/" />
     <envs />

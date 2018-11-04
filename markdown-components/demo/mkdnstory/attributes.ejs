@@ -22,9 +22,38 @@
     <% componentId = 'style' %>
     <div id="<%= componentId %>" class="demo">
         <mkdn-story style="background:salmon;font-family: monospace">
-            # SALMON MARKDOWN
+# SALMON MARKDOWN
 
-            The _salmon_ jumped over the moon
+The _salmon_ jumped over the moon
+```javascript
+function foo(){
+    return 'hello bar';
+}
+```
+        </mkdn-story>
+    </div>
+    <%- include ../partials/code-view.ejs %>
+
+    <!-- --------------------------------------------------------------------- -->
+    <h2 class="demo-code-title"><code>config</code> attribute</h2>
+
+    <% componentId = 'config' %>
+    <div id="<%= componentId %>" class="demo">
+        <mkdn-story stylesheet="highlight.css">
+```javascript
+function foo(){
+    return 'hello bar';
+}
+console.log(foo());
+```
+
+```java
+public class Bar{
+  private String foo = 'hello bar';
+}
+```
+
+Doing the __markdown__ thang!
         </mkdn-story>
     </div>
     <%- include ../partials/code-view.ejs %>
