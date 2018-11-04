@@ -82,21 +82,23 @@ I am implenting this in my free time. A lot is done. But a lot remains to be don
 * TODO:
   * mkdn-story
       * add support for dropcaps at document start 
-      * expose some kind of styling interface
+      * expose some kind of styling interface (in progress)
+      * document marked and highlight.js integration
   * mkdn-list
       * implement support for groups
   * mkdn-view
-      * implement support for a rest-based back-end(mkdn-store)
+      * 
   * mkdn-store and mkdn-static-store
-      * document the data formats and back-end api specification
+      * document the data formats and back-end api specification (started)
       * add caching support
   * general
       * e2e tests do not work in firefox
       * sort out minification and uglification
-      * create online version of demo
+      * create online version of demo (started)
       * build and publish
-      * move /demo out /test one level up
       * review decision to have json and markdown transclusion... seems weird practice
       * figure out what the magic that webpack is doing!
-      * events.js should probably be split into smaller files
+      * events.js should probably be split into smaller files (started)
+  * mkdn-nav
+      * finish first implementation
 
