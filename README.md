@@ -84,6 +84,8 @@ I am implenting this in my free time. A lot is done. But a lot remains to be don
       * add support for dropcaps at document start 
       * expose some kind of styling interface (in progress)
       * document marked and highlight.js integration
+      * review size of highlight.js... see how to use less
+      * remove the style property 
   * mkdn-list
       * implement support for groups
   * mkdn-view
