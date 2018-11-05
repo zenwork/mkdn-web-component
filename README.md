@@ -103,4 +103,5 @@ I am implenting this in my free time. A lot is done. But a lot remains to be don
       * events.js should probably be split into smaller files (started)
   * mkdn-nav
       * finish first implementation
+      * need a loadFromHash event to reload everything when hash is changed manually
 

@@ -6,7 +6,7 @@ export class Index {
 	 * @param defaultStory
 	 */
 	constructor(section, stories, defaultStory) {
-		this.parent = section;
+		this.section = section;
 		this.stories = stories;
 		this.defaultStory = defaultStory;
 	}
