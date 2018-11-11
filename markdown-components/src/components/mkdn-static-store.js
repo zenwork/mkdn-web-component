@@ -15,7 +15,7 @@ export class MkdnStaticStore extends ChildElement {
 	}
 
 	connectedCallback() {
-		let state = this.joinParent('mkdn-view');
+		let state = this.findParent('mkdn-view');
 		if (state === 'standalone') {
 			throw Error('mkdn-static-store can not work in standalone mode');
 		}
@@ -25,7 +25,7 @@ export class MkdnStaticStore extends ChildElement {
 		this.observer.disconnect();
 	}
 
-	onAccepted(parent) {
+	initAdopted(parent) {
 		this.store = [];
 		this.shadowRoot.store = this.store;
 		observeContentChange('MKDN-STATIC-STORE', this.updateStore, this);

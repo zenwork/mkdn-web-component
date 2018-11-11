@@ -23,14 +23,14 @@ export class MkdnList extends ChildElement {
 
 	connectedCallback() {
 		this.inputList = this.empty;
-		super.joinParent('mkdn-view');
+		super.findParent('mkdn-view');
 	}
 
 	disconnectedCallback() {
 		if (this.observer) this.observer.disconnect();
 	}
 
-	initStandalone() {
+	initOrphaned() {
 		if (this.innerHTML) {
 			updateList(this.innerHTML, this);
 		}

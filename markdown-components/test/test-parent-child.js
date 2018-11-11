@@ -25,7 +25,7 @@ export class TestChild extends ChildElement {
 		};
 	}
 
-	onAccepted(parent) {
+	initAdopted(parent) {
 		this.relationship = `READY: ${parent.Class}:${parent.Id} -> ${this.Class}:${this.getAttribute('id')
 		                                                                            ? this.getAttribute('id')
 		                                                                            : this.Id}`;
@@ -66,7 +66,7 @@ export class TestChild extends ChildElement {
 
 
  connectedCallback() {
- super.joinParent('main', {byId:true});
+ super.findParent('main', {byId:true});
  }
  }*/
 

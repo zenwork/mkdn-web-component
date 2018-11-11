@@ -37,16 +37,16 @@ export class MkdnNav extends ChildElement {
   }
 
   connectedCallback() {
-    this.joinParent(this.view, {byId: true});
+    this.findParent(this.view, {byId: true});
   }
 
-  initStandalone() {
+  initOrphaned() {
     this.register.listener('observable', ['this'], this.onElementContentChange);
     this.register.startListening(this);
     this.onElementContentChange(this.innerHTML);
   }
 
-  onAccepted(parent) {
+  initAdopted(parent) {
     this.register.listener('hashchange', ['window'], this.onHashChange);
     this.register.listener('mkdn-list-selection', ['mkdn-list'], this.onSelection);
     this.register.listener('mkdn-store-index-updated', ['mkdn-store', 'mkdn-static-store'], this.onIndexChanged);

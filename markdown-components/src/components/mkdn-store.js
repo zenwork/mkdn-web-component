@@ -18,13 +18,13 @@ export class MkdnStore extends ChildElement {
 	}
 
 	connectedCallback() {
-		let state = this.joinParent('mkdn-view');
+		let state = this.findParent('mkdn-view');
 		if (state === 'standalone') {
 			throw Error('mkdn-static-store can not work in standalone mode');
 		}
 	}
 
-	onAccepted(parent) {
+	initAdopted(parent) {
 		this.index = new Index(new Section(null, null), {}, null);
 		this.updateIndex(this.index, this);
 		this.dispatchIndexEvent(this);

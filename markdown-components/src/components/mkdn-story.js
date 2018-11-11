@@ -28,7 +28,7 @@ export class MkdnStory extends ChildElement {
   connectedCallback() {
     this.marked = marked;
     this.marked.setOptions(StoryConfig.create());
-    this.joinParent('mkdn-view');
+    this.findParent('mkdn-view');
   }
 
   beforeJoining() {
@@ -55,7 +55,7 @@ export class MkdnStory extends ChildElement {
     xmlhttp.send();
   }
 
-  initStandalone() {
+  initOrphaned() {
     const input = this.innerHTML;
     if (input && !this.hidden) this.formatStory(input, this);
     this.observer = observeContentChange('MKDN-STORY', this.formatStory, this);
