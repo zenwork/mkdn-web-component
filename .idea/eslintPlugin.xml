@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ESLintProjectComponent">
+    <option name="eslintExecutable" value="$PROJECT_DIR$/markdown-components/node_modules/eslint/bin/eslint.js" />
+    <option name="nodeInterpreter" value="~/.nvm/versions/node/v10.13.0/bin/node" />
+  </component>
+</project>

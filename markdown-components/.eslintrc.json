@@ -5,8 +5,23 @@
         "jest": true,
         "es6": true
     },
+    "parserOptions": {
+        "sourceType": "module"
+    },
     "extends": ["google"],
     "rules": {
-        "max-len": ["error", { "code": 120, "comments": 80}]
+        "max-len": ["error", {"code": 120, "comments": 80}],
+        "padded-blocks": ["error", {"classes": "always", "blocks": "never"}],
+        "require-jsdoc": ["error", {
+            "require": {
+                "FunctionDeclaration": false,
+                "MethodDefinition": false,
+                "ClassDeclaration": true,
+                "ArrowFunctionExpression": false,
+                "FunctionExpression": false
+            }
+        }],
+        "no-multi-spaces": ["error", { "exceptions": { "ImportDeclaration": true } }],
+        "indent": "off"
     }
 }
