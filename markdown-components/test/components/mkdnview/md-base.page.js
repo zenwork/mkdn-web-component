@@ -58,14 +58,10 @@ test('update static store', async t => {
 	let updateData = ClientFunction(() => document.querySelector('#static > mkdn-view > mkdn-static-store')
 		.innerHTML = `
                 {
-                    "section": {
+                    "sections":[ {
                         "title": "November",
-                        "url": "md/2018/index.json",
-                        "member-of": {
-                            "title": "2018",
-                            "url": "md/2018/index.json"
-                        }
-                    },
+                        "url": "md/2018/index.json"
+                    }],
                     "stories": {
                         "my-first-Blog": {
                             "title":"My First Blog",
@@ -83,7 +79,7 @@ test('update static store', async t => {
                             "content":"# Title 4\\n\\n Forth Blog content."
                         }
                     },
-                    "default":"my-first-Blog"
+                    "defaultStory":"my-first-Blog"
                 }
             `);
 	await updateData();

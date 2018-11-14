@@ -29,14 +29,9 @@
             <mkdn-story></mkdn-story>
             <mkdn-static-store>
                 {
-                    "section": {
-                        "title": "November",
-                        "url": "md/2018/index.json",
-                        "member-of": {
-                            "title": "2018",
-                            "url": "md/2018/index.json"
-                        }
-                    },
+                    "sections":[
+                        {"title": "November", "url": "md/2018/index.json"}
+                    ],
                     "stories": {
                         "my-first-Blog": {
                             "title": "My First Blog",
@@ -50,7 +45,7 @@
                         },
                         "https://google.com": {"redirect": "true", "title": "google"}
                     },
-                    "default": "my-first-Blog"
+                    "defaultStory": "my-first-Blog"
                 }
             </mkdn-static-store>
         </mkdn-view>

@@ -15,10 +15,10 @@ test('process empty raw data', () => {
 
 test('process simplest definition', () => {
     const rawData = JSON.stringify({
-        section: {
+        sections: [{
             title: 'section',
             url: 'md/section-index.json',
-        },
+        }],
         stories: {
             'first-story': 'First Story',
             'second-story': 'Second Story',
@@ -27,8 +27,8 @@ test('process simplest definition', () => {
     const index = po.transformIndex(rawData)
 
     // sections
-    expect(index.section.title).toBe('section')
-    expect(index.section.url).not.toBeNull()
+    expect(index.sections[0].title).toBe('section')
+    expect(index.sections[0].url).not.toBeNull()
 
     // stories
     expect(index.stories).not.toBeNull()
@@ -46,5 +46,5 @@ test('process simplest definition', () => {
     expect(index.stories['second-story'].title).toBe('Second Story')
 
     // default
-    expect(index.default).toBe('first-story')
+    expect(index.defaultStory).toBe('first-story')
 })

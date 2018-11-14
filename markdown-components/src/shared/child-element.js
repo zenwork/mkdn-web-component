@@ -66,7 +66,10 @@ export class ChildElement extends BaseElement {
    * called.
    */
   ready() {
-    this.ancestor.dispatchEvent(Events.createReady(this));
+    // if (!this.isReady) {
+      this.ancestor.dispatchEvent(Events.createReady(this));
+      // this.isReady = true;
+    // }
   }
 
   /**

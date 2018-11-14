@@ -5,7 +5,7 @@
  * @param ofComponent component's name
  * @param handleInputFn function to handle the mutation
  * @param root node on which to attach the observer
- * @returns {MutationObserver}
+ * @return {MutationObserver}
  */
 export function observeContentChange(ofComponent, handleInputFn, root) {
   // Options for the observer (which mutations to observe)
@@ -15,7 +15,7 @@ export function observeContentChange(ofComponent, handleInputFn, root) {
     mutations.forEach(function(mutation) {
       if (mutation.type === 'childList' && mutation.target.nodeName ===
           ofComponent.toUpperCase()) {
-        let input = mutation.target.innerHTML;
+        const input = mutation.target.innerHTML;
         try {
           if (input) {
             handleInputFn(input, root);
@@ -23,7 +23,6 @@ export function observeContentChange(ofComponent, handleInputFn, root) {
         } catch (e) {
           throw e;
         }
-
       }
     });
   });
@@ -34,7 +33,6 @@ export function observeContentChange(ofComponent, handleInputFn, root) {
 }
 
 export function initFromAndObserveContent(ofComponent, handleInputFn, root) {
-
   if (root.innerHTML) {
     handleInputFn(root.innerHTML, root);
   }
@@ -55,12 +53,12 @@ export function listenForIndexUpdate(store, onEventFn) {
 }
 
 export function dispatchSelection(root, storyDef) {
-  let event = new CustomEvent('mkdn-list-selection', {detail: storyDef});
+  const event = new CustomEvent('mkdn-list-selection', {detail: storyDef});
   root.dispatchEvent(event);
 }
 
 export function dispatchHashUrl(root, hash) {
-  let event = new CustomEvent('mkdn-nav-hash-url', {detail: hash});
+  const event = new CustomEvent('mkdn-nav-hash-url', {detail: hash});
   root.dispatchEvent(event);
 }
 
@@ -75,7 +73,7 @@ export function listenForSelection(list, actionFn) {
 }
 
 export function dispatchStory(root, storyDef) {
-  let event = new CustomEvent('mkdn-store-story', {detail: storyDef});
+  const event = new CustomEvent('mkdn-store-story', {detail: storyDef});
   root.dispatchEvent(event);
 }
 
