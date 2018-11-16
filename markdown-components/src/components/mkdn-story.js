@@ -11,6 +11,7 @@ import {listenForStory, observeContentChange} from '../shared/events';
  * attribute and the canonical style attribute for injecting css.
  */
 export class MkdnStory extends ChildElement {
+
   static get name() {
     return 'mkdn-story';
   }
@@ -33,20 +34,21 @@ export class MkdnStory extends ChildElement {
 
   beforeJoining() {
     this.markdown = document.createElement('div');
-    this.formatStory('no markdown provided', this);
+    let markdown = '';
+    if (window['mkdn']['dev']) {
+      markdown = 'no markdown provided';
+    }
+    this.formatStory(markdown, this);
     if (this.stylesheet) {
       this.fetch(this, this.stylesheet, (root, styles) => {
         root.stylesheetCss = styles;
       });
     }
-
-
   }
 
   fetch(root, url, handleResponseFn) {
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = () => {
-
       if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
         handleResponseFn(root, xmlhttp.responseText);
       }
@@ -70,7 +72,7 @@ export class MkdnStory extends ChildElement {
       case 'mkdn-store':
       case 'mkdn-static-store':
         listenForStory(sibling,
-                       storyEvent => {
+                       (storyEvent) => {
                          this.formatStory(storyEvent.detail.content, this);
                        });
         super.ready();
@@ -94,12 +96,12 @@ export class MkdnStory extends ChildElement {
     }
 
     return html`<section class="story">${this.markdown}</section>`;
-
   }
 
   formatStory(markdown, root) {
     root.markdown.innerHTML = root.marked(markdown);
   }
+
 }
 
 MkdnStory.define();

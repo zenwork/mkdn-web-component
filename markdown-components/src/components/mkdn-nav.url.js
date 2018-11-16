@@ -14,10 +14,10 @@ export default class Url {
    * @param {History} historyImpl optional test history implementation
    * @param {Document} documentImpl optional test document implementation
    */
-  constructor(home, register, windowImpl = window, historyImpl = history, documentImpl = document) {
+  constructor(register, windowImpl = window, historyImpl = history, documentImpl = document) {
     this.history = historyImpl;
     this.document = documentImpl;
-    this.title = home;
+    // this.title = home;
     this.window = windowImpl;
     const loc = windowImpl.location;
     this.origin = loc.origin;
@@ -53,9 +53,10 @@ export default class Url {
     const idx = index.detail;
     this.index = new Index(idx.sections, idx.stories, idx.defaultStory);
     // clear all crumbs except first
-    if (this.crumbs.length > 1) {
-      this.crumbs = [this.crumbs[0]];
-    }
+    // if (this.crumbs.length > 1) {
+    //   this.crumbs = [this.crumbs[0]];
+    // }
+    this.crumbs = [];
 
     // sections
     this.index.sections.map((section) => {
@@ -91,6 +92,12 @@ export default class Url {
       if (this.crumbs.length > 1) {
         this.crumbs = [this.crumbs[0]];
       }
+      this.updateHash(hash);
+    }
+  }
+
+  updateHash(hash) {
+    if (hash !== this.hash) {
       this.hash = hash;
       // dispatch event to wait for index update
       this.register.dispatch('mkdn-nav-hash-url', hash);
@@ -101,7 +108,8 @@ export default class Url {
     if (this.crumbs[this.crumbs.length - 1].type === 'story') {
       this.crumbs.splice(this.crumbs.length - 1, 1);
     }
-    this.crumbs.push(new Crumb(storyDef.url, storyDef.title, 'story'));
+    this.crumbs.push(new Crumb('#'+storyDef.url, storyDef.title, 'story'));
+    this.updateHash(`#${storyDef.url}`);
   }
 
   updateHome(url, title) {

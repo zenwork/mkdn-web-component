@@ -57,7 +57,7 @@ export class MkdnList extends ChildElement {
                              });
         break;
       case 'mkdn-story':
-        if (!window.location.hash && this.inputList.length>0) {
+        if (!window.location.hash && this.inputList.length > 0) {
           this.select(this, this.inputList.defaultStory);
           super.ready();
         }
@@ -76,7 +76,11 @@ export class MkdnList extends ChildElement {
 
     function renderItems(inputList, empty) {
       if (inputList === empty) {
-        return html`<li>no items</li>`;
+        if (window['mkdn']['dev']) {
+          return html`<li>no items</li>`;
+        } else {
+          return html``;
+        }
       } else {
         return html`${repeat(Object.keys(inputList.stories),
                              (key) => {

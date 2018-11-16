@@ -6,7 +6,8 @@ export default function styles(delimiter) {
 	return html`<style>
     /* Style the list */
     .mkdn-list {
-        padding: 10px 16px;
+        padding:0;
+        margin:0;
         list-style: none;
         /*background-color: #eee;*/
     }
@@ -14,12 +15,12 @@ export default function styles(delimiter) {
     /* Display list items side by side */
     .mkdn-list li {
         display: inline;
-        font-size: 18px;
+        /*font-size: 18px;*/
     }
 
     /* Add a slash symbol (/) before/behind each list item */
     .mkdn-list li + li:before {
-        padding: 8px;
+        padding: 0.2rem;
         color: black;
         content: "${delimiter}";
     }

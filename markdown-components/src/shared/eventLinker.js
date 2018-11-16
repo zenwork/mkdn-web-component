@@ -9,7 +9,7 @@ export default class EventLinker {
    * @param {Boolean} debug optional, proivide true to enable;
    * otherwise defaults to false.
    */
-  constructor(root, debug) {
+  constructor(root, debug=false) {
     this.root = root;
     this.listenables = [];
     this.dispatched = [];

@@ -34,18 +34,18 @@ test('selection changes crumbs', async t => {
 			.querySelectorAll('ul > li > a');
 	});
 
-	await t.expect(await selector.count).eql(3);
+	await t.expect(await selector.count).eql(2);
 
-	await t.expect(await selector.nth(0).innerText).eql('home');
-	await t.expect(await selector.nth(1).innerText).eql('section');
-	await t.expect(await selector.nth(2).innerText).eql('Story 1');
+	// await t.expect(await selector.nth(0).innerText).eql('home');
+	await t.expect(await selector.nth(0).innerText).eql('section');
+	await t.expect(await selector.nth(1).innerText).eql('Story 1');
 
 	await t.click(await getListSelector().nth(1));
 
-  await t.expect(await selector.count).eql(3);
+  await t.expect(await selector.count).eql(2);
 
-  await t.expect(await selector.nth(0).innerText).eql('home');
-  await t.expect(await selector.nth(1).innerText).eql('section');
-  await t.expect(await selector.nth(2).innerText).eql('Story 2');
+  // await t.expect(await selector.nth(0).innerText).eql('home');
+  await t.expect(await selector.nth(0).innerText).eql('section');
+  await t.expect(await selector.nth(1).innerText).eql('Story 2');
 
 });

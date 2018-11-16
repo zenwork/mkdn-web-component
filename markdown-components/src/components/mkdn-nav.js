@@ -3,7 +3,7 @@ import {repeat}       from 'lit-html/directives/repeat';
 import {ChildElement} from '../shared/child-element';
 import EventLinker    from '../shared/eventLinker';
 import styles         from './mkdn-nav.css.js';
-import Url, {Crumb}   from './mkdn-nav.url';
+import Url            from './mkdn-nav.url';
 
 /**
  * MkDn Navigation component
@@ -33,8 +33,8 @@ export class MkdnNav extends ChildElement {
   constructor() {
     super();
     this.delimiter = '>';
-    this.register = new EventLinker(this, true);
-    this.url = new Url('home', this.register);
+    this.register = new EventLinker(this);
+    this.url = new Url(this.register);
     this.crumbs = this.url.syncCurrentLocation();
     this.register.listener('hashchange', ['window'], this.onHashChange);
   }
@@ -56,7 +56,7 @@ export class MkdnNav extends ChildElement {
 
     this.register.startListening(window);
 
-    this.url.updateHome(window.location.href,'home');
+    // this.url.updateHome(window.location.href, 'home');
 
     this.ready();
   }
@@ -75,10 +75,10 @@ export class MkdnNav extends ChildElement {
     switch (sibling.Class) {
       case 'mkdn-store':
       case 'md-static-store':
-        this.register.startListening(sibling);
         if (window.location.hash) {
           this.register.dispatch('mkdn-nav-hash-url', window.location.hash.substr(1));
         }
+        this.register.startListening(sibling);
         break;
     }
   }
@@ -131,7 +131,6 @@ export class MkdnNav extends ChildElement {
     this.url.updateStory(storyDef);
     this.crumbs = this.url.syncCurrentLocation();
   }
-
 
 
 }
