@@ -1,11 +1,15 @@
-import {html}                                                          from '@polymer/lit-element/lit-element.js';
-import {repeat}                                                        from 'lit-html/directives/repeat';
-import {ChildElement}                                                  from '../shared/child-element';
-import {dispatchSelection, listenForIndexUpdate, observeContentChange} from '../shared/events';
-import {StoreOperations}                                               from '../shared/store';
-import {clone}                                                         from '../shared/util';
-import styles                                                          from './mkdn-list.css.js';
+import {html}              from '@polymer/lit-element/lit-element.js';
+import {repeat}            from 'lit-html/directives/repeat';
+import {ChildElement}      from '../shared/child-element';
+import EventLinker         from '../shared/eventLinker';
+import {dispatchSelection} from '../shared/events';
+import {StoreOperations}   from '../shared/store';
+import {clone}             from '../shared/util';
+import styles              from './mkdn-list.css.js';
 
+/**
+ * List component that shows the stories in the index
+ */
 export class MkdnList extends ChildElement {
 
   static get name() {
@@ -20,6 +24,7 @@ export class MkdnList extends ChildElement {
 
   constructor() {
     super();
+    this.register = new EventLinker(this);
     this.empty = {};
   }
 
@@ -28,40 +33,47 @@ export class MkdnList extends ChildElement {
     super.findParent('mkdn-view');
   }
 
-  disconnectedCallback() {
-    if (this.observer) this.observer.disconnect();
-  }
-
   initOrphaned() {
+    this.register.listener('observable', ['this'], updateList);
     if (this.innerHTML) {
       updateList(this.innerHTML, this);
     }
-    this.observer = observeContentChange('MKDN-LIST', updateList, this);
 
     function updateList(input, root) {
       root.inputList = StoreOperations.transformIndex(input.trim());
     }
   }
 
+  initAdopted(parent) {
+    this.register.listener('mkdn-store-index-updated', ['mkdn-store', 'mkdn-static-store'], this.onIndexChange);
+  }
+
   onSiblingReady(sibling) {
     switch (sibling.Class) {
       case 'mkdn-store':
       case 'mkdn-static-store':
-        listenForIndexUpdate(sibling,
-                             (event) => {
-                               this.inputList = event.detail;
-                               if (!window.location.hash) {
-                                 this.select(this, this.inputList.defaultStory);
-                                 this.ready();
-                               }
-                             });
+        this.register.startListening(sibling);
         break;
       case 'mkdn-story':
+        // todo: this might be part of hash problem. should listen to
+        //  mkdn-nav instead of this.
         if (!window.location.hash && this.inputList.length > 0) {
           this.select(this, this.inputList.defaultStory);
           super.ready();
         }
         break;
+      // case 'mkdn-nav':
+      //   this.register.startListening(sibling);
+      //   break;
+    }
+  }
+
+
+  onIndexChange(event) {
+    this.inputList = event.detail;
+    if (!window.location.hash) {
+      this.select(this, this.inputList.defaultStory);
+      this.ready();
     }
   }
 

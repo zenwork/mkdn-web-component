@@ -14,6 +14,7 @@ import {
  * initialization of families of related elements.
  */
 export class ChildElement extends BaseElement {
+
   /**
    * element name. It should be overriden by implementing class.
    * @return {string} name
@@ -54,8 +55,9 @@ export class ChildElement extends BaseElement {
   onSiblingReady(sibling) {}
 
   /**
-   * Called when a component that has joined is leaving. It will only be called once
-   * @param sibling the leaving element
+   * Called when a component that has joined is leaving. It will only be
+   * called once.
+   * @param {Element} sibling the leaving element
    */
   onSiblingLeaving(sibling) {}
 
@@ -97,7 +99,7 @@ export class ChildElement extends BaseElement {
    * @return {string} 'cooperative' if attempted to register with parent;
    * 'standalone' otherwise
    */
-  findParent(ancestorSelector, options) {
+  findParent(ancestorSelector, options = {}) {
     const that = this;
     // if no parent provided then standalone mode
     if (!ancestorSelector) {
